@@ -3,19 +3,25 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 
-var config = {
-    apiKey: "AIzaSyBqZ0L1pU_CJaGUeCqvqT5DMEtsdnnsVU0",
-    authDomain: "findyourbuddy-76527.firebaseapp.com",
-    databaseURL: "https://findyourbuddy-76527.firebaseio.com",
-    projectId: "findyourbuddy-76527",
-    storageBucket: "findyourbuddy-76527.appspot.com",
-    messagingSenderId: "1045266650568"
-  };
-const firebaseApp = firebase.initializeApp(config);
+
 
 
 
 class App extends React.Component {
+
+  componentWillMount(){
+    
+    const config = {
+        apiKey: "AIzaSyBqZ0L1pU_CJaGUeCqvqT5DMEtsdnnsVU0",
+        authDomain: "findyourbuddy-76527.firebaseapp.com",
+        databaseURL: "https://findyourbuddy-76527.firebaseio.com",
+        projectId: "findyourbuddy-76527",
+        storageBucket: "findyourbuddy-76527.appspot.com",
+        messagingSenderId: "1045266650568"
+      };
+    const firebaseApp = firebase.initializeApp(config);
+
+  }
   render() {
     return (
       <View style={styles.container}>
