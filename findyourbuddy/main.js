@@ -2,15 +2,21 @@ import Expo from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
-
-
-
-
+import { COLOR, ThemeProvider } from 'react-native-material-ui';
+const uiTheme = {
+    palette: {
+        primaryColor: COLOR.green500,
+    },
+    toolbar: {
+        container: {
+            height: 50,
+        },
+    },
+};
 
 class App extends React.Component {
 
   componentWillMount(){
-    
     const config = {
         apiKey: "AIzaSyBqZ0L1pU_CJaGUeCqvqT5DMEtsdnnsVU0",
         authDomain: "findyourbuddy-76527.firebaseapp.com",
@@ -24,9 +30,9 @@ class App extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up main.js to start working on your app!</Text>
-      </View>
+      <ThemeProvider uiTheme={uiTheme}>
+          <App />
+      </ThemeProvider>
     );
   }
 }
