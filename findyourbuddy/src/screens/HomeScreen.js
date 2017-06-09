@@ -16,8 +16,7 @@ class HomeScreen extends React.Component{
 
   }
   render(){
-    console.log('homescreen');
-    console.log(this.props);
+
     return(
       <View>
         <Text>
