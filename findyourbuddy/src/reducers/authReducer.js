@@ -1,12 +1,18 @@
-import { LOGIN_USER_START } from '../actions/types';
+import { LOGIN_USER_START, LOGIN_USER_SUCCESS } from '../actions/types';
 let initialState = {
-  data:'',
+  user: null
 }
 export default authReducer = (state = initialState, action) => {
   switch(action.type){
     case LOGIN_USER_START:
-      console.log('hello world');
-      return 'Hello world'
+
+      return {...state, isLoading: true}
+    case LOGIN_USER_SUCCESS:
+
+      console.log('Loggato correttamente')
+      
+      return {...state, user: action.payload, isLoading: false}
+
     default:
       return state;
   }
