@@ -4,8 +4,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 import LoginForm from './src/screens/LoginForm'
 import HomeScreen from './src/screens/HomeScreen'
+import ReduxThunk from 'redux-thunk';
 import { StackNavigator } from 'react-navigation';
-
+import { Provider } from 'react-redux';
+import store from './src/store';
 
 const config = {
     apiKey: "AIzaSyBqZ0L1pU_CJaGUeCqvqT5DMEtsdnnsVU0",
@@ -16,6 +18,7 @@ const config = {
     messagingSenderId: "1045266650568"
   };
 const firebaseApp = firebase.initializeApp(config);
+
 const AppNavigator = StackNavigator({
     Login: { screen: LoginForm },
     Main: { screen: HomeScreen }
@@ -24,6 +27,7 @@ class Main extends React.Component {
   state = {
     isReady: false
   }
+
   async componentWillMount() {
       await Expo.Font.loadAsync({
         'Roboto': require('native-base/Fonts/Roboto.ttf'),
@@ -31,12 +35,17 @@ class Main extends React.Component {
       });
       this.setState({isReady: true})
   }
+
+
+
   render(){
-    if(this.state.isReady === false){
+    if(!this.state.isReady)
       return null;
-    }
+
     return (
+      <Provider store={store}>
         <AppNavigator/>
+      </Provider>
     );
   }
 }
