@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 import LoginForm from './src/screens/LoginForm'
 import HomeScreen from './src/screens/HomeScreen'
-import ReduxThunk from 'redux-thunk';
 import { StackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import store from './src/store';
