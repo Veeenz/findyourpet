@@ -14,6 +14,7 @@ export const loginUser = ({ email, password, navigateTo }) => {
       .then(user => loginUserSuccess(dispatch, user, navigateTo))
       .catch(error => {
         console.log(error)
+        loginUserFailed(dispatch,error)
         /*firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(user => loginUserSuccess(dispatch, user, navigateTo))
           .catch(error => loginUserFailed(dispatch, error))*/
@@ -29,6 +30,7 @@ const loginUserSuccess = (dispatch, user, navigateTo) => {
 
 const loginUserFailed = (dispatch, error)  => {
   dispatch({ type: LOGIN_USER_FAIL, payload: error })
+  alert('Autenticazione fallita')
 }
 
 
