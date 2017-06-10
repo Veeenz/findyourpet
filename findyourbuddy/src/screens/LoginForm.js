@@ -1,39 +1,51 @@
 import { StackNavigator } from "react-navigation";
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Container, Content, Button, Text } from 'native-base';
+import { Container, Content, Button, Text, Form, Item, Input, InputGroup, Label} from 'native-base';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/actions';
 const mapStateToProps = state => ({
   auth: state.auth
 })
 
-const LoginForm = props => {
-  {
-
-    if(props.auth.isLoading === true)
-      console.log('loading on');
-    if(props.auth.isLoading === false)
-      console.log('loading off');
+class LoginForm extends React.Component {
+  state = {
+    email: '',
+    password: '',
   }
+  render(){
     return(
 
-      <View style={{top:40}}>
-      <Text>Hello world</Text>
+      <Container>
 
-      <Button light onPress={() => props.loginUser({
-          email: 'a@a.it',
-          password: 'aaaaaa',
-          navigateTo: (screen) => props.navigation.navigate(screen)})
-        }><Text> Light </Text></Button>
-      </View>
+        <Content padder>
+        <Item stackedLabel>
+            <Label>Email</Label>
+            <Input onChangeText={(email) => this.setState({email})} />
+        </Item>
+        <Item stackedLabel>
+            <Label>Password</Label>
+            <Input onChangeText={(password) => this.setState({password})}/>
+        </Item>
+          <Button block primary onPress={() => this.props.loginUser({
+            email: this.state.email,
+            password: this.state.password,
+            navigateTo: (screen) => this.props.navigation.navigate(screen)})
+          }>
+            <Text>Submit</Text>
+          </Button>
+          </Content>
+        </Container>
     );
+  }
 };
 
 const style = StyleSheet.create({
-  loginForm:{
-    flex: 1,
-    flexDirection: 'column',
+  login:{
+    width:'80%',
+    alignItems: 'center',
+    justifyContent: 'center'
+
   }
 })
 
