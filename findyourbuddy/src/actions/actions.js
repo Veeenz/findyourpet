@@ -2,7 +2,8 @@ import {
   LOGIN_USER_START,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  USER_PROFILE_INFORMATION
+  USER_PROFILE_INFORMATION,
+  USER_SET_LOCATION
 } from './types';
 import firebase from 'firebase';
 
@@ -13,7 +14,6 @@ export const loginUser = ({ email, password, navigateTo }) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user, navigateTo))
       .catch(error => {
-        console.log(error)
         loginUserFailed(dispatch,error)
         /*firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(user => loginUserSuccess(dispatch, user, navigateTo))
@@ -30,7 +30,7 @@ const loginUserSuccess = (dispatch, user, navigateTo) => {
 
 const loginUserFailed = (dispatch, error)  => {
   dispatch({ type: LOGIN_USER_FAIL, payload: error })
-  alert('Autenticazione fallita')
+
 }
 
 
@@ -41,5 +41,14 @@ export const userProfileInformation = (dispatch) => {
     console.log(currentUser);
     console.log('END OF CURRENT USER @@@@@@@@')
     dispatch({type: USER_PROFILE_INFORMATION, payload: currentUser})
+  }
+}
+
+
+export const setUserLocation = (coordinates) => {
+  return (dispatch) =>{
+    console.log("coordinates: ")
+    console.log(coordinates);
+    dispatch({type: USER_SET_LOCATION, payload: coordinates})
   }
 }
