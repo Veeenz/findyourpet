@@ -13,6 +13,18 @@ class LoginForm extends React.Component {
     email: '',
     password: '',
   }
+
+  handleLoginClickAuth = () => {
+      this.props.loginUser(
+        {
+          email: 'a@a.it',
+          password: 'aaaaaa',
+          navigateTo: (screen) => this.props.navigation.navigate(screen)
+        }
+      )
+
+  }
+
   render(){
     return(
 
@@ -34,6 +46,9 @@ class LoginForm extends React.Component {
           }>
             <Text>Submit</Text>
           </Button>
+            <Button style={{marginTop:20}} block primary onPress={() => this.handleLoginClickAuth()}>
+              <Text>DEBUG Login ever true</Text>
+            </Button>
           </Content>
         </Container>
     );
