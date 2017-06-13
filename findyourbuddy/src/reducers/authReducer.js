@@ -1,4 +1,4 @@
-import { LOGIN_USER_START, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL } from '../actions/types';
+import { LOGIN_USER_START, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_LOGOUT } from '../actions/types';
 let initialState = {
   user: null,
   error: null,
@@ -18,6 +18,14 @@ export default authReducer = (state = initialState, action) => {
         error: action.payload,
         isLoading: false
       }
+    case LOGIN_USER_LOGOUT:
+      console.log('logout users')
+      return {
+        user: null,
+        error: null,
+        isLoading: false
+      }
+
     default:
       return state;
   }

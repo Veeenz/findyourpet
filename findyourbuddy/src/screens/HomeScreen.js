@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, Button } from 'react-native';
 import {connect} from 'react-redux';
-import { userProfileInformation, setUserLocation } from '../actions/actions';
+import { userProfileInformation, setUserLocation, logoutUser } from '../actions/actions';
 import { MapView, Permissions, Location } from 'expo';
+
 
 const mapStateToProps = state => ({
     user: state.user
@@ -10,6 +11,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   userProfileInformation: () => dispatch(userProfileInformation()),
   setUserLocation:(coordinates) => dispatch(setUserLocation(coordinates)),
+  logoutUser: () => dispatch(logoutUser())
 })
 
 class HomeScreen extends React.Component{
@@ -21,6 +23,7 @@ class HomeScreen extends React.Component{
     this.retrieveUserLocation()
     console.log("COMPONENTE MAPPA STA PER ESSERE MONTATO")
     console.log(this.props.user)
+    //console.log(this.props.logoutUser())
 
   }
 
@@ -60,5 +63,15 @@ class HomeScreen extends React.Component{
     );
   }
 }
+
+HomeScreen.navigationOptions = ({navigation}) => ({
+  title: 'TodoList bisijor',
+  headerLeft: <Button title="Logout"
+      onPress={() => this.props.logoutUser()}
+    />,
+  headerRight: <Button title="Add"
+      onPress={() => navigation.navigate('todoCreate')}
+    />
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

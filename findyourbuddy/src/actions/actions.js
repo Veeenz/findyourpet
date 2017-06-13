@@ -2,6 +2,7 @@ import {
   LOGIN_USER_START,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
+  LOGIN_USER_LOGOUT,
   USER_PROFILE_INFORMATION,
   USER_SET_LOCATION
 } from './types';
@@ -33,6 +34,13 @@ const loginUserFailed = (dispatch, error)  => {
 
 }
 
+
+export const logoutUser = (dispatch) => {
+  return (dispatch) => {
+    dispatch({ type: LOGIN_USER_LOGOUT})
+    navigateTo('Login')
+  }
+}
 
 export const userProfileInformation = (dispatch) => {
   return (dispatch) => {
