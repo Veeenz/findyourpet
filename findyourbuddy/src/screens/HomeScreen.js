@@ -27,6 +27,8 @@ class HomeScreen extends React.Component{
 
   }
 
+
+
   retrieveUserLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
@@ -64,13 +66,15 @@ class HomeScreen extends React.Component{
   }
 }
 
+
+
 HomeScreen.navigationOptions = ({navigation}) => ({
-  title: 'TodoList bisijor',
+  title: 'List Find Buddy',
   headerLeft: <Button title="Logout"
-      onPress={() => this.props.logoutUser()}
+      onPress={() => console.log(this.props)}
     />,
   headerRight: <Button title="Add"
-      onPress={() => navigation.navigate('todoCreate')}
+      onPress={() => navigation.navigate('Create')}
     />
 })
 

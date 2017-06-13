@@ -35,7 +35,7 @@ const loginUserFailed = (dispatch, error)  => {
 }
 
 
-export const logoutUser = (dispatch) => {
+export const logoutUser = (dispatch, navigateTo) => {
   return (dispatch) => {
     dispatch({ type: LOGIN_USER_LOGOUT})
     navigateTo('Login')

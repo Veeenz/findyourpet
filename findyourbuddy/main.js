@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 import LoginForm from './src/screens/LoginForm'
 import HomeScreen from './src/screens/HomeScreen'
+import CreateFind from './src/screens/CreateFind'
 import { StackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import store from './src/store';
@@ -20,7 +21,9 @@ const firebaseApp = firebase.initializeApp(config);
 
 const AppNavigator = StackNavigator({
     Login: { screen: LoginForm },
-    Main: { screen: HomeScreen }
+    Main: { screen: HomeScreen },
+    Create: {screen: CreateFind}
+
 });
 class Main extends React.Component {
   state = {
