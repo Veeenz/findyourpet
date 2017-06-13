@@ -19,6 +19,8 @@ class HomeScreen extends React.Component{
   componentWillMount(){
     this.props.userProfileInformation()
     this.retrieveUserLocation()
+    console.log("COMPONENTE MAPPA STA PER ESSERE MONTATO")
+    console.log(this.props.user)
 
   }
 
@@ -40,20 +42,15 @@ class HomeScreen extends React.Component{
 
         <MapView
           style={{ width, height: height-200 }}
+          showsUserLocation={true}
           region={{
             latitude: this.props.user.latitude,
             longitude: this.props.user.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
+
         >
-        <MapView.Marker
-          coordinate={{
-            latitude: this.props.user.latitude || 10.10293,
-            longitude: this.props.user.longitude || 10.0293, 
-          }}
-          title='Sei qui'
-        />
         </MapView>
         <Text> Hello {this.props.user.email}</Text>
         <Text> Coordinate longitude {this.props.user.longitude}</Text>
