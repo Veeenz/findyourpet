@@ -56,6 +56,15 @@ class CreateFind extends Component {
 
     let location = await Location.getCurrentPositionAsync({});
     this.setState({latitude: location.coords.latitude, longitude: location.coords.longitude})
+    this.setState({latitudeMarker: location.coords.latitude, longitudeMarker: location.coords.longitude})
+    fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson.results[1].formatted_address)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   render() {
@@ -89,7 +98,19 @@ class CreateFind extends Component {
                 latitude: this.state.latitude,
                 longitude: this.state.longitude,
               }}
-              onDragEnd={(e) => this.setState({ latitudeMarker: e.nativeEvent.coordinate.latitude, longitudeMarker: e.nativeEvent.coordinate.longitude })}
+              onDragEnd={(e) => { this.setState({ latitudeMarker: e.nativeEvent.coordinate.latitude, longitudeMarker: e.nativeEvent.coordinate.longitude })
+              fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
+                .then((response) => response.json())
+                .then((responseJson) => {
+                  console.log(responseJson.result)
+                  this.setState({location: responseJson.results[1].formatted_address})
+
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+            }
+          }
 
             />
             </MapView>
