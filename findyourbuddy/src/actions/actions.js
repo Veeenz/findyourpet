@@ -4,7 +4,8 @@ import {
   LOGIN_USER_FAIL,
   LOGIN_USER_LOGOUT,
   USER_PROFILE_INFORMATION,
-  USER_SET_LOCATION
+  USER_SET_LOCATION,
+  USER_SET_MARKER
 } from './types';
 import firebase from 'firebase';
 
@@ -58,5 +59,12 @@ export const setUserLocation = (coordinates) => {
     console.log("coordinates: ")
     console.log(coordinates);
     dispatch({type: USER_SET_LOCATION, payload: coordinates})
+  }
+}
+
+
+export const setUserMarker = (coordinates) => {
+  return (dispatch) =>{
+    dispatch({type: USER_SET_MARKER, payload: coordinates})
   }
 }

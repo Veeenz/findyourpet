@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Dimensions, Button } from 'react-native';
 import {connect} from 'react-redux';
-import { userProfileInformation, setUserLocation, logoutUser } from '../actions/actions';
+import { userProfileInformation, setUserLocation, logoutUser,setUserMarker } from '../actions/actions';
 import { MapView, Permissions, Location } from 'expo';
 
 
@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   userProfileInformation: () => dispatch(userProfileInformation()),
   setUserLocation:(coordinates) => dispatch(setUserLocation(coordinates)),
+  setUserMarker:(coordinates) => dispatch(setUserMarker(coordinates)),
   logoutUser: () => dispatch(logoutUser())
 })
 
@@ -56,10 +57,20 @@ class HomeScreen extends React.Component{
           }}
 
         >
+        <MapView.Marker draggable
+          coordinate={{
+            latitude: this.props.user.latitude,
+            longitude: this.props.user.longitude,
+          }}
+          onDragEnd={(e) => { this.props.setUserMarker(e.nativeEvent.coordinate); }}
+        />
         </MapView>
         <Text> Hello {this.props.user.email}</Text>
         <Text> Coordinate longitude {this.props.user.longitude}</Text>
         <Text> Coordinate latitude {this.props.user.latitude}</Text>
+          <Text> Coordinate longitudeMarker {this.props.user.longitudeMarker}</Text>
+          <Text> Coordinate latitudeMarker {this.props.user.latidudeMarker}</Text>
+
       </View>
 
     );
