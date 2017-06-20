@@ -9,7 +9,7 @@
     "@expo/vector-icons": "^5.0.0",
     "expo": "17.0.0",
     "firebase": "^4.1.2",
-    "native-base": "^2.1.4",
+    "native-base": "git+https://github.com/GeekyAnts/NativeBase.git",
     "react": "16.0.0-alpha.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz",
     "react-native-datepicker": "^1.6.0",

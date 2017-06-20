@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardSection,} from '../components/common';
+import {  CardSection,} from '../components/common';
 import DatePicker from 'react-native-datepicker'
-import {Button, Input,Container, Content,Label,Item} from 'native-base'
+import {Button, Input,Container, Content,Label,Item, Card, CardItem} from 'native-base'
 import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { findCreate } from '../actions/CreateActions';
@@ -73,21 +73,21 @@ class CreateFind extends Component {
     return (
       <Container>
         <Content>
-      <ScrollView>
+
         <Card>
-          <CardSection>
-              <Item stackedLabel>
+          <CardItem>
+            <Item stackedLabel style={{ flex:1 }}>
               <Label> Titolo </Label>
-            <Input
+              <Input
               label="Titolo Ricerca"
               placeholder="Titolo della ricerca"
               value={this.state.title}
               onChangeText={text => this.setState({ title: text })}
-            />
+              />
           </Item>
-          </CardSection>
+        </CardItem>
 
-
+        <CardItem>
             <MapView
               style={{ width, height: height-400 }}
               showsUserLocation={true}
@@ -120,37 +120,42 @@ class CreateFind extends Component {
 
             />
             </MapView>
-              <Item stackedLabel>
+          </CardItem>
+
+            <CardItem>
+              <Item stackedLabel style={{ flex:1 }}>
               <Label> Posizione </Label>
               <Input
                 label="Location"
                 placeholder='Where did you lose your buddy?'
                 value={this.state.location}
                 onChangeText={text => this.setState({ location: text })}
+
               />
               </Item>
+            </CardItem>
 
-          <CardSection>
-            <Item stackedLabel>
+            <CardItem
+              >
+
+            <Item stackedLabel style={{ flex:1 }}>
              <Label>Descrizione</Label>
             <Input
               label="Descrizione Ricerca"
               placeholder='Descrivi il tuo animale, segni particolari ecc allegando più foto possibili'
               value={this.state.descr}
               onChangeText={text => this.setState({ descr: text })}
-              style={{ height: 600, width: 300 }}
+              style={{ flex: 1, height:200}}
             />
           </Item>
-          </CardSection>
-          <Text>
+        </CardItem>
+        <CardItem>
+          <Item stackedLabel  style={{ flex:1 }}>
+          <Label>
             Quando hai perso il tuo animale?
-          </Text>
-
-          <CardSection>
-
-
+          </Label>
             <DatePicker
-              style={{ flex: 1 }}
+              style={{ flex: 1, width:'100%' }}
               date={this.state.duedate}
               mode="date"
               placeholder="Dove hai perso il tuo animale?"
@@ -159,25 +164,24 @@ class CreateFind extends Component {
               cancelBtnText="Cancel"
               customStyles={{
                 dateInput: {
-                  marginLeft: 120
+                  marginLeft: 1
                 }
               }}
               onDateChange={(date) => {this.setState({duedate: date})}}
             />
-        
-          </CardSection>
-            <Image />
+        </Item>
+        </CardItem>
+        <CardItem>
+        <Item stackedLabel style={{flex:1}}>
             <Text>
               Inserisci le foto del tuo animali,fino a 5
             </Text>
-          <CardSection>
+
 
             <TouchableOpacity
               onPress={this._pickImage}
               >
-              <ScrollView
-                horizontal={true}
-              >
+
               <Image
                 source={{ uri: this.state.image }}
                 resizeMode="cover"
@@ -189,11 +193,12 @@ class CreateFind extends Component {
                 resizeMode="cover"
                 style={{ height: 100, width: 200 }}
               />
-              </ScrollView>
+
             </TouchableOpacity>
-          </CardSection>
+          </Item>
+        </CardItem>
 
-          <CardSection>
+        <CardItem>
             <Button onPress={() => this.props.findCreate({
                 title: this.state.title,
                 location: this.state.location,
@@ -208,9 +213,9 @@ class CreateFind extends Component {
                 Add Find
               </Text>
             </Button>
-          </CardSection>
+        </CardItem>
         </Card>
-      </ScrollView>
+
     </Content>
     </Container>
     )
