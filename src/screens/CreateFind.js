@@ -7,12 +7,6 @@ import { connect } from 'react-redux';
 import { findCreate } from '../actions/CreateActions';
 import { ImagePicker, Location, MapView, Permissions } from 'expo';
 
-
-
-
-
-
-
 class CreateFind extends Component {
   static navigationOptions = {
     title: 'New Find'
@@ -105,18 +99,18 @@ class CreateFind extends Component {
                 latitude: this.state.latitude,
                 longitude: this.state.longitude,
               }}
-              onDragEnd={(e) => { this.setState({ latitudeMarker: e.nativeEvent.coordinate.latitude, longitudeMarker: e.nativeEvent.coordinate.longitude })
+              onDragEnd={(e) => { this.setState({ latitudeMarker: e.nativeEvent.coordinate.latitude, longitudeMarker: e.nativeEvent.coordinate.longitude }, () =>
               fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
                 .then((response) => response.json())
                 .then((responseJson) => {
-                  console.log(responseJson.result)
+                  console.log("Risultato: " + responseJson.results[1].formatted_address)
                   this.setState({location: responseJson.results[1].formatted_address})
 
                 })
                 .catch((error) => {
-                  console.error(error);
-                });
-            }
+                  console.log("ERROR: " + error);
+                })
+            )}
           }
 
             />
@@ -125,22 +119,20 @@ class CreateFind extends Component {
 
             <CardItem>
               <Item stackedLabel style={{ flex:1 }}>
-              <Label> Posizione </Label>
-              <Input
-                label="Location"
-                placeholder='Where did you lose your buddy?'
-                value={this.state.location}
-                onChangeText={text => this.setState({ location: text })}
+                <Label> Posizione </Label>
+                <Input
+                  label="Location"
+                  placeholder='Where did you lose your buddy?'
+                  value={this.state.location}
+                  onChangeText={text => this.setState({ location: text })}
 
-              />
+                />
               </Item>
             </CardItem>
 
-            <CardItem
-              >
-
+            <CardItem>
             <Item stackedLabel style={{ flex:1 }}>
-             <Label>Descrizione</Label>
+              <Label>Descrizione</Label>
             <Input
               label="Descrizione Ricerca"
               placeholder='Descrivi il tuo animale, segni particolari ecc allegando più foto possibili'
