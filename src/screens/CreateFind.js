@@ -174,25 +174,23 @@ class CreateFind extends Component {
               Inserisci le foto del tuo animali,fino a 5
             </Label>
 
-
               <List horizontal={true} dataArray={this.state.items}
                     renderRow={(item) =>
-                        <ListItem>
-                          <TouchableOpacity
-                            style={{flexDirection:'row'}}
-                            onPress={this._pickImage}
-                            >
+                        <ListItem button onPress = {() => console.log('click on image')}>
+
                             <Image
                               source={{ uri:this.state.image }}
                               resizeMode="cover"
+
                               style={{ height :100, width: 200}}
                               >
 
                             </Image>
-                          </TouchableOpacity>
+
                         </ListItem>
                     }>
               </List>
+
 
 
           </Item>
