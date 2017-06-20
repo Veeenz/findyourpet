@@ -127,9 +127,7 @@ class CreateFind extends Component {
             />
 
           <CardSection>
-            <Item regular>
-                        <Input placeholder='Descrivi il tuo animale, segni particolari ecc allegando più foto possibili'/>
-            </Item>
+                <Input placeholder='Descrivi il tuo animale, segni particolari ecc allegando più foto possibili'/>
             <Input
               label="Descrizione Ricerca"
               placeholder='Descrivi il tuo animale, segni particolari ecc allegando più foto possibili'
