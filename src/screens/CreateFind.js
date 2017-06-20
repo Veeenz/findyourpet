@@ -133,7 +133,49 @@ class CreateFind extends Component {
                 />
               </Item>
             </CardItem>
+            <CardItem>
+            <Item stackedLabel>
+                <Label>
+                  Inserisci le foto del tuo animali,fino a 5
+                </Label>
 
+                  <List horizontal={true} dataArray={this.state.items}
+                        renderRow={(item) =>
+                            <ListItem button onPress = {() => console.log('click on image')}>
+                                <Image
+                                  source={{ uri:this.state.image }}
+                                  resizeMode="cover"
+
+                                  style={{ height :100, width: 200}}
+                                  >
+                                </Image>
+                            </ListItem>
+                        }>
+                  </List>
+              </Item>
+            </CardItem>
+            <CardItem>
+              <Item stackedLabel  style={{ flex:1 }}>
+              <Label>
+                Quando hai perso il tuo animale?
+              </Label>
+                <DatePicker
+                  style={{ flex: 1, width:'100%' }}
+                  date={this.state.duedate}
+                  mode="date"
+                  placeholder="Dove hai perso il tuo animale?"
+                  format="YYYY-MM-DD"
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  customStyles={{
+                    dateInput: {
+                      marginLeft: 1
+                    }
+                  }}
+                  onDateChange={(date) => {this.setState({duedate: date})}}
+                />
+            </Item>
+            </CardItem>
             <CardItem>
             <Item stackedLabel style={{ flex:1 }}>
               <Label>Descrizione</Label>
@@ -146,55 +188,8 @@ class CreateFind extends Component {
             />
           </Item>
         </CardItem>
-        <CardItem>
-          <Item stackedLabel  style={{ flex:1 }}>
-          <Label>
-            Quando hai perso il tuo animale?
-          </Label>
-            <DatePicker
-              style={{ flex: 1, width:'100%' }}
-              date={this.state.duedate}
-              mode="date"
-              placeholder="Dove hai perso il tuo animale?"
-              format="YYYY-MM-DD"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateInput: {
-                  marginLeft: 1
-                }
-              }}
-              onDateChange={(date) => {this.setState({duedate: date})}}
-            />
-        </Item>
-        </CardItem>
-        <CardItem>
-        <Item stackedLabel>
-            <Label>
-              Inserisci le foto del tuo animali,fino a 5
-            </Label>
-
-              <List horizontal={true} dataArray={this.state.items}
-                    renderRow={(item) =>
-                        <ListItem button onPress = {() => console.log('click on image')}>
-
-                            <Image
-                              source={{ uri:this.state.image }}
-                              resizeMode="cover"
-
-                              style={{ height :100, width: 200}}
-                              >
-
-                            </Image>
-
-                        </ListItem>
-                    }>
-              </List>
 
 
-
-          </Item>
-        </CardItem>
 
         <CardItem>
           <Item style={{flex:1}}>
