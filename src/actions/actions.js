@@ -2,8 +2,10 @@ import {
   LOGIN_USER_START,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
+  LOGIN_USER_LOGOUT,
   USER_PROFILE_INFORMATION,
-  USER_SET_LOCATION
+  USER_SET_LOCATION,
+  USER_SET_MARKER
 } from './types';
 import firebase from 'firebase';
 
@@ -34,6 +36,13 @@ const loginUserFailed = (dispatch, error)  => {
 }
 
 
+export const logoutUser = (dispatch, navigateTo) => {
+  return (dispatch) => {
+    dispatch({ type: LOGIN_USER_LOGOUT})
+    navigateTo('Login')
+  }
+}
+
 export const userProfileInformation = (dispatch) => {
   return (dispatch) => {
     const { currentUser } = firebase.auth();
@@ -50,5 +59,12 @@ export const setUserLocation = (coordinates) => {
     console.log("coordinates: ")
     console.log(coordinates);
     dispatch({type: USER_SET_LOCATION, payload: coordinates})
+  }
+}
+
+
+export const setUserMarker = (coordinates) => {
+  return (dispatch) =>{
+    dispatch({type: USER_SET_MARKER, payload: coordinates})
   }
 }
