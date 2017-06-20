@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardSection, Input, Button } from '../components/common';
+import { Card, CardSection,} from '../components/common';
 import DatePicker from 'react-native-datepicker'
+import {Button, Input,Container, Content} from 'native-base'
 import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { findCreate } from '../actions/CreateActions';
@@ -70,6 +71,8 @@ class CreateFind extends Component {
   render() {
     const { width, height } = Dimensions.get('window');
     return (
+      <Container>
+        <Content>
       <ScrollView>
         <Card>
           <CardSection>
@@ -124,12 +127,15 @@ class CreateFind extends Component {
             />
 
           <CardSection>
+            <Item regular>
+                        <Input placeholder='Descrivi il tuo animale, segni particolari ecc allegando più foto possibili'/>
+            </Item>
             <Input
               label="Descrizione Ricerca"
               placeholder='Descrivi il tuo animale, segni particolari ecc allegando più foto possibili'
               value={this.state.descr}
               onChangeText={text => this.setState({ descr: text })}
-              style={{ height: 200, width: 300 }}
+              style={{ height: 600, width: 300 }}
             />
           </CardSection>
           <Text>
@@ -193,11 +199,15 @@ class CreateFind extends Component {
                 longitudeMarker: this.state.longitudeMarker,
                 navigateBack: () => this.props.navigation.goBack()
               })}>
-              Add Find
+              <Text>
+                Add Find
+              </Text>
             </Button>
           </CardSection>
         </Card>
       </ScrollView>
+    </Content>
+    </Container>
     )
   }
 }
