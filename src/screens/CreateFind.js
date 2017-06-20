@@ -180,11 +180,12 @@ class CreateFind extends Component {
             <Item stackedLabel style={{ flex:1 }}>
               <Label>Descrizione</Label>
             <Input
-              label="Descrizione Ricerca"
-              placeholder='Descrivi il tuo animale, segni particolari ecc allegando più foto possibili'
+              style={{ flex: 1, height:200 }}
+              placeholder='Inserisci più dettagli'
               value={this.state.descr}
+              multiline={true}
               onChangeText={text => this.setState({ descr: text })}
-              style={{ flex: 1, height:200}}
+
             />
           </Item>
         </CardItem>
