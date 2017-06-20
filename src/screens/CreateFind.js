@@ -20,8 +20,9 @@ class CreateFind extends Component {
     descr: '',
     latitudeMarker: 0.0,
     longitudeMarker: 0.0,
-    latitude: 0.0,
-    longitude: 0.0
+    latitude: 37.525729,
+          longitude: 15.072030,
+
   }
 
   componentWillMount(){
@@ -86,18 +87,21 @@ class CreateFind extends Component {
             <MapView
               style={{ width, height: height-400 }}
               showsUserLocation={true}
-              region={{
+              loadingEnabled={true}
+              initialRegion={{
                 latitude: this.state.latitude,
                 longitude: this.state.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitudeDelta: 0.0,
+                longitudeDelta: 0.0,
               }}
 
+              //onRegionChangeComplete={(region) => this.setState({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta})}
             >
+
             <MapView.Marker draggable
               coordinate={{
-                latitude: this.state.latitude,
-                longitude: this.state.longitude,
+                latitude: this.state.latitudeMarker,
+                longitude: this.state.longitudeMarker,
               }}
               onDragEnd={(e) => { this.setState({ latitudeMarker: e.nativeEvent.coordinate.latitude, longitudeMarker: e.nativeEvent.coordinate.longitude }, () =>
               fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
