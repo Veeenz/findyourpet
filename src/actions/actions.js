@@ -5,7 +5,8 @@ import {
   LOGIN_USER_LOGOUT,
   USER_PROFILE_INFORMATION,
   USER_SET_LOCATION,
-  USER_SET_MARKER
+  USER_SET_MARKER,
+  FINDLIST_FETCH_SUCCESS
 } from './types';
 import firebase from 'firebase';
 
@@ -66,5 +67,15 @@ export const setUserLocation = (coordinates) => {
 export const setUserMarker = (coordinates) => {
   return (dispatch) =>{
     dispatch({type: USER_SET_MARKER, payload: coordinates})
+  }
+}
+
+
+export const findListFetch = () => {
+  return (dispatch) => {
+    firebase.database().ref("/DataList")
+    .on("value", snap => {
+      dispatch({type:FINDLIST_FETCH_SUCCESS, payload: snap.val()})
+    })
   }
 }
