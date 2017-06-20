@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Dimensions, Button } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
+import {Button} from 'native-base'
 import {connect} from 'react-redux';
 import { userProfileInformation, setUserLocation, logoutUser,setUserMarker } from '../actions/actions';
 import { MapView, Permissions, Location } from 'expo';
