@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardSection,} from '../components/common';
 import DatePicker from 'react-native-datepicker'
-import {Button, Input,Container, Content} from 'native-base'
+import {Button, Input,Container, Content,Label,Item} from 'native-base'
 import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { findCreate } from '../actions/CreateActions';
@@ -76,12 +76,15 @@ class CreateFind extends Component {
       <ScrollView>
         <Card>
           <CardSection>
+              <Item stackedLabel>
+              <Label> Titolo </Label>
             <Input
               label="Titolo Ricerca"
               placeholder="Titolo della ricerca"
               value={this.state.title}
               onChangeText={text => this.setState({ title: text })}
             />
+          </Item>
           </CardSection>
 
 
@@ -117,17 +120,19 @@ class CreateFind extends Component {
 
             />
             </MapView>
-
-
-            <Input
-              label="Location"
-              placeholder='Where did you lose your buddy?'
-              value={this.state.location}
-              onChangeText={text => this.setState({ location: text })}
-            />
+              <Item stackedLabel>
+              <Label> Posizione </Label>
+              <Input
+                label="Location"
+                placeholder='Where did you lose your buddy?'
+                value={this.state.location}
+                onChangeText={text => this.setState({ location: text })}
+              />
+              </Item>
 
           <CardSection>
-                <Input placeholder='Descrivi il tuo animale, segni particolari ecc allegando più foto possibili'/>
+            <Item stackedLabel>
+             <Label>Descrizione</Label>
             <Input
               label="Descrizione Ricerca"
               placeholder='Descrivi il tuo animale, segni particolari ecc allegando più foto possibili'
@@ -135,12 +140,14 @@ class CreateFind extends Component {
               onChangeText={text => this.setState({ descr: text })}
               style={{ height: 600, width: 300 }}
             />
+          </Item>
           </CardSection>
           <Text>
             Quando hai perso il tuo animale?
           </Text>
 
           <CardSection>
+
 
             <DatePicker
               style={{ flex: 1 }}
@@ -157,7 +164,7 @@ class CreateFind extends Component {
               }}
               onDateChange={(date) => {this.setState({duedate: date})}}
             />
-
+        
           </CardSection>
             <Image />
             <Text>
