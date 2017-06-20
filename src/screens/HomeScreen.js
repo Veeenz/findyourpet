@@ -2,18 +2,21 @@ import React from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import {Button} from 'native-base'
 import {connect} from 'react-redux';
-import { userProfileInformation, setUserLocation, logoutUser,setUserMarker } from '../actions/actions';
+import { userProfileInformation, setUserLocation, logoutUser,setUserMarker,findListFetch } from '../actions/actions';
 import { MapView, Permissions, Location } from 'expo';
 
+import firebase from 'firebase';
 
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    pet: state.pet
 })
 const mapDispatchToProps = dispatch => ({
   userProfileInformation: () => dispatch(userProfileInformation()),
   setUserLocation:(coordinates) => dispatch(setUserLocation(coordinates)),
   setUserMarker:(coordinates) => dispatch(setUserMarker(coordinates)),
-  logoutUser: () => dispatch(logoutUser())
+  logoutUser: () => dispatch(logoutUser()),
+  findListFetch: () => dispatch(findListFetch())
 })
 
 class HomeScreen extends React.Component{
@@ -41,12 +44,16 @@ class HomeScreen extends React.Component{
     this.props.setUserLocation(location.coords);
   }
 
+  handleClickButton = () => {
+    this.props.findListFetch();
+  }
+
   render(){
     const { width, height } = Dimensions.get('window');
     const { latitude, longitude } = this.props.user
     return(
       <View>
-
+        <Button onPress={() => this.handleClickButton()}><Text>Hello</Text></Button>
         <MapView
           style={{ width, height: height-200 }}
           showsUserLocation={true}
@@ -69,8 +76,8 @@ class HomeScreen extends React.Component{
         <Text> Hello {this.props.user.email}</Text>
         <Text> Coordinate longitude {this.props.user.longitude}</Text>
         <Text> Coordinate latitude {this.props.user.latitude}</Text>
-          <Text> Coordinate longitudeMarker {this.props.user.longitudeMarker}</Text>
-          <Text> Coordinate latitudeMarker {this.props.user.latidudeMarker}</Text>
+        <Text> Coordinate longitudeMarker {this.props.user.longitudeMarker}</Text>
+        <Text> Coordinate latitudeMarker {this.props.user.latidudeMarker}</Text>
 
       </View>
 
