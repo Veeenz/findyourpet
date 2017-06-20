@@ -1,7 +1,7 @@
 import { StackNavigator } from "react-navigation";
 import React, {Component} from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Container, Content, Button, Text, Form, Item, Input, InputGroup, Label} from 'native-base';
+import { Container, Content, Button, Text, Form, Item, Input, InputGroup, Label, Spinner} from 'native-base';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/actions';
 import ErrorCard from '../components/ErrorCard';
@@ -27,6 +27,7 @@ class LoginForm extends Component {
   }
 
   handleLoginClickAuth = () => {
+
       this.props.loginUser(
         {
           email: 'a@a.it',
@@ -38,6 +39,13 @@ class LoginForm extends Component {
   }
 
   render(){
+    if(this.props.auth.isLoading)
+      return(
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text></Text>
+            <Spinner color='blue' />
+        </View>
+      );
     return(
 
       <Container>
