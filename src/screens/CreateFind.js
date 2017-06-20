@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {  CardSection,} from '../components/common';
 import DatePicker from 'react-native-datepicker'
-import {Button, Input,Container, Content,Label,Item, Card, CardItem} from 'native-base'
+import {Button, Input,Container, Content,Label,Item, Card, CardItem, List, ListItem} from 'native-base'
 import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { findCreate } from '../actions/CreateActions';
@@ -21,6 +21,7 @@ class CreateFind extends Component {
     title: '',
     location: '',
     duedate: new Date().toISOString(),
+    items: [1,2,3,4],
     image: 'https://facebook.github.io/react/img/logo_og.png',
     descr: '',
     latitudeMarker: 0.0,
@@ -172,33 +173,37 @@ class CreateFind extends Component {
         </Item>
         </CardItem>
         <CardItem>
-        <Item stackedLabel style={{flex:1}}>
-            <Text>
+        <Item stackedLabel>
+            <Label>
               Inserisci le foto del tuo animali,fino a 5
-            </Text>
+            </Label>
 
 
-            <TouchableOpacity
-              onPress={this._pickImage}
-              >
+              <List horizontal={true} dataArray={this.state.items}
+                    renderRow={(item) =>
+                        <ListItem>
+                          <TouchableOpacity
+                            style={{flexDirection:'row'}}
+                            onPress={this._pickImage}
+                            >
+                            <Image
+                              source={{ uri:this.state.image }}
+                              resizeMode="cover"
+                              style={{ height :100, width: 200}}
+                              >
 
-              <Image
-                source={{ uri: this.state.image }}
-                resizeMode="cover"
-                style={{ height: 100, width: 200 }}
-              />
+                            </Image>
+                          </TouchableOpacity>
+                        </ListItem>
+                    }>
+              </List>
 
-              <Image
-                source={{ uri: this.state.image }}
-                resizeMode="cover"
-                style={{ height: 100, width: 200 }}
-              />
 
-            </TouchableOpacity>
           </Item>
         </CardItem>
 
         <CardItem>
+          <Item style={{flex:1}}>
             <Button onPress={() => this.props.findCreate({
                 title: this.state.title,
                 location: this.state.location,
@@ -208,11 +213,14 @@ class CreateFind extends Component {
                 latitudeMarker: this.state.latitudeMarker,
                 longitudeMarker: this.state.longitudeMarker,
                 navigateBack: () => this.props.navigation.goBack()
-              })}>
+              })}
+              style={{flex:1,justifyContent: 'center'}}
+              >
               <Text>
                 Add Find
               </Text>
             </Button>
+          </Item>
         </CardItem>
         </Card>
 
