@@ -1,4 +1,4 @@
-import { StackNavigator } from "react-navigation";
+import { StackNavigator,NavigationActions } from "react-navigation";
 import React, {Component} from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Container, Content, Button, Text, Form, Item, Input, InputGroup, Label, Spinner} from 'native-base';
@@ -32,7 +32,7 @@ class LoginForm extends Component {
         {
           email: 'a@a.it',
           password: 'aaaaaa',
-          navigateTo: (screen) => this.props.navigation.navigate(screen)
+          navigateTo: (screen) => this.props.navigation.navigate('CreateFind')
         }
       )
 

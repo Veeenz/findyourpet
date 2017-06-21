@@ -87,14 +87,8 @@ class HomeScreen extends React.Component{
 
 
 
-HomeScreen.navigationOptions = ({navigation}) => ({
-  title: 'List Find Buddy',
-  headerLeft: <Button title="Logout"
-      onPress={() => console.log(this.props)}
-    />,
-  headerRight: <Button title="Add"
-      onPress={() => navigation.navigate('Create')}
-    />
-})
+
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

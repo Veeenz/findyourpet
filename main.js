@@ -5,7 +5,7 @@ import firebase from 'firebase';
 import LoginForm from './src/screens/LoginForm'
 import HomeScreen from './src/screens/HomeScreen'
 import CreateFind from './src/screens/CreateFind'
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator,TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import store from './src/store';
 
@@ -19,12 +19,23 @@ const config = {
   };
 const firebaseApp = firebase.initializeApp(config);
 
-const AppNavigator = StackNavigator({
+const AppNavigator = TabNavigator({
     Login: { screen: LoginForm },
     Main: { screen: HomeScreen },
-    Create: {screen: CreateFind}
-
-});
+    Create: {screen: CreateFind}},
+    {
+      tabBarOptions: {
+        activeTintColor: '#e91e63',
+        animationEnabled: 'true',
+      labelStyle: {
+        fontSize: 12,
+      },
+      style: {
+        backgroundColor: 'blue',
+      },
+      }
+    }
+);
 class Main extends React.Component {
   state = {
     isReady: false
@@ -46,11 +57,35 @@ class Main extends React.Component {
 
     return (
       <Provider store={store}>
-        <AppNavigator/>
-      </Provider>
+        <AppNavigator />
+    </Provider>
+
+
     );
   }
 }
+
+
+const MyApp = TabNavigator({
+  Home: {
+    screen: HomeScreen,
+  },
+  Notifications: {
+    screen: CreateFind,
+  },
+}, {
+  tabBarOptions: {
+    activeTintColor: '#e91e63',
+    animationEnabled: 'true',
+  labelStyle: {
+    fontSize: 12,
+  },
+  style: {
+    backgroundColor: 'blue',
+  },
+  },
+});
+
 
 const styles = StyleSheet.create({
   container: {
