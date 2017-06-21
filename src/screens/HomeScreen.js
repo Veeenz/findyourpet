@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Dimensions } from 'react-native';
-import {Button} from 'native-base'
+import {Button,Container, Content,Label,Item, Card, CardItem, Header, Icon, Left, Right, Body,Title} from 'native-base'
 import {connect} from 'react-redux';
 import { userProfileInformation, setUserLocation, logoutUser,setUserMarker,findListFetch } from '../actions/actions';
 import { MapView, Permissions, Location } from 'expo';
@@ -52,34 +52,39 @@ class HomeScreen extends React.Component{
     const { width, height } = Dimensions.get('window');
     const { latitude, longitude } = this.props.user
     return(
-      <View>
-        <Button onPress={() => this.handleClickButton()}><Text>Hello</Text></Button>
-        <MapView
-          style={{ width, height: height-200 }}
-          showsUserLocation={true}
-          region={{
-            latitude: this.props.user.latitude,
-            longitude: this.props.user.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
+      <Container>
+        <Content
+          padder= {false}
+          >
+        <Card >
+          <Header>
+             <Body>
+                 <Title>Maps</Title>
+             </Body>
+         </Header>
+          <CardItem>
+        <View>
+          <Button onPress={() => this.handleClickButton()}><Text>Hello</Text></Button>
+          <MapView
+            style={{ width, height: height }}
+            showsUserLocation={true}
+            region={{
+              latitude: this.props.user.latitude,
+              longitude: this.props.user.longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
 
-        >
-        <MapView.Marker draggable
-          coordinate={{
-            latitude: this.props.user.latitude,
-            longitude: this.props.user.longitude,
-          }}
-          onDragEnd={(e) => { this.props.setUserMarker(e.nativeEvent.coordinate); }}
-        />
-        </MapView>
-        <Text> Hello {this.props.user.email}</Text>
-        <Text> Coordinate longitude {this.props.user.longitude}</Text>
-        <Text> Coordinate latitude {this.props.user.latitude}</Text>
-        <Text> Coordinate longitudeMarker {this.props.user.longitudeMarker}</Text>
-        <Text> Coordinate latitudeMarker {this.props.user.latidudeMarker}</Text>
+          >
+          </MapView>
+          </View>
 
-      </View>
+        </CardItem>
+          </Card>
+        </Content>
+    </Container>
+
+
 
     );
   }
