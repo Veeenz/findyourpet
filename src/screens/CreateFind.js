@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {  CardSection,} from '../components/common';
 import DatePicker from 'react-native-datepicker'
-import {Button, Input,Container, Content,Label,Item, Card, CardItem, List, ListItem} from 'native-base'
+import {Button, Input,Container, Content,Label,Item, Card, CardItem, List, ListItem, Header, Icon, Left, Right, Body,Title} from 'native-base'
 import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { findCreate } from '../actions/CreateActions';
@@ -71,6 +71,11 @@ class CreateFind extends Component {
         <Content>
 
         <Card>
+          <Header>
+             <Body>
+                 <Title>CreateFind</Title>
+             </Body>
+         </Header>
           <CardItem>
             <Item stackedLabel style={{ flex:1 }}>
               <Label> Titolo </Label>
