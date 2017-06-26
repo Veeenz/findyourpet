@@ -9,7 +9,7 @@ export default petReducer = (state = initialState, action) => {
       return {...state, isLoading: true}
     break;
     case FINDLIST_FETCH_SUCCESS:
-      return action.payload || {}
+      return {petList: action.payload, isLoading: false}
     break;
     case FINDLIST_FETCH_ERROR:
       return {...state, isLoading: false}

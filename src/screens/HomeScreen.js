@@ -4,13 +4,18 @@ import {Button,Container, Content,Label,Item, Card, CardItem, Header, Icon, Left
 import {connect} from 'react-redux';
 import { userProfileInformation, setUserLocation, logoutUser,setUserMarker,findListFetch } from '../actions/actions';
 import { MapView, Permissions, Location } from 'expo';
-
 import firebase from 'firebase';
 
-const mapStateToProps = state => ({
-    user: state.user,
-    pet: state.pet
-})
+const mapStateToProps = state => {
+    const petList = Object.keys(state.pet.petList).map(id => {
+      return { ...state.pet.petList[id] }
+    });
+    return{
+        user: state.user,
+        pet: petList
+    }
+}
+
 const mapDispatchToProps = dispatch => ({
   userProfileInformation: () => dispatch(userProfileInformation()),
   setUserLocation:(coordinates) => dispatch(setUserLocation(coordinates)),
@@ -26,10 +31,7 @@ class HomeScreen extends React.Component{
   componentWillMount(){
     this.props.userProfileInformation()
     this.retrieveUserLocation()
-    console.log("COMPONENTE MAPPA STA PER ESSERE MONTATO")
-    console.log(this.props.user)
-    //console.log(this.props.logoutUser())
-
+    this.props.findListFetch()
   }
 
 
@@ -48,10 +50,26 @@ class HomeScreen extends React.Component{
     this.props.findListFetch();
   }
 
+  markerRender = () => {
+      return Object.keys(this.props.pet).map((key) => { // TODO: Need to find a better way to manage this
+          return (<MapView.Marker
+                      key={key}
+                      coordinate={{
+                          latitude: this.props.pet[key].latitudeMarker,
+                          longitude: this.props.pet[key].longitudeMarker
+                      }}
+                  />)
+      })
+  }
+
   render(){
     const { width, height } = Dimensions.get('window');
-    const { latitude, longitude } = this.props.user
+    const { latitude, longitude, longitudeMarker, latidudeMarker } = this.props.user
     return(
+          >
+          {this.markerRender()}
+
+            
       <Container>
         <Content
           padder= {false}
@@ -76,6 +94,7 @@ class HomeScreen extends React.Component{
             }}
 
           >
+          {this.markerRender()}
           </MapView>
           </View>
 

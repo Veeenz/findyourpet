@@ -2,7 +2,8 @@ import {
   FIND_CREATE,
   FINDLIST_FETCH_SUCCESS,
   DOWNLOAD_INITIALTODOLIST_START,
-  DOWNLOAD_INITIALTODOLIST_SUCCESS
+  DOWNLOAD_INITIALTODOLIST_SUCCESS,
+  FINDLIST_FETCH_START
  } from './types';
 import firebase from 'firebase';
 
@@ -22,12 +23,10 @@ export const findCreate = ({ title, location, duedate, descr,image,latitudeMarke
 
 export const findlistFetch = () => {
 
-  console.log("carichiamo le todo da firebase");
-  const { currentUser } = firebase.auth();
-  console.log('currentUser', currentUser.uid);
   return (dispatch) => {
-    dispatch({ type: DOWNLOAD_INITIALLIST_START });
-    firebase.database().ref(`/users/Findlist/${currentUser.uid}/`)
+    dispatch({ type: FINDLIST_FETCH_START });
+    //firebase.database().ref(`Findlist/${currentUser.uid}/`)
+    firebase.database().ref("FindList").orderByKey()
       .on('value', snapshot => {
         dispatch({ type: FINDLIST_FETCH_SUCCESS, payload: snapshot.val()})
         dispatch({ type: DOWNLOAD_INITIALLIST_SUCCESS })

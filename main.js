@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 import LoginForm from './src/screens/LoginForm'
-import HomeScreen from './src/screens/HomeScreen'
+import HomeScreen from './src/screens/HomeScreen';
 import CreateFind from './src/screens/CreateFind'
 import { StackNavigator,TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
