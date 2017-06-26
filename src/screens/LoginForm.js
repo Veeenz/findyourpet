@@ -32,7 +32,7 @@ class LoginForm extends Component {
         {
           email: 'a@a.it',
           password: 'aaaaaa',
-          navigateTo: (screen) => this.props.navigation.navigate('CreateFind')
+          navigateTo: (screen) => this.props.navigation.navigate(screen)
         }
       )
 

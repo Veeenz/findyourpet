@@ -19,7 +19,9 @@ const config = {
   };
 const firebaseApp = firebase.initializeApp(config);
 
-const AppNavigator = TabNavigator({
+
+
+const SecondaryNavigator = TabNavigator({
     Login: { screen: LoginForm },
     Main: { screen: HomeScreen },
     Create: {screen: CreateFind}},
@@ -36,6 +38,11 @@ const AppNavigator = TabNavigator({
       }
     }
 );
+const MainNavigator = StackNavigator({
+    Login: { screen: LoginForm },
+    Main: { screen: SecondaryNavigator}
+});
+
 class Main extends React.Component {
   state = {
     isReady: false
@@ -57,7 +64,7 @@ class Main extends React.Component {
 
     return (
       <Provider store={store}>
-        <AppNavigator />
+        <MainNavigator />
     </Provider>
 
 

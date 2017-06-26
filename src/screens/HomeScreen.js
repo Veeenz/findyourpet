@@ -66,10 +66,6 @@ class HomeScreen extends React.Component{
     const { width, height } = Dimensions.get('window');
     const { latitude, longitude, longitudeMarker, latidudeMarker } = this.props.user
     return(
-          >
-          {this.markerRender()}
-
-            
       <Container>
         <Content
           padder= {false}
@@ -94,7 +90,6 @@ class HomeScreen extends React.Component{
             }}
 
           >
-          {this.markerRender()}
           </MapView>
           </View>
 
