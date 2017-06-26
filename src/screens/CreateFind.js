@@ -9,7 +9,7 @@ import { ImagePicker, Location, MapView, Permissions } from 'expo';
 
 class CreateFind extends Component {
   static navigationOptions = {
-    title: 'New Find'
+    title: 'Create Find'
   }
   state = {
     title: '',

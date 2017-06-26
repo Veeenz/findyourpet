@@ -19,10 +19,13 @@ const config = {
   };
 const firebaseApp = firebase.initializeApp(config);
 
-
-
-const SecondaryNavigator = TabNavigator({
+const SecondaryNavigator = StackNavigator({
     Login: { screen: LoginForm },
+    Create: { screen: CreateFind}
+});
+
+const MainNavigator = TabNavigator({
+    Login: { screen: SecondaryNavigator },
     Main: { screen: HomeScreen },
     Create: {screen: CreateFind}},
     {
@@ -38,10 +41,7 @@ const SecondaryNavigator = TabNavigator({
       }
     }
 );
-const MainNavigator = StackNavigator({
-    Login: { screen: LoginForm },
-    Main: { screen: SecondaryNavigator}
-});
+
 
 class Main extends React.Component {
   state = {

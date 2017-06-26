@@ -29,7 +29,7 @@ class HomeScreen extends React.Component{
     super(props);
   }
   componentWillMount(){
-    this.props.userProfileInformation()
+    //this.props.userProfileInformation()
     this.retrieveUserLocation()
     this.props.findListFetch()
   }
