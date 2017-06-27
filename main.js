@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import LoginForm from './src/screens/LoginForm'
 import HomeScreen from './src/screens/HomeScreen';
 import CreateFind from './src/screens/CreateFind'
+import { NavigationComponent } from 'react-native-material-bottom-navigation'
 import { StackNavigator,TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import store from './src/store';
@@ -19,23 +20,40 @@ const config = {
   };
 const firebaseApp = firebase.initializeApp(config);
 
-const AppNavigator = TabNavigator({
+const SecondaryNavigator = StackNavigator({
     Login: { screen: LoginForm },
+    Create: { screen: CreateFind}
+});
+
+const MainNavigator = TabNavigator({
+    Login: { screen: SecondaryNavigator },
     Main: { screen: HomeScreen },
     Create: {screen: CreateFind}},
     {
-      tabBarOptions: {
-        activeTintColor: '#e91e63',
-        animationEnabled: 'true',
-      labelStyle: {
-        fontSize: 12,
-      },
-      style: {
-        backgroundColor: 'blue',
-      },
+  tabBarComponent: NavigationComponent,
+  tabBarPosition: 'bottom',
+  tabBarOptions: {
+    bottomNavigationOptions: {
+      labelColor: 'white',
+      rippleColor: 'white',
+
+      tabs: {
+        Login: {
+            barBackgroundColor: '#37474F',
+        },
+        Main: {
+            barBackgroundColor: '#37474F',
+        },
+        Create: {
+          barBackgroundColor: '#EEEEEE',
+          activeLabelColor: '#212121',
+        }
       }
     }
-);
+  }
+});
+
+
 class Main extends React.Component {
   state = {
     isReady: false
@@ -56,34 +74,33 @@ class Main extends React.Component {
       return null;
 
     return (
-      <Provider store={store}>
-        <AppNavigator />
-    </Provider>
-
-
+        <Provider store={store} style={{top:20}}>
+            <MainNavigator />
+        </Provider>
     );
   }
 }
 
 
 const MyApp = TabNavigator({
-  Home: {
-    screen: HomeScreen,
-  },
-  Notifications: {
-    screen: CreateFind,
-  },
-}, {
-  tabBarOptions: {
-    activeTintColor: '#e91e63',
-    animationEnabled: 'true',
-  labelStyle: {
-    fontSize: 12,
-  },
-  style: {
-    backgroundColor: 'blue',
-  },
-  },
+    Home: {
+        screen: HomeScreen,
+    },
+    Notifications: {
+        screen: CreateFind,
+    }},
+    {
+    tabBarOptions: {
+        activeTintColor: '#e91e63',
+        animationEnabled: 'true',
+        tabBarPosition: 'bottom',
+        labelStyle: {
+            fontSize: 12,
+        },
+        style: {
+            backgroundColor: 'blue',
+        },
+    },
 });
 
 
