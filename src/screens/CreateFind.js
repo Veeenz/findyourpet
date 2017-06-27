@@ -69,26 +69,26 @@ class CreateFind extends Component {
     return (
       <Container>
         <Content>
-
+            <Header>
+               <Body>
+                   <Title>CreateFind</Title>
+               </Body>
+            </Header>
         <Card>
-          <Header>
-             <Body>
-                 <Title>CreateFind</Title>
-             </Body>
-         </Header>
-          <CardItem>
-            <Item stackedLabel style={{ flex:1 }}>
-              <Label> Titolo </Label>
-              <Input
-              label="Titolo Ricerca"
-              placeholder="Titolo della ricerca"
-              value={this.state.title}
-              onChangeText={text => this.setState({ title: text })}
-              />
-          </Item>
-        </CardItem>
 
-        <CardItem>
+         <CardItem cardBody>
+                 <Item stackedLabel style={{ flex:1 }}>
+                     <Label> Titolo </Label>
+                     <Input
+                         label="Titolo Ricerca"
+                         placeholder="Titolo della ricerca"
+                         value={this.state.title}
+                         onChangeText={text => this.setState({ title: text })}
+                     />
+                 </Item>
+         </CardItem>
+
+        <CardItem cardBody>
             <MapView
               style={{ width, height: height-400 }}
               showsUserLocation={true}
@@ -172,11 +172,7 @@ class CreateFind extends Component {
                   format="YYYY-MM-DD"
                   confirmBtnText="Confirm"
                   cancelBtnText="Cancel"
-                  customStyles={{
-                    dateInput: {
-                      marginLeft: 1
-                    }
-                  }}
+
                   onDateChange={(date) => {this.setState({duedate: date})}}
                 />
             </Item>

@@ -67,31 +67,27 @@ class HomeScreen extends React.Component{
         const { latitude, longitude, longitudeMarker, latidudeMarker } = this.props.user
         return(
             <Container>
-                <Content
-                    padder= {false}
-                    >
+                <Header>
+                    <Body>
+                        <Title>Maps</Title>
+                    </Body>
+                </Header>
+                <Content>
                         <Card>
-                            <Header>
-                                <Body>
-                                    <Title>Maps</Title>
-                                </Body>
-                            </Header>
-                            <CardItem>
-                                <View>
-                                    <MapView
-                                        style={{ width, height: height }}
-                                        showsUserLocation={true}
-                                        initialRegion={{
-                                            latitude: 41.9097306,
-                                            longitude: 12.2558141,
-                                            latitudeDelta: 12.3422,
-                                            longitudeDelta: 12.3221,
-                                        }}
-                                        >
-                                            {this.markerRender()}
-                                    </MapView>
-                                </View>
 
+                            <CardItem cardBody>
+                                <MapView
+                                    style={{ width, height: height }}
+                                    showsUserLocation={true}
+                                    initialRegion={{
+                                        latitude: 41.9097306,
+                                        longitude: 12.2558141,
+                                        latitudeDelta: 12.3422,
+                                        longitudeDelta: 12.3221,
+                                    }}
+                                    >
+                                        {this.markerRender()}
+                                </MapView>
                             </CardItem>
                         </Card>
                     </Content>
