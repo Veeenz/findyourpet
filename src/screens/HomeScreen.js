@@ -70,7 +70,7 @@ class HomeScreen extends React.Component{
                 <Content
                     padder= {false}
                     >
-                        <Card >
+                        <Card>
                             <Header>
                                 <Body>
                                     <Title>Maps</Title>
@@ -78,26 +78,24 @@ class HomeScreen extends React.Component{
                             </Header>
                             <CardItem>
                                 <View>
-                                    <Button onPress={() => this.handleClickButton()}><Text>Hello</Text></Button>
                                     <MapView
                                         style={{ width, height: height }}
                                         showsUserLocation={true}
-                                        region={{
-                                            latitude: this.props.user.latitude,
-                                            longitude: this.props.user.longitude,
-                                            latitudeDelta: 0.0922,
-                                            longitudeDelta: 0.0421,
+                                        initialRegion={{
+                                            latitude: 41.9097306,
+                                            longitude: 12.2558141,
+                                            latitudeDelta: 12.3422,
+                                            longitudeDelta: 12.3221,
                                         }}
-
                                         >
-                                        {this.markerRender()}
-                                        </MapView>
-                                    </View>
+                                            {this.markerRender()}
+                                    </MapView>
+                                </View>
 
-                                </CardItem>
-                            </Card>
-                        </Content>
-                    </Container>
+                            </CardItem>
+                        </Card>
+                    </Content>
+                </Container>
                 );
             }
         }
