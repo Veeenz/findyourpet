@@ -21,6 +21,8 @@ class PetScreen extends React.Component{
                             <MapView
                                 style={{ width, height: height-400 }}
                                 rotateEnabled={false}
+                                zoomEnabled={false}
+                                scrollEnabled={false}
                                 showsUserLocation={false}
                                 loadingEnabled={true}
                                 initialRegion={{
