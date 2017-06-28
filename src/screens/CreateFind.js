@@ -8,241 +8,244 @@ import { findCreate } from '../actions/actions';
 import { ImagePicker, Location, MapView, Permissions } from 'expo';
 
 class CreateFind extends Component {
-  static navigationOptions = {
-    title: 'Create Find'
-  }
-  state = {
-    title: '',
-    location: '',
-    duedate: new Date().toISOString(),
-    items: [1,2,3,4],
-    image: 'https://facebook.github.io/react/img/logo_og.png',
-    descr: '',
-    latitudeMarker: 0.0,
-    longitudeMarker: 0.0,
-    latitude: 37.525729,
-    longitude: 15.072030,
-    error_input_titolo: false,
-    error_input_descr: false,
-    error_input_posit: false
-  }
-
-  componentWillMount(){
-    this.retrieveUserLocation()
-
-
-  }
-
-
-  _pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: false
-    });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      this.setState({ image: result.uri });
+    static navigationOptions = {
+        title: 'Create Find'
     }
-  };
-
-
-  retrieveUserLocation = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      this.setState({ errorMessage: 'Permesso negato'});
+    state = {
+        title: '',
+        location: '',
+        duedate: new Date().toISOString(),
+        items: [1,2,3,4],
+        image: 'https://facebook.github.io/react/img/logo_og.png',
+        descr: '',
+        latitudeMarker: 0.0,
+        longitudeMarker: 0.0,
+        latitude: 37.525729,
+        longitude: 15.072030,
+        error_input_titolo: false,
+        error_input_descr: false,
+        error_input_posit: false
     }
 
-    let location = await Location.getCurrentPositionAsync({});
-    this.setState({latitude: location.coords.latitude, longitude: location.coords.longitude})
-    this.setState({latitudeMarker: location.coords.latitude, longitudeMarker: location.coords.longitude})
-    fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson.results[1].formatted_address)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  render() {
-    const { width, height } = Dimensions.get('window');
-    return (
-      <Container>
-        <Content>
-
-        <Card>
-
-         <CardItem cardBody>
-                 <Item stackedLabel  error={this.state.error_input_titolo} style={{ flex:1 }}>
-                     <Label> Titolo </Label>
-                     <Input
-                         label="Titolo Ricerca"
-                         placeholder="Titolo della ricerca"
-                         onChangeText={text =>{
-                          if( text === '')
-                            this.setState({error_input_titolo:true})
-                          else
-                            this.setState({ title: text,error_input_titolo:false })
-
-                       }}
-                     />
-                 </Item>
-         </CardItem>
-
-        <CardItem cardBody>
-            <MapView
-              style={{ width, height: height-400 }}
-              rotateEnabled={false}
-              showsUserLocation={true}
-              loadingEnabled={true}
-              initialRegion={{
-                latitude: this.state.latitude,
-                longitude: this.state.longitude,
-                latitudeDelta: 4.0,
-                longitudeDelta: 4.0,
-              }}
-
-              //onRegionChangeComplete={(region) => this.setState({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta})}
-            >
-
-            <MapView.Marker draggable
-              coordinate={{
-                latitude: this.state.latitudeMarker,
-                longitude: this.state.longitudeMarker,
-              }}
-              onDragEnd={(e) => { this.setState({ latitudeMarker: e.nativeEvent.coordinate.latitude, longitudeMarker: e.nativeEvent.coordinate.longitude }, () =>
-              fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
-                .then((response) => response.json())
-                .then((responseJson) => {
-                  console.log("Risultato: " + responseJson.results[1].formatted_address)
-                  this.setState({location: responseJson.results[1].formatted_address})
-
-                })
-                .catch((error) => {
-                  console.log("ERROR: " + error);
-                })
-            )}
-          }
-
-            />
-            </MapView>
-          </CardItem>
-
-            <CardItem>
-              <Item stackedLabel  error={this.state.error_input_posit} style={{ flex:1 }}>
-                <Label> Posizione </Label>
-                <Input
-                  label="Location"
-                  placeholder='Where did you lose your buddy?'
-                  value={this.state.location}
-                  onChangeText={text => this.setState({ location: text,error_input_posit: false })}
-
-                />
-              </Item>
-            </CardItem>
-            <CardItem>
-            <Item stackedLabel>
-                <Label>
-                  Inserisci le foto del tuo animali,fino a 5
-                </Label>
-
-                  <List horizontal={true} dataArray={this.state.items}
-                        renderRow={(item) =>
-                            <ListItem button onPress = {() => console.log('click on image')}>
-                                <Image
-                                  source={{ uri:this.state.image }}
-                                  resizeMode="cover"
-
-                                  style={{ height :100, width: 200}}
-                                  >
-                                </Image>
-                            </ListItem>
-                        }>
-                  </List>
-              </Item>
-            </CardItem>
-            <CardItem>
-              <Item stackedLabel  style={{ flex:1 }}>
-              <Label>
-                Quando hai perso il tuo animale?
-              </Label>
-                <DatePicker
-                  style={{ flex: 1, width:'100%' }}
-                  date={this.state.duedate}
-                  mode="date"
-                  value= {this.state.descr}
-                  placeholder="Dove hai perso il tuo animale?"
-                  format="YYYY-MM-DD"
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-
-                  onDateChange={(date) => {this.setState({duedate: date})}}
-                />
-            </Item>
-            </CardItem>
-            <CardItem >
-
-            <Item stackedLabel  error={this.state.error_input_descr} style={{flex: 1, flexDirection:'column'}}>
-              <Label>
-                Descrizione
-              </Label>
-
-            <Input
-
-              style={{ flex: 1, alignSelf:'flex-start', height:200 }}
-              placeholder='Inserisci più dettagli'
-              multiline={true}
-              onChangeText={text =>{
-                if( text === '')
-                  this.setState({error_input_descr:true})
-                else
-                  this.setState({ descr: text, error_input_descr:false })
-
-            }}
-
-            />
-          </Item>
-        </CardItem>
+    componentWillMount(){
+        this.retrieveUserLocation()
 
 
+    }
 
-        <CardItem>
-          <Item style={{flex:1}}>
-            <Button onPress={() => {
-                if (this.state.location === '')
-                  this.setState({error_input_posit: true})
-                if (this.state.title === '')
-                  this.setState({error_input_titolo: true})
-                if (this.state.descr === '')
-                  this.setState({error_input_descr: true})
 
-                if (this.state.location !== '' && this.stata.title !== '' && this.stata.descr !== '')
-                this.props.findCreate({
-                title: this.state.title,
-                location: this.state.location,
-                duedate: this.state.duedate,
-                descr: this.state.descr,
-                image: this.state.image,
-                latitudeMarker: this.state.latitudeMarker,
-                longitudeMarker: this.state.longitudeMarker,
-                navigateBack: () => this.props.navigation.goBack()
-              })}}
-              style={{flex:1,justifyContent: 'center'}}
-              >
-              <Text>
-                Add Find
-              </Text>
-            </Button>
-          </Item>
-        </CardItem>
-        </Card>
+    _pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: false
+        });
 
-    </Content>
-    </Container>
-    )
-  }
+        console.log(result);
+
+        if (!result.cancelled) {
+            this.setState({ image: result.uri });
+        }
+    };
+
+
+    retrieveUserLocation = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+            this.setState({ errorMessage: 'Permesso negato'});
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        this.setState({latitude: location.coords.latitude, longitude: location.coords.longitude})
+        this.setState({latitudeMarker: location.coords.latitude, longitudeMarker: location.coords.longitude})
+        fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log(responseJson.results[1].formatted_address)
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
+    render() {
+        const { width, height } = Dimensions.get('window');
+        return (
+            <Container>
+                <Content>
+
+                    <Card>
+
+                        <CardItem cardBody>
+                            <Item stackedLabel  error={this.state.error_input_titolo} style={{ flex:1 }}>
+                                <Label> Titolo </Label>
+                                <Input
+                                    label="Titolo Ricerca"
+                                    placeholder="Titolo della ricerca"
+                                    onChangeText={text =>{
+                                        if( text === '')
+                                        this.setState({error_input_titolo:true})
+                                        else
+                                        this.setState({ title: text,error_input_titolo:false })
+
+                                    }}
+                                />
+                            </Item>
+                        </CardItem>
+
+                        <CardItem cardBody>
+                            <MapView
+                                style={{ width, height: height-400 }}
+                                rotateEnabled={false}
+                                showsUserLocation={true}
+                                loadingEnabled={true}
+                                initialRegion={{
+                                    latitude: this.state.latitude,
+                                    longitude: this.state.longitude,
+                                    latitudeDelta: 4.0,
+                                    longitudeDelta: 4.0,
+                                }}
+
+                                //onRegionChangeComplete={(region) => this.setState({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta})}
+                                >
+
+                                    <MapView.Marker draggable
+                                        coordinate={{
+                                            latitude: this.state.latitudeMarker,
+                                            longitude: this.state.longitudeMarker,
+                                        }}
+                                        onDragEnd={(e) => { this.setState({ latitudeMarker: e.nativeEvent.coordinate.latitude, longitudeMarker: e.nativeEvent.coordinate.longitude }, () =>
+                                        fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
+                                        .then((response) => response.json())
+                                        .then((responseJson) => {
+                                            console.log("Risultato: " + responseJson.results[1].formatted_address)
+                                            this.setState({location: responseJson.results[1].formatted_address})
+
+                                        })
+                                        .catch((error) => {
+                                            console.log("ERROR: " + error);
+                                        })
+                                    )}
+                                }
+
+                            />
+                        </MapView>
+                    </CardItem>
+
+                    <CardItem>
+                        <Item stackedLabel  error={this.state.error_input_posit} style={{ flex:1 }}>
+                            <Label> Posizione </Label>
+                            <Input
+                                label="Location"
+                                placeholder='Where did you lose your buddy?'
+                                value={this.state.location}
+                                onChangeText={text => this.setState({ location: text,error_input_posit: false })}
+
+                            />
+                        </Item>
+                    </CardItem>
+                    <CardItem>
+                        <Item stackedLabel>
+                            <Label>
+                                Inserisci le foto del tuo animali,fino a 5
+                            </Label>
+
+                            <List
+                                horizontal={true}
+                                dataArray={this.state.items}
+                                renderRow={(item) =>
+                                    <ListItem button onPress = {() => console.log('click on image')}>
+                                        <Image
+                                            source={{ uri:this.state.image }}
+                                            resizeMode="cover"
+
+                                            style={{ height :100, width: 200}}
+                                            >
+                                            </Image>
+                                        </ListItem>
+                                    }>
+                                </List>
+                            </Item>
+                        </CardItem>
+                        <CardItem>
+                            <Item stackedLabel  style={{ flex:1 }}>
+                                <Label>
+                                    Quando hai perso il tuo animale?
+                                </Label>
+                                <DatePicker
+                                    style={{ flex: 1, width:'100%' }}
+                                    date={this.state.duedate}
+                                    mode="date"
+                                    value= {this.state.descr}
+                                    placeholder="Dove hai perso il tuo animale?"
+                                    format="YYYY-MM-DD"
+                                    confirmBtnText="Confirm"
+                                    cancelBtnText="Cancel"
+
+                                    onDateChange={(date) => {this.setState({duedate: date})}}
+                                />
+                            </Item>
+                        </CardItem>
+                        <CardItem >
+
+                            <Item stackedLabel  error={this.state.error_input_descr} style={{flex: 1, flexDirection:'column'}}>
+                                <Label>
+                                    Descrizione
+                                </Label>
+
+                                <Input
+
+                                    style={{ flex: 1, alignSelf:'flex-start', height:200 }}
+                                    placeholder='Inserisci più dettagli'
+                                    multiline={true}
+                                    onChangeText={text =>{
+                                        if( text === '')
+                                        this.setState({error_input_descr:true})
+                                        else
+                                        this.setState({ descr: text, error_input_descr:false })
+
+                                    }}
+
+                                />
+                            </Item>
+                        </CardItem>
+
+
+
+                        <CardItem>
+                            <Item style={{flex:1}}>
+                                <Button onPress={() => {
+                                    if (this.state.location === '')
+                                    this.setState({error_input_posit: true})
+                                    if (this.state.title === '')
+                                    this.setState({error_input_titolo: true})
+                                    if (this.state.descr === '')
+                                    this.setState({error_input_descr: true})
+
+                                    if (this.state.location !== '' && this.stata.title !== '' && this.stata.descr !== '')
+                                    this.props.findCreate({
+                                        title: this.state.title,
+                                        location: this.state.location,
+                                        duedate: this.state.duedate,
+                                        descr: this.state.descr,
+                                        image: this.state.image,
+                                        latitudeMarker: this.state.latitudeMarker,
+                                        longitudeMarker: this.state.longitudeMarker,
+                                        navigateBack: () => this.props.navigation.goBack()
+                                    })
+                                }}
+                                style={{flex:1,justifyContent: 'center'}}
+                                >
+                                    <Text>
+                                        Add Find
+                                    </Text>
+                                </Button>
+                            </Item>
+                        </CardItem>
+                    </Card>
+
+                </Content>
+            </Container>
+        )
+    }
 }
 
 export default connect(null, { findCreate }) (CreateFind);
