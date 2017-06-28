@@ -9,7 +9,7 @@ import { ImagePicker, Location, MapView, Permissions } from 'expo';
 
 class CreateFind extends Component {
     static navigationOptions = {
-        title: 'Create Find'
+        title: 'Segnala'
     }
     state = {
         title: '',
@@ -22,6 +22,7 @@ class CreateFind extends Component {
         longitudeMarker: 0.0,
         latitude: 37.525729,
         longitude: 15.072030,
+
         error_input_titolo: false,
         error_input_descr: false,
         error_input_posit: false
@@ -57,13 +58,14 @@ class CreateFind extends Component {
         this.setState({latitude: location.coords.latitude, longitude: location.coords.longitude})
         this.setState({latitudeMarker: location.coords.latitude, longitudeMarker: location.coords.longitude})
         fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
-        .then((response) => response.json())
-        .then((responseJson) => {
-            console.log(responseJson.results[1].formatted_address)
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+            .then((response) => response.json())
+            .then((data) => {
+                if(data.results[1])
+                    console.log(data.results[1].formatted_address)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     render() {
@@ -71,26 +73,25 @@ class CreateFind extends Component {
         return (
             <Container>
                 <Content>
-
                     <Card>
-
                         <CardItem cardBody>
                             <Item stackedLabel  error={this.state.error_input_titolo} style={{ flex:1 }}>
                                 <Label> Titolo </Label>
                                 <Input
                                     label="Titolo Ricerca"
                                     placeholder="Titolo della ricerca"
-                                    onChangeText={text =>{
-                                        if( text === '')
-                                        this.setState({error_input_titolo:true})
+                                    onChangeText={title =>{
+                                        if( title === '')
+                                            this.setState({error_input_titolo:true})
                                         else
-                                        this.setState({ title: text,error_input_titolo:false })
-
+                                            this.setState({
+                                                title,
+                                                error_input_titolo:false
+                                            })
                                     }}
                                 />
                             </Item>
                         </CardItem>
-
                         <CardItem cardBody>
                             <MapView
                                 style={{ width, height: height-400 }}
@@ -103,10 +104,8 @@ class CreateFind extends Component {
                                     latitudeDelta: 4.0,
                                     longitudeDelta: 4.0,
                                 }}
-
                                 //onRegionChangeComplete={(region) => this.setState({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta})}
                                 >
-
                                     <MapView.Marker draggable
                                         coordinate={{
                                             latitude: this.state.latitudeMarker,
@@ -115,10 +114,9 @@ class CreateFind extends Component {
                                         onDragEnd={(e) => { this.setState({ latitudeMarker: e.nativeEvent.coordinate.latitude, longitudeMarker: e.nativeEvent.coordinate.longitude }, () =>
                                         fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
                                         .then((response) => response.json())
-                                        .then((responseJson) => {
-                                            console.log("Risultato: " + responseJson.results[1].formatted_address)
-                                            this.setState({location: responseJson.results[1].formatted_address})
-
+                                        .then((data) => {
+                                            if(data.results[1])
+                                                this.setState({location: data.results[1].formatted_address})
                                         })
                                         .catch((error) => {
                                             console.log("ERROR: " + error);
@@ -156,7 +154,6 @@ class CreateFind extends Component {
                                         <Image
                                             source={{ uri:this.state.image }}
                                             resizeMode="cover"
-
                                             style={{ height :100, width: 200}}
                                             >
                                             </Image>
@@ -192,18 +189,10 @@ class CreateFind extends Component {
                                 </Label>
 
                                 <Input
-
                                     style={{ flex: 1, alignSelf:'flex-start', height:200 }}
                                     placeholder='Inserisci più dettagli'
                                     multiline={true}
-                                    onChangeText={text =>{
-                                        if( text === '')
-                                        this.setState({error_input_descr:true})
-                                        else
-                                        this.setState({ descr: text, error_input_descr:false })
-
-                                    }}
-
+                                    onChangeText={text => text === '' ? this.setState({error_input_descr: true}) : this.setState({ descr: text, error_input_descr: false })}
                                 />
                             </Item>
                         </CardItem>
