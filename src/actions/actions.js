@@ -6,7 +6,8 @@ import {
   USER_PROFILE_INFORMATION,
   USER_SET_LOCATION,
   USER_SET_MARKER,
-  FINDLIST_FETCH_SUCCESS
+  FINDLIST_FETCH_SUCCESS,
+  FIND_CREATE
 } from './types';
 import firebase from 'firebase';
 
@@ -77,5 +78,17 @@ export const findListFetch = () => {
     .on("value", snap => {
       dispatch({type:FINDLIST_FETCH_SUCCESS, payload: snap.val()})
     })
+  }
+}
+
+export const findCreate = ({ title, location, duedate, descr,image,latitudeMarker,longitudeMarker, navigateBack }) => {
+  const { currentUser } = firebase.auth();
+  console.log('currentUser', currentUser.uid);
+  navigateBack();
+
+  return (dispatch) => {
+    firebase.database().ref(`/DataList`)
+      .push({ title, location, duedate, descr,image,latitudeMarker,longitudeMarker})
+      .then(() => console.log('Aggiunta eseguita con successo'))
   }
 }
