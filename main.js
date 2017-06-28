@@ -23,36 +23,36 @@ const firebaseApp = firebase.initializeApp(config);
 
 const SecondaryNavigator = StackNavigator({
     Login: { screen: LoginForm },
-    Create: { screen: CreateFind}
+    Create: { screen: CreateFind},
+    Pet: {screen: PetScreen}
 });
 
 const MainNavigator = TabNavigator({
     Login: { screen: SecondaryNavigator },
     Main: { screen: HomeContainer },
-    Create: {screen: CreateFind},
-    Pet: {screen: PetScreen}},
-    {
-  tabBarComponent: NavigationComponent,
-  tabBarPosition: 'bottom',
-  tabBarOptions: {
-    bottomNavigationOptions: {
-      labelColor: 'white',
-      rippleColor: 'white',
-
-      tabs: {
-        Login: {
-            barBackgroundColor: '#37474F',
-        },
-        Main: {
-            barBackgroundColor: '#37474F',
-        },
-        Create: {
-          barBackgroundColor: '#EEEEEE',
-          activeLabelColor: '#212121',
+    Create: {screen: CreateFind}
+},
+{
+    tabBarComponent: NavigationComponent,
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+        bottomNavigationOptions: {
+            labelColor: 'white',
+            rippleColor: 'white',
+            tabs: {
+                Login: {
+                    barBackgroundColor: '#37474F',
+                },
+                Main: {
+                    barBackgroundColor: '#37474F',
+                },
+                Create: {
+                    barBackgroundColor: '#EEEEEE',
+                    activeLabelColor: '#212121',
+                }
+            }
         }
-      }
     }
-  }
 });
 
 
@@ -83,28 +83,6 @@ class Main extends React.Component {
     );
   }
 }
-
-
-const MyApp = TabNavigator({
-    Home: {
-        screen: HomeContainer,
-    },
-    Notifications: {
-        screen: CreateFind,
-    }},
-    {
-    tabBarOptions: {
-        activeTintColor: '#e91e63',
-        animationEnabled: 'true',
-        tabBarPosition: 'bottom',
-        labelStyle: {
-            fontSize: 12,
-        },
-        style: {
-            backgroundColor: 'blue',
-        },
-    },
-});
 
 
 const styles = StyleSheet.create({

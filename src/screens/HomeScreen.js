@@ -38,7 +38,7 @@ class HomeScreen extends React.Component{
                 key={key}
                 title={title !== "" ? title : 'Title not defined' }             //NOTE: After validation, those if can be
                 description={descr !== "" ? descr : 'Description not provided'} //      removed
-                onPress={() => this.props.navigation.navigate("Pet")}
+                onPress={() => this.props.navigation.navigate("Pet",{pet: this.props.pet[key]})}
                 coordinate={{
                     latitude: latitudeMarker,
                     longitude: longitudeMarker
