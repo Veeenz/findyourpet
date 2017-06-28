@@ -1,28 +1,9 @@
 import React from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import {Button,Container, Content,Label,Item, Card, CardItem, Header, Icon, Left, Right, Body,Title} from 'native-base'
-import {connect} from 'react-redux';
-import { userProfileInformation, setUserLocation, logoutUser,setUserMarker,findListFetch } from '../actions/actions';
 import { MapView, Permissions, Location } from 'expo';
 import firebase from 'firebase';
 
-const mapStateToProps = state => {
-    const petList = Object.keys(state.pet.petList).map(id => {
-        return { ...state.pet.petList[id] }
-    });
-    return{
-        user: state.user,
-        pet: petList
-    }
-}
-
-const mapDispatchToProps = dispatch => ({
-    userProfileInformation: () => dispatch(userProfileInformation()),
-    setUserLocation:(coordinates) => dispatch(setUserLocation(coordinates)),
-    setUserMarker:(coordinates) => dispatch(setUserMarker(coordinates)),
-    logoutUser: () => dispatch(logoutUser()),
-    findListFetch: () => dispatch(findListFetch())
-})
 
 class HomeScreen extends React.Component{
     constructor(props){
@@ -95,4 +76,4 @@ class HomeScreen extends React.Component{
                 );
             }
         }
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default HomeScreen;
