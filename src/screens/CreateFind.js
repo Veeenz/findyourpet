@@ -220,7 +220,7 @@ class CreateFind extends Component {
                                     if (this.state.descr === '')
                                     this.setState({error_input_descr: true})
 
-                                    if (this.state.location !== '' && this.stata.title !== '' && this.stata.descr !== '')
+                                    if (this.state.location !== '' && this.state.title !== '' && this.state.descr !== '')
                                     this.props.findCreate({
                                         title: this.state.title,
                                         location: this.state.location,
