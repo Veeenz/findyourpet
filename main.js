@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 import LoginForm from './src/screens/LoginForm'
-import HomeScreen from './src/screens/HomeScreen';
+import HomeContainer from './src/containers/HomeContainer';
 import CreateFind from './src/screens/CreateFind'
 import { NavigationComponent } from 'react-native-material-bottom-navigation'
 import { StackNavigator,TabNavigator } from 'react-navigation';
@@ -84,7 +84,7 @@ class Main extends React.Component {
 
 const MyApp = TabNavigator({
     Home: {
-        screen: HomeScreen,
+        screen: HomeContainer,
     },
     Notifications: {
         screen: CreateFind,

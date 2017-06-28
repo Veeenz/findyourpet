@@ -33,11 +33,15 @@ class HomeScreen extends React.Component{
 
     markerRender = () => {
         return Object.keys(this.props.pet).map((key) => { // TODO: Need to find a better way to manage this
+            const { title, descr, latitudeMarker, longitudeMarker } = this.props.pet[key]
             return (<MapView.Marker
                 key={key}
+                title={title !== "" ? title : 'Title not defined' }             //NOTE: After validation, those if can be
+                description={descr !== "" ? descr : 'Description not provided'} //      removed
+                onPress={() => this.props.navigation.navigate("Pet")}
                 coordinate={{
-                    latitude: this.props.pet[key].latitudeMarker,
-                    longitude: this.props.pet[key].longitudeMarker
+                    latitude: latitudeMarker,
+                    longitude: longitudeMarker
                 }}
             />)
         })
