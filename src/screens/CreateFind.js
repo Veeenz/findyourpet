@@ -21,8 +21,10 @@ class CreateFind extends Component {
     latitudeMarker: 0.0,
     longitudeMarker: 0.0,
     latitude: 37.525729,
-          longitude: 15.072030,
-
+    longitude: 15.072030,
+    error_input_titolo: false,
+    error_input_descr: false,
+    error_input_posit: false
   }
 
   componentWillMount(){
@@ -69,21 +71,22 @@ class CreateFind extends Component {
     return (
       <Container>
         <Content>
-            <Header>
-               <Body>
-                   <Title>CreateFind</Title>
-               </Body>
-            </Header>
+
         <Card>
 
          <CardItem cardBody>
-                 <Item stackedLabel style={{ flex:1 }}>
+                 <Item stackedLabel  error={this.state.error_input_titolo} style={{ flex:1 }}>
                      <Label> Titolo </Label>
                      <Input
                          label="Titolo Ricerca"
                          placeholder="Titolo della ricerca"
-                         value={this.state.title}
-                         onChangeText={text => this.setState({ title: text })}
+                         onChangeText={text =>{
+                          if( text === '')
+                            this.setState({error_input_titolo:true})
+                          else
+                            this.setState({ title: text,error_input_titolo:false })
+
+                       }}
                      />
                  </Item>
          </CardItem>
@@ -128,13 +131,13 @@ class CreateFind extends Component {
           </CardItem>
 
             <CardItem>
-              <Item stackedLabel style={{ flex:1 }}>
+              <Item stackedLabel  error={this.state.error_input_posit} style={{ flex:1 }}>
                 <Label> Posizione </Label>
                 <Input
                   label="Location"
                   placeholder='Where did you lose your buddy?'
                   value={this.state.location}
-                  onChangeText={text => this.setState({ location: text })}
+                  onChangeText={text => this.setState({ location: text,error_input_posit: false })}
 
                 />
               </Item>
@@ -169,6 +172,7 @@ class CreateFind extends Component {
                   style={{ flex: 1, width:'100%' }}
                   date={this.state.duedate}
                   mode="date"
+                  value= {this.state.descr}
                   placeholder="Dove hai perso il tuo animale?"
                   format="YYYY-MM-DD"
                   confirmBtnText="Confirm"
@@ -178,15 +182,25 @@ class CreateFind extends Component {
                 />
             </Item>
             </CardItem>
-            <CardItem>
-            <Item stackedLabel style={{ flex:1 }}>
-              <Label>Descrizione</Label>
+            <CardItem >
+
+            <Item stackedLabel  error={this.state.error_input_descr} style={{flex: 1, flexDirection:'column'}}>
+              <Label>
+                Descrizione
+              </Label>
+
             <Input
-              style={{ flex: 1, height:200 }}
+
+              style={{ flex: 1, alignSelf:'flex-start', height:200 }}
               placeholder='Inserisci più dettagli'
-              value={this.state.descr}
               multiline={true}
-              onChangeText={text => this.setState({ descr: text })}
+              onChangeText={text =>{
+                if( text === '')
+                  this.setState({error_input_descr:true})
+                else
+                  this.setState({ descr: text, error_input_descr:false })
+
+            }}
 
             />
           </Item>
@@ -196,7 +210,16 @@ class CreateFind extends Component {
 
         <CardItem>
           <Item style={{flex:1}}>
-            <Button onPress={() => this.props.findCreate({
+            <Button onPress={() => {
+                if (this.state.location === '')
+                  this.setState({error_input_posit: true})
+                if (this.state.title === '')
+                  this.setState({error_input_titolo: true})
+                if (this.state.descr === '')
+                  this.setState({error_input_descr: true})
+
+                if (this.state.location !== '' && this.stata.title !== '' && this.stata.descr !== '')
+                this.props.findCreate({
                 title: this.state.title,
                 location: this.state.location,
                 duedate: this.state.duedate,
@@ -205,7 +228,7 @@ class CreateFind extends Component {
                 latitudeMarker: this.state.latitudeMarker,
                 longitudeMarker: this.state.longitudeMarker,
                 navigateBack: () => this.props.navigation.goBack()
-              })}
+              })}}
               style={{flex:1,justifyContent: 'center'}}
               >
               <Text>
