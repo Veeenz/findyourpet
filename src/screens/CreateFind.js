@@ -91,13 +91,14 @@ class CreateFind extends Component {
         <CardItem cardBody>
             <MapView
               style={{ width, height: height-400 }}
+              rotateEnabled={false}
               showsUserLocation={true}
               loadingEnabled={true}
               initialRegion={{
                 latitude: this.state.latitude,
                 longitude: this.state.longitude,
-                latitudeDelta: 0.0,
-                longitudeDelta: 0.0,
+                latitudeDelta: 4.0,
+                longitudeDelta: 4.0,
               }}
 
               //onRegionChangeComplete={(region) => this.setState({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta})}

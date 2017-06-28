@@ -73,25 +73,25 @@ class HomeScreen extends React.Component{
                     </Body>
                 </Header>
                 <Content>
-                        <Card>
-
-                            <CardItem cardBody>
-                                <MapView
-                                    style={{ width, height: height }}
-                                    showsUserLocation={true}
-                                    initialRegion={{
-                                        latitude: 41.9097306,
-                                        longitude: 12.2558141,
-                                        latitudeDelta: 12.3422,
-                                        longitudeDelta: 12.3221,
-                                    }}
-                                    >
-                                        {this.markerRender()}
-                                </MapView>
-                            </CardItem>
-                        </Card>
-                    </Content>
-                </Container>
+                    <Card>
+                        <CardItem cardBody>
+                            <MapView
+                                style={{ width, height: height }}
+                                showsUserLocation={true}
+                                rotateEnabled={false}
+                                initialRegion={{
+                                    latitude: 41.9097306,
+                                    longitude: 12.2558141,
+                                    latitudeDelta: 12.3422,
+                                    longitudeDelta: 12.3221,
+                                }}
+                                >
+                                    {this.markerRender()}
+                            </MapView>
+                        </CardItem>
+                    </Card>
+                </Content>
+            </Container>
                 );
             }
         }
