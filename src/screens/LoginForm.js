@@ -14,7 +14,9 @@ class LoginForm extends Component {
     state = {
         email: '',
         password: '',
-        loginLoad: false
+        loginLoad: false,
+        error_input_email: false,
+        error_input_password: false
     }
 
     handleAuthenticationError = () => {
@@ -91,26 +93,47 @@ class LoginForm extends Component {
 
                         {this.handleAuthenticationError()}
                         <CardItem>
-                            <Item stackedLabel style={{ flex:1 }}>
+                            <Item stackedLabel error={this.state.error_input_email} style={{ flex:1 }}>
                                 <Label>Email</Label>
-                                <Input onChangeText={(email) => this.setState({email})} />
+                                <Input onChangeText={(email) =>{
+                                    if( email=== '')
+                                      this.setState({error_input_email:true})
+                                    else
+                                      this.setState({email,error_input_email:false})
+                                    }}
+                                />
                             </Item>
                         </CardItem>
                         <CardItem>
-                            <Item stackedLabel style={{ flex:1 }}>
+                            <Item stackedLabel error={this.state.error_input_password} style={{ flex:1 }}>
                                 <Label>Password</Label>
-                                <Input onChangeText={(password) => this.setState({password})}/>
+                                <Input onChangeText={(password) =>{
+                                    if(password === '')
+                                      this.setState({error_input_password:true})
+                                    else
+                                      this.setState({error_input_password:false, password})
+
+
+                                  }}
+
+                              />
                             </Item>
                         </CardItem>
                         <CardItem>
                             <Item stackedLabel style={{ flex:1 }}>
-                                <Button block primary onPress={() => this.props.loginUser(
-                                    {
-                                        email: this.state.email,
-                                        password: this.state.password,
-                                        navigateTo: (screen) => this.props.navigation.navigate(screen)
-                                    }
-                                )}>
+                                <Button block primary onPress={() =>{
+                                    if(this.state.email === '')
+                                      this.setState({error_input_email: true})
+                                    if (this.state.password === '')
+                                      this.setState({error_input_password: true})
+                                    if (this.state.email !== '' && this.state.password !== '')
+                                      this.props.loginUser(
+                                      {
+                                          email: this.state.email,
+                                          password: this.state.password,
+                                          navigateTo: (screen) => this.props.navigation.navigate(screen)
+                                      }
+                                )}}>
                                 <Text>Log in</Text>
                             </Button>
                         </Item>
