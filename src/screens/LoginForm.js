@@ -55,35 +55,31 @@ class LoginForm extends Component {
                 <Spinner color='blue' />
             </View>
         );
-        if( this.state.loginLoad)
-        return(
-            <Container>
-                <Content>
-                    <Card>
-                        <CardItem>
-                            <Item stackedLabel style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                                <Button style={{marginTop:20}} block primary onPress={() =>  this.props.navigation.navigate("Create") }>
-                                    <Text>DEBUG CreateFind</Text>
-                                </Button>
-                            </Item>
-                        </CardItem>
-                        <CardItem>
-                            <Item stackedLabel style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                                <Button style={{marginTop:20}} block primary onPress={() =>   this.setState({loginLoad:false }) }>
-                                    <Text>LOGOUT </Text>
-                                </Button>
-                            </Item>
-                        </CardItem>
+        if( this.props.auth.isLogged )
+            return(
+                <Container>
+                    <Content>
+                        <Card>
+                            <CardItem>
+                                <Item stackedLabel style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Button style={{marginTop:20}} block primary onPress={() =>  this.props.navigation.navigate("Create") }>
+                                        <Text>DEBUG CreateFind</Text>
+                                    </Button>
+                                </Item>
+                            </CardItem>
+                            <CardItem>
+                                <Item stackedLabel style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Button style={{marginTop:20}} block primary onPress={() =>   this.setState({loginLoad:false }) }>
+                                        <Text>LOGOUT </Text>
+                                    </Button>
+                                </Item>
+                            </CardItem>
 
-                        <Text>LOGIN EFFETTUATO</Text>
-                    </Card>
-                </Content>
-            </Container>
-
-
-
-
-        );
+                            <Text>LOGIN EFFETTUATO</Text>
+                        </Card>
+                    </Content>
+                </Container>
+            );
         return(
 
             <Container>
@@ -140,14 +136,22 @@ class LoginForm extends Component {
                     </CardItem>
                     <CardItem>
                         <Item stackedLabel style={{ flex:1 }}>
-                            <Button style={{marginTop:20}} block primary onPress={() => { this.setState({loginLoad:true },() => {console.log(this.state)}) }}>
+                            <Button style={{marginTop:20}} block primary onPress={() => {
+                                this.props.loginUser(
+                                    {
+                                        email: 'a@a.it',
+                                        password: 'aaaaaa',
+                                        navigateTo: (screen) => this.props.navigation.navigate(screen)
+                                    }
+                                )
+                            }}>
                                 <Text>DEBUG Login ever true</Text>
                             </Button>
                         </Item>
                     </CardItem>
                     <CardItem>
                         <Item stackedLabel style={{ flex:1 }}>
-                            <Button style={{marginTop:20}} block primary onPress={() =>  this.props.navigation.navigate("Create") }>
+                            <Button style={{marginTop:20}} block primary onPress={() => this.props.navigation.navigate("Create") }>
                                 <Text>DEBUG CreateFind</Text>
                             </Button>
                         </Item>
