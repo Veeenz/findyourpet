@@ -87,6 +87,23 @@ export const findCreate = ({ title, location, duedate, descr,image,latitudeMarke
   navigateBack();
 
   return (dispatch) => {
+    let formData = new FormData();
+      //for (x in image){
+        var localUri = image;
+        var filename = localUri.split('/').pop();
+
+        // Infer the type of the image
+        var match = /\.(\w+)$/.exec(filename);
+        var type = match ? `image/${match[1]}` : `image`;
+        formData.append('photo', { uri: localUri, name: filename, type });
+      //}
+      fetch('http://188.213.170.165:8050/insert', {
+        method: 'POST',
+        body: formData,
+        header: {
+          'content-type': 'multipart/form-data',
+        },
+    });
     firebase.database().ref(`/DataList`)
       .push({ title, location, duedate, descr,image,latitudeMarker,longitudeMarker})
       .then(() => console.log('Aggiunta eseguita con successo'))

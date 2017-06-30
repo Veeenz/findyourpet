@@ -17,7 +17,7 @@ class CreateFind extends Component {
         duedate: new Date().toISOString(),
         items: [1,2,3,4],
         image: 'https://facebook.github.io/react/img/logo_og.png',
-        descr: '',
+        descr: 'tes',
         latitudeMarker: 0.0,
         longitudeMarker: 0.0,
         latitude: 37.525729,
@@ -191,6 +191,7 @@ class CreateFind extends Component {
                                 <Input
                                     style={{ flex: 1, alignSelf:'flex-start', height:200 }}
                                     placeholder='Inserisci più dettagli'
+                                    value=""
                                     multiline={true}
                                     onChangeText={text => text === '' ? this.setState({error_input_descr: true}) : this.setState({ descr: text, error_input_descr: false })}
                                 />
