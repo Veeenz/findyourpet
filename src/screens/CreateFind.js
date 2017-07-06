@@ -16,8 +16,8 @@ class CreateFind extends Component {
         location: '',
         duedate: new Date().toISOString(),
         items: [1,2,3,4],
-        image: 'https://facebook.github.io/react/img/logo_og.png',
-        descr: 'tes',
+        images: ['https://facebook.github.io/react/img/logo_og.png'],
+        descr: '',
         latitudeMarker: 0.0,
         longitudeMarker: 0.0,
         latitude: 37.525729,
@@ -43,7 +43,7 @@ class CreateFind extends Component {
         console.log(result);
 
         if (!result.cancelled) {
-            this.setState({ image: result.uri });
+            this.setState({ images: this.state.images.concat(result.uri)});
         }
     };
 
@@ -149,16 +149,17 @@ class CreateFind extends Component {
                             <List
                                 horizontal={true}
                                 dataArray={this.state.items}
-                                renderRow={(item) =>
-                                    <ListItem button onPress = {() => console.log('click on image')}>
+                                renderRow={(item) =>{
+                                    console.log(item)
+                                    return (<ListItem button onPress = {() => this._pickImage()}>
                                         <Image
-                                            source={{ uri:this.state.image }}
+                                            source={{ uri: this.state.images[0] }}
                                             resizeMode="cover"
                                             style={{ height :100, width: 200}}
                                             >
                                             </Image>
                                         </ListItem>
-                                    }>
+                                    )}}>
                                 </List>
                             </Item>
                         </CardItem>
@@ -187,9 +188,8 @@ class CreateFind extends Component {
                                 <Label>
                                     Descrizione
                                 </Label>
-
                                 <Input
-                                    style={{ flex: 1, alignSelf:'flex-start', height:200 }}
+                                    style={{ flex: 1, height:200 }}
                                     placeholder='Inserisci più dettagli'
                                     value=""
                                     multiline={true}
@@ -197,30 +197,27 @@ class CreateFind extends Component {
                                 />
                             </Item>
                         </CardItem>
-
-
-
                         <CardItem>
                             <Item style={{flex:1}}>
                                 <Button onPress={() => {
                                     if (this.state.location === '')
-                                    this.setState({error_input_posit: true})
+                                        this.setState({error_input_posit: true})
                                     if (this.state.title === '')
-                                    this.setState({error_input_titolo: true})
+                                        this.setState({error_input_titolo: true})
                                     if (this.state.descr === '')
-                                    this.setState({error_input_descr: true})
+                                        this.setState({error_input_descr: true})
 
                                     if (this.state.location !== '' && this.state.title !== '' && this.state.descr !== '')
-                                    this.props.findCreate({
-                                        title: this.state.title,
-                                        location: this.state.location,
-                                        duedate: this.state.duedate,
-                                        descr: this.state.descr,
-                                        image: this.state.image,
-                                        latitudeMarker: this.state.latitudeMarker,
-                                        longitudeMarker: this.state.longitudeMarker,
-                                        navigateBack: () => this.props.navigation.goBack()
-                                    })
+                                        this.props.findCreate({
+                                            title: this.state.title,
+                                            location: this.state.location,
+                                            duedate: this.state.duedate,
+                                            descr: this.state.descr,
+                                            images: this.state.images,
+                                            latitudeMarker: this.state.latitudeMarker,
+                                            longitudeMarker: this.state.longitudeMarker,
+                                            navigateBack: () => this.props.navigation.goBack()
+                                        })
                                 }}
                                 style={{flex:1,justifyContent: 'center'}}
                                 >
