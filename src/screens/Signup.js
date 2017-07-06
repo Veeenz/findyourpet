@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import {Button, Input,Container, Content,Label,Item, Card, CardItem, List, ListItem, Header, Icon, Left, Right, Body,Title} from 'native-base'
 import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-import { findCreate } from '../actions/actions';
+import { SignUpUser } from '../actions/actions';
 import { ImagePicker, Location, MapView, Permissions } from 'expo';
 
 
-class Signin extends Component {
+class Signup extends Component {
     static navigationOptions = {
         title: 'Registrazione'
     }
@@ -129,9 +129,11 @@ class Signin extends Component {
                                     if (this.state.email !== '' && this.state.emailV !== '' &&
                                     this.state.password !== '' && this.state.passwordV !== '' &&
                                     this.state.email === this.state.emailV && this.state.password === this.state.passwordV)
-                                      alert("ok")
-
-                                }}
+                                      this.props.SignUpUser({
+                                        email:this.state.email,
+                                        password: this.state.password
+                                      ,
+                                })}}
                                 style={{flex:1,justifyContent: 'center'}}
                                 >
                                     <Text>
@@ -148,5 +150,5 @@ class Signin extends Component {
     }
 }
 
-//export default connect(null, { findCreate }) (CreateFind);
-export default Signin;
+export default connect(null, { SignUpUser }) (Signup);
+//export default Signup;

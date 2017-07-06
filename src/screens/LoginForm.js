@@ -18,6 +18,9 @@ class LoginForm extends Component {
         error_input_email: false,
         error_input_password: false
     }
+    static navigationOptions = {
+        title: 'Profilo'
+    }
 
     handleAuthenticationError = () => {
         if(this.props.auth.error)
@@ -47,6 +50,7 @@ class LoginForm extends Component {
 
     }
 
+
     render(){
         if(this.props.auth.isLoading)
         return(
@@ -55,7 +59,7 @@ class LoginForm extends Component {
                 <Spinner color='blue' />
             </View>
         );
-        if( this.props.auth.isLogged )
+        if( this.props.auth.isLogged ){
             return(
                 <Container>
                     <Content>
@@ -80,6 +84,9 @@ class LoginForm extends Component {
                     </Content>
                 </Container>
             );
+
+
+        }
         return(
 
             <Container>
@@ -153,7 +160,7 @@ class LoginForm extends Component {
                     </CardItem>
                     <CardItem>
                         <Item stackedLabel style={{ flex:1 }}>
-                            <Button style={{marginTop:20}} block primary onPress={() => this.props.navigation.navigate("Signin") }>
+                            <Button style={{marginTop:20}} block primary onPress={() => this.props.navigation.navigate("Signup") }>
                                 <Text>Registrati</Text>
                             </Button>
                         </Item>
@@ -165,11 +172,12 @@ class LoginForm extends Component {
 }
 };
 
+/*
 LoginForm.navigationOptions = ({ navigation }) => ({
     title: "Login"
     // headerLeft: <Button title="Login" onPress={() => navigation.goBack()} />,
 });
-
+*/
 const style = StyleSheet.create({
     login:{
         width:'80%',

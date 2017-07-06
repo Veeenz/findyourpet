@@ -37,6 +37,21 @@ const loginUserFailed = (dispatch, error)  => {
 
 }
 
+export const SignUpUser= ({email,password,navigateTo}) => {
+
+  return (dispatch) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(() => loginUser({
+            email: email,
+            password: password,
+            navigateTo: navigateTo
+        }))
+    .catch((error) => console.log(error));
+  }
+
+
+}
+
 
 export const logoutUser = (dispatch) => {
   return (dispatch) => {
