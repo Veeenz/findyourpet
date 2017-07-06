@@ -39,11 +39,9 @@ class CreateFind extends Component {
         let result = await ImagePicker.launchImageLibraryAsync({
             allowsEditing: false
         });
-
         console.log(result);
-
         if (!result.cancelled) {
-            this.setState({ images: this.state.images.concat(result.uri)});
+            this.setState({ images: this.state.images.concat(result.uri)}, console.log(this.state.images));
         }
     };
 
@@ -54,7 +52,13 @@ class CreateFind extends Component {
             this.setState({ errorMessage: 'Permesso negato'});
         }
 
-        let location = await Location.getCurrentPositionAsync({});
+        //let location = await Location.getCurrentPositionAsync({});
+        let location = {
+            coords: {
+                latitude: 40.0192,
+                longitude: 3.0918
+            }
+        }
         this.setState({latitude: location.coords.latitude, longitude: location.coords.longitude})
         this.setState({latitudeMarker: location.coords.latitude, longitudeMarker: location.coords.longitude})
         fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
@@ -177,13 +181,13 @@ class CreateFind extends Component {
                                     format="YYYY-MM-DD"
                                     confirmBtnText="Confirm"
                                     cancelBtnText="Cancel"
-
-                                    onDateChange={(date) => {this.setState({duedate: date})}}
+                                    onDateChange={(date) => {
+                                        this.setState({duedate: date})
+                                    }}
                                 />
                             </Item>
                         </CardItem>
                         <CardItem >
-
                             <Item stackedLabel  error={this.state.error_input_descr} style={{flex: 1, flexDirection:'column'}}>
                                 <Label>
                                     Descrizione
