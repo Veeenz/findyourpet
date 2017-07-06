@@ -13,6 +13,8 @@ class PetScreen extends React.Component{
         const { pet } = this.props.navigation.state.params
         const { width, height } = Dimensions.get('window');
         console.log(pet);
+        console.log('PET SCREEEN')
+        console.log(pet.images.length)
         return(
             <Container>
                 <Content>
@@ -51,11 +53,11 @@ class PetScreen extends React.Component{
                             <Item>
                                 <List
                                       horizontal={true}
-                                      dataArray={[1,2,3]}
+                                      dataArray={[pet.images.length]}
                                       renderRow={(item) =>
                                           <ListItem button onPress = {() => console.log('click on image')}>
                                               <Image
-                                                source={{ uri:pet.image }}
+                                                source={{ uri:pet.images[0] }}
                                                 resizeMode="cover"
                                                 style={{ height :180, width: 300}}
                                                 >

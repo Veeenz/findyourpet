@@ -89,7 +89,7 @@ export const findCreate = ({ title, location, duedate, descr, images ,latitudeMa
 
   return (dispatch) => {
     let formData = new FormData();
-      //for (x in image){
+    for (image in images){
         var localUri = image;
         var filename = localUri.split('/').pop();
 
@@ -97,7 +97,7 @@ export const findCreate = ({ title, location, duedate, descr, images ,latitudeMa
         var match = /\.(\w+)$/.exec(filename);
         var type = match ? `image/${match[1]}` : `image`;
         formData.append('photo', { uri: localUri, name: filename, type });
-      //}
+      }
       fetch('http://188.213.170.165:8050/insert', {
         method: 'POST',
         body: formData,
