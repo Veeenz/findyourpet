@@ -52,11 +52,6 @@ class HomeScreen extends React.Component{
         const { latitude, longitude, longitudeMarker, latidudeMarker } = this.props.user
         return(
             <Container>
-                <Header>
-                    <Body>
-                        <Title>Maps</Title>
-                    </Body>
-                </Header>
                 <Content>
                     <Card>
                         <CardItem cardBody>
@@ -80,4 +75,9 @@ class HomeScreen extends React.Component{
                 );
             }
         }
+
+HomeScreen.navigationOptions = ({ navigation }) => ({
+    title: "Map"
+    // headerLeft: <Button title="Login" onPress={() => navigation.goBack()} />,
+    });
 export default HomeScreen;

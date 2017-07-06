@@ -6,6 +6,7 @@ import LoginForm from './src/screens/LoginForm'
 import HomeContainer from './src/containers/HomeContainer';
 import CreateFind from './src/screens/CreateFind'
 import PetScreen from './src/screens/PetScreen'
+import Signin from './src/screens/Signin'
 import { NavigationComponent } from 'react-native-material-bottom-navigation'
 import { StackNavigator,TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
@@ -24,12 +25,19 @@ const firebaseApp = firebase.initializeApp(config);
 const SecondaryNavigator = StackNavigator({
     Login: { screen: LoginForm },
     Create: { screen: CreateFind},
+    Pet: {screen: PetScreen},
+    Signin: {screen: Signin}
+});
+
+const MainStackNavigator = StackNavigator({
+    MainScreen: { screen: HomeContainer },
     Pet: {screen: PetScreen}
 });
 
+
 const MainNavigator = TabNavigator({
     Login: { screen: SecondaryNavigator },
-    Main: { screen: HomeContainer },
+    Main: { screen: MainStackNavigator },
     Create: {screen: CreateFind}
 },
 {

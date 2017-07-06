@@ -103,7 +103,9 @@ class LoginForm extends Component {
                         <CardItem>
                             <Item stackedLabel error={this.state.error_input_password} style={{ flex:1 }}>
                                 <Label>Password</Label>
-                                <Input onChangeText={(password) =>{
+                                <Input
+                                   secureTextEntry={true}
+                                   onChangeText={(password) =>{
                                     if(password === '')
                                       this.setState({error_input_password:true})
                                     else
@@ -151,7 +153,7 @@ class LoginForm extends Component {
                     </CardItem>
                     <CardItem>
                         <Item stackedLabel style={{ flex:1 }}>
-                            <Button style={{marginTop:20}} block primary onPress={() => this.props.navigation.navigate("Create") }>
+                            <Button style={{marginTop:20}} block primary onPress={() => this.props.navigation.navigate("Signin") }>
                                 <Text>Registrati</Text>
                             </Button>
                         </Item>
