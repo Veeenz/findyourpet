@@ -24,7 +24,8 @@ export default authReducer = (state = initialState, action) => {
       return {
         user: null,
         error: null,
-        isLoading: false
+        isLoading: false,
+        isLogged: false
       }
 
     default:

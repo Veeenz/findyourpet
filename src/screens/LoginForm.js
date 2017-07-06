@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Container, Content, Button, Text, Form, Item, Input, InputGroup, Label, Spinner, Header, Icon, Card,Body,Title,CardItem} from 'native-base';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/actions';
+import { loginUser,logoutUser } from '../actions/actions';
 import ErrorCard from '../components/ErrorCard';
 
 const mapStateToProps = state => ({
@@ -69,7 +69,7 @@ class LoginForm extends Component {
                             </CardItem>
                             <CardItem>
                                 <Item stackedLabel style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                                    <Button style={{marginTop:20}} block primary onPress={() =>   this.setState({loginLoad:false }) }>
+                                    <Button style={{marginTop:20}} block primary onPress={() =>   this.props.logoutUser() }>
                                         <Text>LOGOUT </Text>
                                     </Button>
                                 </Item>
@@ -103,7 +103,9 @@ class LoginForm extends Component {
                         <CardItem>
                             <Item stackedLabel error={this.state.error_input_password} style={{ flex:1 }}>
                                 <Label>Password</Label>
-                                <Input onChangeText={(password) =>{
+                                <Input
+                                   secureTextEntry={true}
+                                   onChangeText={(password) =>{
                                     if(password === '')
                                       this.setState({error_input_password:true})
                                     else
@@ -151,8 +153,8 @@ class LoginForm extends Component {
                     </CardItem>
                     <CardItem>
                         <Item stackedLabel style={{ flex:1 }}>
-                            <Button style={{marginTop:20}} block primary onPress={() => this.props.navigation.navigate("Create") }>
-                                <Text>DEBUG CreateFind</Text>
+                            <Button style={{marginTop:20}} block primary onPress={() => this.props.navigation.navigate("Signin") }>
+                                <Text>Registrati</Text>
                             </Button>
                         </Item>
                     </CardItem>
@@ -176,4 +178,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default connect(mapStateToProps, { loginUser })(LoginForm);
+export default connect(mapStateToProps, { loginUser,logoutUser })(LoginForm);
