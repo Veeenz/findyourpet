@@ -195,7 +195,6 @@ class CreateFind extends Component {
                                 <Input
                                     style={{ flex: 1, height:200 }}
                                     placeholder='Inserisci più dettagli'
-                                    value=""
                                     multiline={true}
                                     onChangeText={text => text === '' ? this.setState({error_input_descr: true}) : this.setState({ descr: text, error_input_descr: false })}
                                 />
@@ -220,7 +219,7 @@ class CreateFind extends Component {
                                             images: this.state.images,
                                             latitudeMarker: this.state.latitudeMarker,
                                             longitudeMarker: this.state.longitudeMarker,
-                                            navigateBack: () => this.props.navigation.goBack()
+                                            navigateBack: () => this.props.navigation.navigate('Main')
                                         })
                                 }}
                                 style={{flex:1,justifyContent: 'center'}}

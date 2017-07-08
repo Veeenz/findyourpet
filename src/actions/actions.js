@@ -30,7 +30,6 @@ export const loginUser = ({ email, password, navigateTo }) => {
 const loginUserSuccess = (dispatch, user, navigateTo) => {
   console.log("Login effettuato")
   dispatch({ type: LOGIN_USER_SUCCESS, payload: user })
-  // vai a home screen
   navigateTo()
 }
 
@@ -43,14 +42,8 @@ const signupUserSuccess = (dispatch, email,password, navigateBack) => {
   console.log("Registrazione effettuata")
   dispatch({type: SIGNUP_USER_SUCCESS})
   console.log("Loggato")
-
-  loginUser({
-    email: email,
-    password: password,
-    navigateTo: navigateBack
-  })
-
-  //navigateBack()
+  navigateBack()
+  alert("Registrazione effettuata con successo, procedi ora con il login")
 }
 
 const signupUserFailed= (dispatch,error) => {
@@ -120,26 +113,33 @@ export const findCreate = ({ title, location, duedate, descr, images ,latitudeMa
   return (dispatch) => {
     let formData = new FormData();
     for (image in images){
-        var localUri = image;
-        var filename = localUri.split('/').pop();
 
+        var localUri = images[image];
+        var filename = localUri.split('/').pop();
         // Infer the type of the image
         var match = /\.(\w+)$/.exec(filename);
         var type = match ? `image/${match[1]}` : `image`;
         formData.append('photo', { uri: localUri, name: filename, type });
       }
-      fetch('http://188.213.170.165:8050/insert', {
+
+    fetch('http://188.213.170.165:8050/insert', {
         method: 'POST',
         body: formData,
         header: {
           'content-type': 'multipart/form-data',
         },
-    });
-    firebase.database().ref(`/DataList`)
-      .push({ title, location, duedate, descr,images,latitudeMarker,longitudeMarker})
-      .then((data) => {
-          console.log(data);
-          console.log('Aggiunta eseguita con successo')
-      })
+    })
+    .then( response => response.json())
+    .then( image =>{
+      firebase.database().ref(`/DataList`)
+        .push({ title, location, duedate, descr,image,latitudeMarker,longitudeMarker})
+        .then((data) => {
+            console.log(data);
+            console.log('Aggiunta eseguita con successo')
+        })
+
+    })
+    .catch(error => console.log(error));
+
   }
 }
