@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import {Button, Input,Container, Content,Label,Item, Card, CardItem, List, ListItem, Header, Icon, Left, Right, Body,Title} from 'native-base'
+import {Button, Input,Container, Content,Label,Item, Card, CardItem, List,Spinner, ListItem, Header, Icon, Left, Right, Body,Title} from 'native-base'
 import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { SignUpUser } from '../actions/actions';
 import { ImagePicker, Location, MapView, Permissions } from 'expo';
+import ErrorCard from '../components/ErrorCard';
 
+const mapStateToProps = state => ({
+    auth: state.auth
+})
 
 class Signup extends Component {
     static navigationOptions = {
@@ -21,6 +25,16 @@ class Signup extends Component {
       error_input_passwordV: false,
     }
 
+    handleAuthenticationError = () => {
+        if(this.props.auth.error)
+        return (
+            <ErrorCard>
+                {this.props.auth.error.message}
+            </ErrorCard>
+        )
+
+    }
+
     componentWillMount(){
       console.log("Componente Registrazione creato")
 
@@ -29,10 +43,18 @@ class Signup extends Component {
 
     render() {
         const { width, height } = Dimensions.get('window');
+        if(this.props.auth.isLoading)
+        return(
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <Text></Text>
+                <Spinner color='blue' />
+            </View>
+        );
         return (
             <Container>
                 <Content>
                     <Card>
+                      {this.handleAuthenticationError()}
                         <CardItem cardBody>
                             <Item stackedLabel  error={this.state.error_input_email} style={{ flex:1 }}>
                                 <Label> Email </Label>
@@ -131,8 +153,9 @@ class Signup extends Component {
                                     this.state.email === this.state.emailV && this.state.password === this.state.passwordV)
                                       this.props.SignUpUser({
                                         email:this.state.email,
-                                        password: this.state.password
-                                      ,
+                                        password: this.state.password,
+                                        navigateToBack: () => this.props.navigate.goBack(),
+
                                 })}}
                                 style={{flex:1,justifyContent: 'center'}}
                                 >
@@ -150,5 +173,5 @@ class Signup extends Component {
     }
 }
 
-export default connect(null, { SignUpUser }) (Signup);
+export default connect(mapStateToProps, { SignUpUser }) (Signup);
 //export default Signup;

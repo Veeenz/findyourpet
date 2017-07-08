@@ -12,12 +12,15 @@ import {
 import firebase from 'firebase';
 
 export const loginUser = ({ email, password, navigateTo }) => {
-
+  console.log("entra sulla funzione login")
   return (dispatch) => {
+    console.log("entra nel return")
     dispatch({ type: LOGIN_USER_START });
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user, navigateTo))
       .catch(error => {
+        console.log("errore sign")
+        console.log(error)
         loginUserFailed(dispatch,error)
         /*firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(user => loginUserSuccess(dispatch, user, navigateTo))
@@ -27,9 +30,10 @@ export const loginUser = ({ email, password, navigateTo }) => {
 };
 
 const loginUserSuccess = (dispatch, user, navigateTo) => {
+  console.log("Login effettuato")
   dispatch({ type: LOGIN_USER_SUCCESS, payload: user })
   // vai a home screen
-  navigateTo('Main')
+  navigateTo(navigateTo)
 }
 
 const loginUserFailed = (dispatch, error)  => {
@@ -37,16 +41,17 @@ const loginUserFailed = (dispatch, error)  => {
 
 }
 
-export const SignUpUser= ({email,password,navigateTo}) => {
-
+export const SignUpUser= ({email,password,navigateToBack}) => {
+  console.log("Navigator")
+  console.log(navigateToBack)
   return (dispatch) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(() => loginUser({
             email: email,
             password: password,
-            navigateTo: navigateTo
+            navigateTo: navigateToBack
         }))
-    .catch((error) => console.log(error));
+    .catch((error) =>{ loginUserFailed(dispatch,error) });
   }
 
 

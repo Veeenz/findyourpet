@@ -8,7 +8,7 @@ let initialState = {
 export default authReducer = (state = initialState, action) => {
   switch(action.type){
     case LOGIN_USER_START:
-
+      console.log("Start login")
       return {...state, isLoading: true}
     case LOGIN_USER_SUCCESS:
       console.log('Loggato correttamente')
