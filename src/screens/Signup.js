@@ -25,18 +25,10 @@ class Signup extends Component {
       error_input_passwordV: false,
     }
 
-    handleAuthenticationError = () => {
-        if(this.props.auth.error)
-        return (
-            <ErrorCard>
-                {this.props.auth.error.message}
-            </ErrorCard>
-        )
-
-    }
 
     componentWillMount(){
       console.log("Componente Registrazione creato")
+      console.log(this.props.navigation)
 
     }
 
@@ -54,7 +46,6 @@ class Signup extends Component {
             <Container>
                 <Content>
                     <Card>
-                      {this.handleAuthenticationError()}
                         <CardItem cardBody>
                             <Item stackedLabel  error={this.state.error_input_email} style={{ flex:1 }}>
                                 <Label> Email </Label>
@@ -154,7 +145,7 @@ class Signup extends Component {
                                       this.props.SignUpUser({
                                         email:this.state.email,
                                         password: this.state.password,
-                                        navigateToBack: () => this.props.navigate.goBack(),
+                                        navigateToBack: () => this.props.navigation.goBack(),
 
                                 })}}
                                 style={{flex:1,justifyContent: 'center'}}

@@ -7,24 +7,22 @@ import {
   USER_SET_LOCATION,
   USER_SET_MARKER,
   FINDLIST_FETCH_SUCCESS,
-  FIND_CREATE
+  FIND_CREATE,
+  SIGNUP_USER_FAIL,
+  SIGNUP_USER_START,
+  SIGNUP_USER_SUCCESS
 } from './types';
 import firebase from 'firebase';
 
 export const loginUser = ({ email, password, navigateTo }) => {
   console.log("entra sulla funzione login")
   return (dispatch) => {
-    console.log("entra nel return")
     dispatch({ type: LOGIN_USER_START });
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user, navigateTo))
       .catch(error => {
         console.log("errore sign")
-        console.log(error)
         loginUserFailed(dispatch,error)
-        /*firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(user => loginUserSuccess(dispatch, user, navigateTo))
-          .catch(error => loginUserFailed(dispatch, error))*/
       });
   }
 };
@@ -33,7 +31,7 @@ const loginUserSuccess = (dispatch, user, navigateTo) => {
   console.log("Login effettuato")
   dispatch({ type: LOGIN_USER_SUCCESS, payload: user })
   // vai a home screen
-  navigateTo(navigateTo)
+  navigateTo()
 }
 
 const loginUserFailed = (dispatch, error)  => {
@@ -41,17 +39,30 @@ const loginUserFailed = (dispatch, error)  => {
 
 }
 
+const signupUserSuccess = (dispatch, email,password, navigateBack) => {
+  console.log("Registrazione effettuata")
+  dispatch({type: SIGNUP_USER_SUCCESS})
+  console.log("Loggato")
+
+  loginUser({
+    email: email,
+    password: password,
+    navigateTo: navigateBack
+  })
+
+  //navigateBack()
+}
+
+const signupUserFailed= (dispatch,error) => {
+  alert(error)
+}
+
 export const SignUpUser= ({email,password,navigateToBack}) => {
-  console.log("Navigator")
-  console.log(navigateToBack)
   return (dispatch) => {
+    dispatch({ type: SIGNUP_USER_START });
     firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(() => loginUser({
-            email: email,
-            password: password,
-            navigateTo: navigateToBack
-        }))
-    .catch((error) =>{ loginUserFailed(dispatch,error) });
+    .then(() => signupUserSuccess(dispatch,email,password,navigateToBack))
+    .catch((error) =>{ signupUserFailed(dispatch,error) });
   }
 
 
