@@ -1,16 +1,61 @@
 import { StackNavigator,NavigationActions } from "react-navigation";
 import React, {Component} from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Container, Content, Button, Text, Form, Item, Input, InputGroup, Label, Spinner, Header, Icon, Card,Body,Title,CardItem} from 'native-base';
+import { Container, Content, Button, Text, Form, Item, Input, InputGroup, Label, Spinner, Header, Icon, Card,Body,Title,CardItem,Right} from 'native-base';
 import { connect } from 'react-redux';
 import { loginUser,logoutUser } from '../actions/actions';
 import ErrorCard from '../components/ErrorCard';
+import firebase from 'firebase';
 
-const mapStateToProps = state => ({
-    auth: state.auth
-})
+
+const mapStateToProps = state => {
+    const petList = Object.keys(state.pet.petList).map(id => {
+        return { ...state.pet.petList[id] }
+    });
+    return {
+        auth:state.auth,
+        pet: petList
+    }
+}
 
 class LoginForm extends Component {
+  renderPetList = () => {
+
+      return Object.keys(this.props.pet).map((key) => {
+          console.log("STAMPA KEY")
+          console.log(this.props.pet[key])
+          const { currentUser } = firebase.auth();
+          console.log('currentUser', currentUser.uid);
+          idUser=currentUser.uid
+          console.log(idUser)
+          if (idUser !== this.props.pet[key]['idUser']){
+            console.log("DIVERSO")
+            return
+          }else{
+            console.log("UGUALE")
+          }
+          const { title, descr } = this.props.pet[key]
+
+          return (
+              <Card
+                  key={key}
+                  onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}
+              >
+                  <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}>
+
+                      <Icon active name="logo-googleplus" />
+                      <Text>{'title' + title}</Text>
+                      <Right>
+                          <Icon name="arrow-forward" />
+                      </Right>
+                  </CardItem>
+              </Card>
+          )
+      })
+  }
+  ren
+
+
     state = {
         email: '',
         password: '',
@@ -60,32 +105,33 @@ class LoginForm extends Component {
             </View>
         );
         if( this.props.auth.isLogged ){
-            return(
-                <Container>
-                    <Content>
-                        <Card>
-                            <CardItem>
-                                <Item stackedLabel style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                                    <Button style={{marginTop:20}} block primary onPress={() =>  this.props.navigation.navigate("Create") }>
-                                        <Text>DEBUG CreateFind</Text>
-                                    </Button>
-                                </Item>
-                            </CardItem>
-                            <CardItem>
-                                <Item stackedLabel style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                                    <Button style={{marginTop:20}} block primary onPress={() =>   this.props.logoutUser() }>
-                                        <Text>LOGOUT </Text>
-                                    </Button>
-                                </Item>
-                            </CardItem>
+          console.log(this.props.pet)
+          return(
+              <Container>
+                  <Content>
+                      <Card>
+                          <CardItem>
+                              <Item stackedLabel style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
-                            <Text>LOGIN EFFETTUATO</Text>
-                        </Card>
-                    </Content>
-                </Container>
-            );
+                                  <Button style={{marginTop:20}} block primary onPress={() =>  this.props.navigation.navigate("Create") }>
+                                      <Text>DEBUG CreateFind</Text>
+                                  </Button>
+                              </Item>
+                          </CardItem>
+                          {this.renderPetList()}
+                          <CardItem>
+                              <Item stackedLabel style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                                  <Button style={{marginTop:20}} block primary onPress={() =>   this.props.logoutUser() }>
+                                      <Text>LOGOUT </Text>
+                                  </Button>
+                              </Item>
+                          </CardItem>
 
-
+                          <Text>LOGIN EFFETTUATO</Text>
+                      </Card>
+                  </Content>
+              </Container>
+          );
         }
         return(
 

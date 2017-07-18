@@ -107,7 +107,10 @@ export const findListFetch = () => {
 export const findCreate = ({ title, location, duedate, descr, images ,latitudeMarker,longitudeMarker, navigateBack}) => {
   const { currentUser } = firebase.auth();
   console.log('currentUser', currentUser.uid);
+  idUser=currentUser.uid
   navigateBack();
+
+  //console.log('currentUser', currentUser.uid);
 
 
   return (dispatch) => {
@@ -132,7 +135,7 @@ export const findCreate = ({ title, location, duedate, descr, images ,latitudeMa
     .then( response => response.json())
     .then( image =>{
       firebase.database().ref(`/DataList`)
-        .push({ title, location, duedate, descr,image,latitudeMarker,longitudeMarker})
+        .push({idUser, title, location, duedate, descr,image,latitudeMarker,longitudeMarker})
         .then((data) => {
             console.log(data);
             console.log('Aggiunta eseguita con successo')
