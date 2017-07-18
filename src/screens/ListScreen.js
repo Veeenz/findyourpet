@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
+import { Container, Content, Card, CardItem, Text, Icon, Right,Button } from 'native-base';
 import { connect } from 'react-redux'
 
 const mapStateToProps = state => {
@@ -21,9 +21,10 @@ class ListScreen extends Component {
                     key={key}
                     onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}
                 >
-                    <CardItem>
+                    <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}>
+
                         <Icon active name="logo-googleplus" />
-                        <Text onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })} >{'title' + title}</Text>
+                        <Text>{'title' + title}</Text>
                         <Right>
                             <Icon name="arrow-forward" />
                         </Right>

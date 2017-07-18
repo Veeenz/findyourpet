@@ -6,6 +6,7 @@ import LoginForm from './src/screens/LoginForm'
 import HomeContainer from './src/containers/HomeContainer';
 import CreateFind from './src/screens/CreateFind'
 import PetScreen from './src/screens/PetScreen'
+import ListScreen from './src/screens/ListScreen'
 import Signup from './src/screens/Signup'
 import { NavigationComponent } from 'react-native-material-bottom-navigation'
 import { StackNavigator,TabNavigator } from 'react-navigation';
@@ -35,10 +36,16 @@ const MainStackNavigator = StackNavigator({
 });
 
 
+const SecondaryNavigator2 = StackNavigator({
+  List: {screen: ListScreen},
+  Pet: {screen: PetScreen}
+
+})
+
 const MainNavigator = TabNavigator({
     Login: { screen: SecondaryNavigator },
     Main: { screen: MainStackNavigator },
-    Create: {screen: CreateFind}
+    List: {screen: SecondaryNavigator2}
 },
 {
     tabBarComponent: NavigationComponent,
