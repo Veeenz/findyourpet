@@ -31,7 +31,7 @@ class HomeScreen extends React.Component{
         this.props.findListFetch();
     }
 
-    markerRender = () => {
+    markersRender = () => {
         return Object.keys(this.props.pet).map((key) => { // TODO: Need to find a better way to manage this
             const { title, descr, latitudeMarker, longitudeMarker } = this.props.pet[key]
             return (<MapView.Marker
@@ -66,7 +66,7 @@ class HomeScreen extends React.Component{
                                     longitudeDelta: 12.3221,
                                 }}
                                 >
-                                    {this.markerRender()}
+                                    {this.markersRender()}
                             </MapView>
                         </CardItem>
                     </Card>
