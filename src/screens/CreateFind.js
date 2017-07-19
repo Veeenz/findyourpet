@@ -15,7 +15,7 @@ class CreateFind extends Component {
         title: '',
         location: '',
         duedate: new Date().toISOString(),
-        items: [1,2,3,4],
+        items: [],
         images: ['https://facebook.github.io/react/img/logo_og.png'],
         descr: '',
         latitudeMarker: 0.0,
@@ -152,12 +152,12 @@ class CreateFind extends Component {
 
                             <List
                                 horizontal={true}
-                                dataArray={this.state.items}
-                                renderRow={(item) =>{
-                                    console.log(item)
+                                dataArray={this.state.images}
+                                renderRow={(image, i) =>{
+                                    console.log(image) //NOTE: Images
                                     return (<ListItem button onPress = {() => this._pickImage()}>
                                         <Image
-                                            source={{ uri: this.state.images[0] }}
+                                            source={{ uri: image }}
                                             resizeMode="cover"
                                             style={{ height :100, width: 200}}
                                             >
