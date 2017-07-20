@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Content, Card, CardItem, Text, Icon, Right,Button } from 'native-base';
-import { connect } from 'react-redux'
+import { Container, Content, Card, CardItem, Text, Icon, Right, Button } from 'native-base';
+import { Image } from 'react-native';
+import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
     const petList = Object.keys(state.pet.petList).map(id => {
@@ -15,16 +16,20 @@ class ListScreen extends Component {
 
         return Object.keys(this.props.pet).map((key) => {
             console.log(key)
-            const { title, descr } = this.props.pet[key]
+            const { title, descr, images } = this.props.pet[key]
             return (
                 <Card
                     key={key}
                     onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}
                 >
                     <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}>
-
-                        <Icon active name="logo-googleplus" />
-                        <Text>{'title' + title}</Text>
+                        <Image
+                            source={{ uri: images[0] }}
+                            resizeMode="cover"
+                            style={{ height :80, width: 80}}
+                        >
+                        </Image>
+                        <Text style={{marginLeft:10}}>{'title' + title}</Text>
                         <Right>
                             <Icon name="arrow-forward" />
                         </Right>
