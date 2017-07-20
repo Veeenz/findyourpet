@@ -29,7 +29,7 @@ class ListScreen extends Component {
                             style={{ height :80, width: 80}}
                         >
                         </Image>
-                        <Text style={{marginLeft:10}}>{'title' + title}</Text>
+                        <Text style={{marginLeft:10}}>{title}</Text>
                         <Right>
                             <Icon name="arrow-forward" />
                         </Right>

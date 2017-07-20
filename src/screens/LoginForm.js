@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Container, Content, Button, Text, Form, Item, Input, InputGroup, Label, Spinner, Header, Icon, Card,Body,Title,CardItem,Right} from 'native-base';
 import { connect } from 'react-redux';
+import { Image } from 'react-native'
 import { loginUser,logoutUser } from '../actions/actions';
 import ErrorCard from '../components/ErrorCard';
 import firebase from 'firebase';
@@ -34,7 +35,7 @@ class LoginForm extends Component {
           }else{
             console.log("UGUALE")
           }
-          const { title, descr } = this.props.pet[key]
+          const { title, descr,images } = this.props.pet[key]
 
           return (
               <Card
@@ -42,9 +43,13 @@ class LoginForm extends Component {
                   onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}
               >
                   <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}>
-
-                      <Icon active name="logo-googleplus" />
-                      <Text>{'title' + title}</Text>
+                    <Image
+                        source={{ uri: images[images.length-1] }}
+                        resizeMode="cover"
+                        style={{ height :80, width: 80}}
+                    >
+                  </Image>
+                      <Text>{title}</Text>
                       <Right>
                           <Icon name="arrow-forward" />
                       </Right>
