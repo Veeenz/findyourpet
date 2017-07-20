@@ -23,18 +23,11 @@ class LoginForm extends Component {
   renderPetList = () => {
 
       return Object.keys(this.props.pet).map((key) => {
-          console.log("STAMPA KEY")
-          console.log(this.props.pet[key])
           const { currentUser } = firebase.auth();
-          console.log('currentUser', currentUser.uid);
           idUser=currentUser.uid
-          console.log(idUser)
-          if (idUser !== this.props.pet[key]['idUser']){
-            console.log("DIVERSO")
+          if (idUser !== this.props.pet[key]['idUser'])
             return
-          }else{
-            console.log("UGUALE")
-          }
+
           const { title, descr,images } = this.props.pet[key]
 
           return (
@@ -94,11 +87,6 @@ class LoginForm extends Component {
 
     }
 
-    componentWillMount() {
-        console.log("Componente login montato")
-        console.log(this.state)
-
-    }
 
 
     render(){
@@ -110,7 +98,6 @@ class LoginForm extends Component {
             </View>
         );
         if( this.props.auth.isLogged ){
-          console.log(this.props.pet)
           return(
               <Container>
                   <Content>

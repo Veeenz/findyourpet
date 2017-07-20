@@ -6,11 +6,7 @@ import { Image } from 'react-native'
 
 class PetScreen extends React.Component{
   renderImageList = (pet) => {
-    console.log("PET")
-    console.log(pet.images)
       return Object.keys(pet.images).map((key) => {
-          console.log("STAMPA IMMAGINI SU PETSCREEN")
-          console.log(key)
           return (
               <Card>
                   <CardItem>
@@ -32,7 +28,6 @@ class PetScreen extends React.Component{
         horizontal={true}
         dataArray={pet.images}
         renderRow={(image, i) =>{
-            console.log(image) //NOTE: Images
             return (<ListItem
               onPress={() => this.props.navigation.navigate( "ImageScreen",{ image: image })}
               >
@@ -56,9 +51,6 @@ class PetScreen extends React.Component{
     render(){
         const { pet } = this.props.navigation.state.params
         const { width, height } = Dimensions.get('window');
-        console.log(pet);
-        console.log('PET SCREEEN')
-        console.log(pet.images.length)
         return(
             <Container>
                 <Content>

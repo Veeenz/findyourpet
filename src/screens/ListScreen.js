@@ -15,7 +15,6 @@ class ListScreen extends Component {
     renderPetList = () => {
 
         return Object.keys(this.props.pet).map((key) => {
-            console.log(key)
             const { title, descr, images } = this.props.pet[key]
             return (
                 <Card
@@ -39,8 +38,6 @@ class ListScreen extends Component {
         })
     }
     render() {
-        console.log('list screen props')
-        console.log(this.props.pet)
         return (
             <Container>
                 <Content>

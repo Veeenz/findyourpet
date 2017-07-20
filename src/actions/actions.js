@@ -15,20 +15,17 @@ import {
 import firebase from 'firebase';
 
 export const loginUser = ({ email, password, navigateTo }) => {
-  console.log("entra sulla funzione login")
   return (dispatch) => {
     dispatch({ type: LOGIN_USER_START });
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user, navigateTo))
       .catch(error => {
-        console.log("errore sign")
         loginUserFailed(dispatch,error)
       });
   }
 };
 
 const loginUserSuccess = (dispatch, user, navigateTo) => {
-  console.log("Login effettuato")
   dispatch({ type: LOGIN_USER_SUCCESS, payload: user })
   navigateTo()
 }
@@ -39,9 +36,7 @@ const loginUserFailed = (dispatch, error)  => {
 }
 
 const signupUserSuccess = (dispatch, email,password, navigateBack) => {
-  console.log("Registrazione effettuata")
   dispatch({type: SIGNUP_USER_SUCCESS})
-  console.log("Loggato")
   navigateBack()
   alert("Registrazione effettuata con successo, procedi ora con il login")
 }
@@ -71,9 +66,6 @@ export const logoutUser = (dispatch) => {
 export const userProfileInformation = (dispatch) => {
   return (dispatch) => {
     const { currentUser } = firebase.auth();
-    console.log('Current user: ');
-    console.log(currentUser);
-    console.log('END OF CURRENT USER @@@@@@@@')
     dispatch({type: USER_PROFILE_INFORMATION, payload: currentUser})
   }
 }
@@ -81,8 +73,6 @@ export const userProfileInformation = (dispatch) => {
 
 export const setUserLocation = (coordinates) => {
   return (dispatch) =>{
-    console.log("coordinates: ")
-    console.log(coordinates);
     dispatch({type: USER_SET_LOCATION, payload: coordinates})
   }
 }
@@ -106,13 +96,8 @@ export const findListFetch = () => {
 
 export const findCreate = ({ title, location, duedate, descr, images ,latitudeMarker,longitudeMarker, navigateBack}) => {
   const { currentUser } = firebase.auth();
-  console.log('currentUser', currentUser.uid);
   idUser=currentUser.uid
   navigateBack();
-
-  //console.log('currentUser', currentUser.uid);
-
-
   return (dispatch) => {
     let formData = new FormData();
     for (image in images){
@@ -137,8 +122,6 @@ export const findCreate = ({ title, location, duedate, descr, images ,latitudeMa
       firebase.database().ref(`/DataList`)
         .push({idUser, title, location, duedate, descr,images,latitudeMarker,longitudeMarker})
         .then((data) => {
-            console.log(data);
-            console.log('Aggiunta eseguita con successo')
             alert("Operazione eseguita con fuccesso")
         })
 

@@ -26,11 +26,7 @@ class Signup extends Component {
     }
 
 
-    componentWillMount(){
-      console.log("Componente Registrazione creato")
-      console.log(this.props.navigation)
 
-    }
 
 
     render() {

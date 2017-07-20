@@ -8,19 +8,15 @@ let initialState = {
 export default authReducer = (state = initialState, action) => {
   switch(action.type){
     case LOGIN_USER_START:
-      console.log("Start login")
       return {...state, isLoading: true, error: null}
     case LOGIN_USER_SUCCESS:
-      console.log('Loggato correttamente')
       return {...state, user: action.payload, isLoading: false, isLogged: true,error: null}
     case LOGIN_USER_FAIL:
-      console.log('login user fail')
       return {
         error: action.payload,
         isLoading: false
       }
     case LOGIN_USER_LOGOUT:
-      console.log('logout users')
       return {
         user: null,
         error: null,
@@ -28,7 +24,6 @@ export default authReducer = (state = initialState, action) => {
         isLogged: false
       }
     case SIGNUP_USER_START:
-      console.log('Avvio della registrazione')
       return{
         user: null,
         error: null,
@@ -36,7 +31,6 @@ export default authReducer = (state = initialState, action) => {
         isLogged: false
       }
     case SIGNUP_USER_SUCCESS:
-      console.log('Registrazione effettuatata')
       return{
         user: null,
         error: null,
@@ -44,7 +38,6 @@ export default authReducer = (state = initialState, action) => {
         isLogged: false
       }
     case SIGNUP_USER_FAIL:
-      console.log('Errore Registrazione')
       return{
         user: null,
         error: action.payload,
