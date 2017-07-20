@@ -17,6 +17,8 @@ class ListScreen extends Component {
         return Object.keys(this.props.pet).map((key) => {
             console.log(key)
             const { title, descr, images } = this.props.pet[key]
+            console.log("STAPA IMMAGINI")
+            console.log(images)
             return (
                 <Card
                     key={key}

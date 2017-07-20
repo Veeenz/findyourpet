@@ -219,7 +219,7 @@ class CreateFind extends Component {
                                             images: this.state.images,
                                             latitudeMarker: this.state.latitudeMarker,
                                             longitudeMarker: this.state.longitudeMarker,
-                                            navigateBack: () => this.props.navigation.navigate('Main')
+                                            navigateBack: () => this.props.navigation.goBack()
                                         })
                                 }}
                                 style={{flex:1,justifyContent: 'center'}}
