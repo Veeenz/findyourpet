@@ -17,8 +17,6 @@ class ListScreen extends Component {
         return Object.keys(this.props.pet).map((key) => {
             console.log(key)
             const { title, descr, images } = this.props.pet[key]
-            console.log("STAPA IMMAGINI")
-            console.log(images)
             return (
                 <Card
                     key={key}
@@ -26,7 +24,7 @@ class ListScreen extends Component {
                 >
                     <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}>
                         <Image
-                            source={{ uri: images[0] }}
+                            source={{ uri: images[images.length-1] }}
                             resizeMode="cover"
                             style={{ height :80, width: 80}}
                         >

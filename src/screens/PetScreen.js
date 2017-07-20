@@ -5,6 +5,47 @@ import { MapView, Permissions, Location} from 'expo';
 import { Image } from 'react-native'
 
 class PetScreen extends React.Component{
+  renderImageList = (pet) => {
+    console.log("PET")
+    console.log(pet.images)
+      return Object.keys(pet.images).map((key) => {
+          console.log("STAMPA IMMAGINI SU PETSCREEN")
+          console.log(key)
+          return (
+              <Card>
+                  <CardItem>
+                      <Image
+                          source={{ uri: pet.images[key] }}
+                          resizeMode="cover"
+                          style={{ height :80, width: 80}}
+                      >
+                      </Image>
+                  </CardItem>
+              </Card>
+          )
+      })
+  }
+
+  renderImageList2 = (pet) => {
+  return(
+    <List
+        horizontal={true}
+        dataArray={pet.images}
+        renderRow={(image, i) =>{
+            console.log(image) //NOTE: Images
+            return (<ListItem >
+                <Image
+                    source={{ uri: image }}
+                    resizeMode="cover"
+                    style={{ height :180, width: 300}}
+                    >
+                    </Image>
+                </ListItem>
+            )}}>
+        </List>
+    )
+  }
+
     constructor(props){
         super(props);
     }
@@ -49,25 +90,11 @@ class PetScreen extends React.Component{
                                 <Text>{pet.descr}</Text>
                             </Body>
                         </CardItem>
+
                         <CardItem cardBody>
-                            <Item>
-                                <List
-                                      horizontal={true}
-                                      dataArray={[pet.images.length]}
-                                      renderRow={(item) =>
-                                          <ListItem button onPress = {() => console.log('click on image')}>
-                                              <Image
-                                                source={{ uri:pet.images[0] }}
-                                                resizeMode="cover"
-                                                style={{ height :180, width: 300}}
-                                                >
-                                              </Image>
-                                          </ListItem>
-                                      }
-                                >
-                                </List>
-                            </Item>
+                          {this.renderImageList2(pet)}
                         </CardItem>
+
                         <CardItem>
                             <Text>Smarrito in data {pet.duedate}</Text>
                         </CardItem>
