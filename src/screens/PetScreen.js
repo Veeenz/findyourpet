@@ -33,11 +33,14 @@ class PetScreen extends React.Component{
         dataArray={pet.images}
         renderRow={(image, i) =>{
             console.log(image) //NOTE: Images
-            return (<ListItem >
+            return (<ListItem
+              onPress={() => this.props.navigation.navigate( "ImageScreen",{ image: image })}
+              >
                 <Image
                     source={{ uri: image }}
                     resizeMode="cover"
                     style={{ height :180, width: 300}}
+
                     >
                     </Image>
                 </ListItem>

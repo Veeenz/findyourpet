@@ -8,6 +8,7 @@ import CreateFind from './src/screens/CreateFind'
 import PetScreen from './src/screens/PetScreen'
 import ListScreen from './src/screens/ListScreen'
 import Signup from './src/screens/Signup'
+import ImageScreen from './src/screens/ImageScreen'
 import { NavigationComponent } from 'react-native-material-bottom-navigation'
 import { StackNavigator,TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
@@ -32,13 +33,15 @@ const SecondaryNavigator = StackNavigator({
 
 const MainStackNavigator = StackNavigator({
     MainScreen: { screen: HomeContainer },
-    Pet: {screen: PetScreen}
+    Pet: {screen: PetScreen},
+    ImageScreen: {screen: ImageScreen}
 });
 
 
 const SecondaryNavigator2 = StackNavigator({
   List: {screen: ListScreen},
-  Pet: {screen: PetScreen}
+  Pet: {screen: PetScreen},
+  ImageScreen: {screen: ImageScreen}
 
 })
 
