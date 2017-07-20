@@ -209,8 +209,20 @@ class CreateFind extends Component {
                                         this.setState({error_input_titolo: true})
                                     if (this.state.descr === '')
                                         this.setState({error_input_descr: true})
+                                    if (this.state.images.length === 1)
+                                        alert("Inserisci almeno 1 foto")
 
-                                    if (this.state.location !== '' && this.state.title !== '' && this.state.descr !== '')
+                                    if (this.state.location !== '' && this.state.title !== '' && this.state.descr !== '' && this.state.images.length >= 2){
+
+                                        //this.setState({images: this.state.images.filter((image) =>{return image != 'https://facebook.github.io/react/img/logo_og.png'})})
+                                        if (this.state.images.indexOf('https://facebook.github.io/react/img/logo_og.png') >= 0){
+                                          //this.state.images.splice(images.indexOf('https://facebook.github.io/react/img/logo_og.png'),1) //QUESTA COSA SI DEVE FARE CON setState
+                                          imagesCopy= this.state.images
+                                          imagesCopy.splice(imagesCopy.indexOf('https://facebook.github.io/react/img/logo_og.png'),1)
+                                          this.setState({images:imagesCopy})
+                                          console.log("STAMPA IMMAGINI STATE###################################à")
+                                          console.log(this.state.images)
+                                        }
                                         this.props.findCreate({
                                             title: this.state.title,
                                             location: this.state.location,
@@ -221,6 +233,7 @@ class CreateFind extends Component {
                                             longitudeMarker: this.state.longitudeMarker,
                                             navigateBack: () => this.props.navigation.goBack()
                                         })
+                                      }
                                 }}
                                 style={{flex:1,justifyContent: 'center'}}
                                 >
