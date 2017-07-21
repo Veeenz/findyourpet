@@ -146,3 +146,15 @@ export const findRemove = ({key, navigateBack}) => {
     })
     navigateBack()
 }
+
+
+export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeMarker, idFind, navigateBack}) => {
+  navigateBack();
+  return (dispatch) => {
+      firebase.database().ref(`/ReportList`)
+        .push({idFind,email, telefono, descr, descr,latitudeMarker,longitudeMarker})
+        .then((data) => {
+            
+        })
+  }
+}

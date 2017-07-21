@@ -78,7 +78,7 @@ class PetScreen extends React.Component{
     }
 
     render(){
-        const { pet } = this.props.navigation.state.params
+        const { pet,key } = this.props.navigation.state.params
         const { width, height } = Dimensions.get('window');
         return(
             <Container>
@@ -128,8 +128,13 @@ class PetScreen extends React.Component{
                                         key: pet.key,
                                         navigateBack: () => this.props.navigation.goBack()
                                     })
-                                }} block bordered style={{width:'100%'}}>
+                                }} block bordered style={{width:'50%'}}>
                                 <Text >Press me</Text>
+                            </Button>
+                            <Button onPress={() => {
+                                    this.props.navigation.navigate( "Report",{ key: pet.key })
+                                }} block bordered style={{width:'50%'}}>
+                                <Text >SEGNALA AVVISTAMENTO</Text>
                             </Button>
                         </CardItem>
                         {this.printDeleteButtonIfLogged}

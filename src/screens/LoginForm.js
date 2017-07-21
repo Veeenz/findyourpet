@@ -74,7 +74,7 @@ class LoginForm extends Component {
                   key={key}
                   onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}
               >
-                  <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}>
+                  <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key],key:key })}>
                     <Image
                         source={{ uri: images[images.length-1] }}
                         resizeMode="cover"
