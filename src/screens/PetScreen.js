@@ -2,7 +2,16 @@ import React from 'react';
 import { View, Dimensions } from 'react-native';
 import {Button, Text, Container, Content,Label,Item, List, ListItem, Card, CardItem, Header, Icon, Left, Right, Body, Title, Footer} from 'native-base'
 import { MapView, Permissions, Location} from 'expo';
-import { Image } from 'react-native'
+import { Image } from 'react-native';
+import { findRemove } from '../actions/actions';
+import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation'
+const resetAction = NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'MainScreen'})
+  ]
+})
 
 class PetScreen extends React.Component{
   renderImageList = (pet) => {
@@ -42,6 +51,26 @@ class PetScreen extends React.Component{
             )}}>
         </List>
     )
+  }
+
+  printDeleteButtonIfLogged = () => {
+      if(this.props.auth.user === null)
+        return null
+      if (this.props.auth.user.uid === this.props.navigation.state.params.idUser){
+          console.log('should join')
+          return (<CardItem style={{flex: 1, justifyContent: 'center'}}>
+              <Button onPress={() => {
+                      console.log('BEFORE JOIN FINDREMOVE')
+                      console.warn('KEY VALUE FINDREMOVE: '+pet.key)
+                      findRemove({
+                          key: pet.key,
+                          navigateBack: () => this.props.navigation.goBack()
+                      })
+                  }} block bordered style={{width:'100%'}}>
+                  <Text>ELIMINA</Text>
+              </Button>
+          </CardItem>)
+      }
   }
 
     constructor(props){
@@ -94,15 +123,24 @@ class PetScreen extends React.Component{
                             <Text>Smarrito in data {pet.duedate}</Text>
                         </CardItem>
                         <CardItem style={{flex: 1, justifyContent: 'center'}}>
-                            <Button block bordered style={{width:'100%'}}>
-                                <Text>Press me</Text>
+                            <Button onPress={() => {
+                                    findRemove({
+                                        key: pet.key,
+                                        navigateBack: () => this.props.navigation.goBack()
+                                    })
+                                }} block bordered style={{width:'100%'}}>
+                                <Text >Press me</Text>
                             </Button>
                         </CardItem>
+                        {this.printDeleteButtonIfLogged}
+
                     </Card>
                 </Content>
             </Container>
         );
     }
 }
-
-export default PetScreen;
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+export default connect(mapStateToProps, {findRemove})(PetScreen);
