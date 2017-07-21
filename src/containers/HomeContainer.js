@@ -3,7 +3,7 @@ import { userProfileInformation, setUserLocation, logoutUser,setUserMarker,findL
 import HomeScreen from '../screens/HomeScreen';
 const mapStateToProps = state => {
     const petList = Object.keys(state.pet.petList).map(id => {
-        return { ...state.pet.petList[id] }
+        return { ...state.pet.petList[id], key: id }
     });
     return{
         user: state.user,

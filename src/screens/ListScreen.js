@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
     const petList = Object.keys(state.pet.petList).map(id => {
-        return { ...state.pet.petList[id] }
+        return { ...state.pet.petList[id], key: id }
     });
     return {
         pet: petList
