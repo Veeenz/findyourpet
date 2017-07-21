@@ -130,3 +130,19 @@ export const findCreate = ({ title, location, duedate, descr, images ,latitudeMa
 
   }
 }
+
+export const findRemove = ({key, navigateBack}) => {
+    console.warn(key)
+    console.log('ref: '+firebase.database().ref('/DataList').child(key));
+    const{ currentUser } = firebase.auth();
+    console.log('ref: '+firebase.database().ref('/DataList').child(key));
+    firebase.database().ref('/DataList').child(key).remove()
+    .then(data => {
+        console.log('REMOVED SUCCESFULLY')
+
+    })
+    .catch(data => {
+        console.log('error')
+    })
+    navigateBack()
+}

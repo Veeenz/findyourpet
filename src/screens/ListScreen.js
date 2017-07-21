@@ -14,14 +14,14 @@ const mapStateToProps = state => {
 class ListScreen extends Component {
     renderPetList = () => {
 
-        return Object.keys(this.props.pet).map((key) => {
-            const { title, descr, images } = this.props.pet[key]
+        return Object.keys(this.props.pet).map((id) => {
+            const { title, descr, images } = this.props.pet[id]
             return (
                 <Card
-                    key={key}
-                    onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}
+                    key={id}
+                    onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[id] })}
                 >
-                    <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}>
+                    <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[id] })}>
                         <Image
                             source={{ uri: images[images.length-1] }}
                             resizeMode="cover"

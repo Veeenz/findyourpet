@@ -32,13 +32,13 @@ class HomeScreen extends React.Component{
     }
 
     markersRender = () => {
-        return Object.keys(this.props.pet).map((key) => { // TODO: Need to find a better way to manage this
-            const { title, descr, latitudeMarker, longitudeMarker } = this.props.pet[key]
+        return Object.keys(this.props.pet).map((id) => { // TODO: Need to find a better way to manage this
+            const { title, descr, latitudeMarker, longitudeMarker } = this.props.pet[id]
             return (<MapView.Marker
-                key={key}
+                key={id}
                 title={title !== "" ? title : 'Title not defined' }             //NOTE: After validation, those if can be
                 description={descr !== "" ? descr : 'Description not provided'} //      removed
-                onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}
+                onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[id] })}
                 coordinate={{
                     latitude: latitudeMarker,
                     longitude: longitudeMarker
