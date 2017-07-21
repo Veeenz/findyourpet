@@ -7,6 +7,42 @@ import { Image } from 'react-native'
 import { loginUser,logoutUser } from '../actions/actions';
 import ErrorCard from '../components/ErrorCard';
 import firebase from 'firebase';
+import { Permissions, Notifications } from 'expo';
+
+async function registerForPushNotificationsAsync(idUser) {
+const { existingStatus } = await Permissions.getAsync(Permissions.REMOTE_NOTIFICATIONS);
+let finalStatus = existingStatus;
+if (existingStatus !== 'granted') {
+  const { status } = await Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
+  finalStatus = status;
+}
+
+// Stop here if the user did not grant permissions
+if (finalStatus !== 'granted') {
+  return;
+}
+
+// Get the token that uniquely identifies this device
+let tokenReturn = await Notifications.getExponentPushTokenAsync();
+var token= tokenReturn.substring(tokenReturn.indexOf('[')+1,tokenReturn.indexOf(']'))
+
+firebase.database().ref("/TokenUser")
+.on("value", snap => {
+  var idUserArray=new Array()
+  snap.forEach((child) => {
+    idUserArray.push(child.val().idUser)
+  })
+  if (idUserArray.indexOf(idUser) !== -1)
+    return
+  else{
+    firebase.database().ref(`/TokenUser`)
+      .push({idUser, token})
+      .then((data) => {
+        console.log("inserito")
+      })
+  }
+})
+}
 
 
 const mapStateToProps = state => {
@@ -20,6 +56,9 @@ const mapStateToProps = state => {
 }
 
 class LoginForm extends Component {
+
+
+
   renderPetList = () => {
 
       return Object.keys(this.props.pet).map((key) => {
@@ -87,6 +126,12 @@ class LoginForm extends Component {
 
     }
 
+    handleAuthenticationPosition=  async () => {
+      const { currentUser } = firebase.auth();
+      idUser=currentUser.uid
+      registerForPushNotificationsAsync(idUser)
+    }
+
 
 
     render(){
@@ -98,6 +143,7 @@ class LoginForm extends Component {
             </View>
         );
         if( this.props.auth.isLogged ){
+          this.handleAuthenticationPosition()
           return(
               <Container>
                   <Content>

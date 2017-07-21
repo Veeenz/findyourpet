@@ -1,4 +1,5 @@
 import Expo from 'expo';
+import { Permissions, Notifications } from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
@@ -76,7 +77,8 @@ const MainNavigator = TabNavigator({
 
 class Main extends React.Component {
   state = {
-    isReady: false
+    isReady: false,
+    notification: {},
   }
 
   async componentWillMount() {
@@ -86,8 +88,13 @@ class Main extends React.Component {
         'Ionicons': require('native-base/Fonts/Ionicons.ttf')
       });
       this.setState({isReady: true})
+      this._notificationSubscription = Notifications.addListener(this._handleNotification);
   }
+  _handleNotification = (notification) => {
 
+  this.setState({notification: notification});
+    alert(this.state.notification)
+};
 
 
   render(){
