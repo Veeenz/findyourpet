@@ -154,7 +154,38 @@ export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeM
       firebase.database().ref(`/ReportList`)
         .push({idFind,email, telefono, descr, descr,latitudeMarker,longitudeMarker})
         .then((data) => {
-            
+          firebase.database().ref('/DataList').on("value", snap => {
+            var IdUserGet=snap.val()[idFind]['idUser']
+            var TitleGet= snap.val()[idFind]['title']
+            firebase.database().ref("/TokenUser")
+            .on("value", snap => {
+              snap.forEach((child) => {
+                if(child.val().idUser === IdUserGet){
+                  var TokenGet=child.val().token
+                    fetch('https://exp.host/--/api/v2/push/send', {
+                      method: 'POST',
+                      headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'accept-encoding': 'gzip, deflate'
+                      },
+                      body: JSON.stringify([{
+                        to :'ExponentPushToken['+TokenGet+']',
+                        sound: "default",
+                        body: "Hai recevuto una segnalazione per: "+TitleGet,
+                        data: { title: TitleGet}
+                      }]),
+                    });
+                }
+              })
+
+            })
+
+
+
+          })
+
+
         })
   }
 }

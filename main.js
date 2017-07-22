@@ -97,7 +97,7 @@ class Main extends React.Component {
   _handleNotification = (notification) => {
 
   this.setState({notification: notification});
-    alert(this.state.notification)
+    alert("Hai ricevuto una segnalazione per la tua ricerca: "+this.state.notification.data.title)
 };
 
 
