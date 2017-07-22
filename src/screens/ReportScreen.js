@@ -108,7 +108,7 @@ class ReportScreen extends Component {
                     </CardItem>
 
                         <CardItem >
-                            <Item stackedLabel  error={this.state.error_input_descr} style={{flex: 1, flexDirection:'column'}}>
+                            <Item stackedLabel  error={this.state.error_input_email} style={{flex: 1, flexDirection:'column'}}>
                                 <Label>
                                     Indirizzo e-mail
                                 </Label>
@@ -116,13 +116,14 @@ class ReportScreen extends Component {
                                     style={{ flex: 1 }}
                                     placeholder='Inserisci il tuo indirizzo e-mail per essere contattato'
                                     multiline={true}
-                                    onChangeText={text => text === '' ? this.setState({error_input_email: true}) : this.setState({ email: text, error_input_email: false })}
+                                    keyboardType= 'email-address'
+                                    onChangeText={text => text === '' || this.state.email.indexOf('@') !== -1 ? this.setState({error_input_email: true}) : this.setState({ email: text, error_input_email: false })}
                                 />
                             </Item>
                         </CardItem>
 
                         <CardItem >
-                            <Item stackedLabel  error={this.state.error_input_descr} style={{flex: 1, flexDirection:'column'}}>
+                            <Item stackedLabel  error={this.state.error_input_telefono} style={{flex: 1, flexDirection:'column'}}>
                                 <Label>
                                     Numero di telefono
                                 </Label>
@@ -130,6 +131,7 @@ class ReportScreen extends Component {
                                     style={{ flex: 1 }}
                                     placeholder='Inserisci il tuo numero di telefono per essere contattato'
                                     multiline={true}
+                                    keyboardType= 'numeric'
                                     onChangeText={text => text === '' ? this.setState({error_input_telefono: true}) : this.setState({ telefono: text, error_input_telefono: false })}
                                 />
                             </Item>
@@ -153,14 +155,15 @@ class ReportScreen extends Component {
                         <CardItem>
                             <Item style={{flex:1}}>
                                 <Button onPress={() => {
-                                    if (this.state.email === '')
+                                    if (this.state.email === '' ||  this.state.email.indexOf('@') === -1)
                                         this.setState({error_input_email: true})
                                     if (this.state.telefono === '')
                                         this.setState({error_input_telefono: true})
                                     if (this.state.descr === '')
                                         this.setState({error_input_descr: true})
-
-                                    if (this.state.email !== '' && this.state.telefono !== '' && this.state.descr !== ''){
+                                    if (this.state.latitudeMarker === 0.0 && this.state.longitudeMarker === 0.0)
+                                        alert('Perfavore posiziona il marker dove hai avvistato l\'animale')
+                                    if (this.state.email !== '' && this.state.email.indexOf('@') !== -1 &&this.state.telefono !== '' && this.state.descr !== '' && (this.state.latitudeMarker !== 0.0 || this.state.longitudeMarker !== 0.0)){
                                         this.props.ReportCreate({
                                             email: this.state.email,
                                             telefono: this.state.telefono,

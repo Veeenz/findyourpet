@@ -136,6 +136,13 @@ class PetScreen extends React.Component{
                                 }} block bordered style={{width:'50%'}}>
                                 <Text >SEGNALA AVVISTAMENTO</Text>
                             </Button>
+                          </CardItem>
+                          <CardItem>
+                            <Button onPress={() => {
+                                    this.props.navigation.navigate( "ReportList",{ key: pet.key })
+                                }} block bordered style={{width:'50%'}}>
+                                <Text >LISTA AVVISTAMENTI</Text>
+                            </Button>
                         </CardItem>
                         {this.printDeleteButtonIfLogged}
 

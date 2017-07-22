@@ -11,6 +11,7 @@ import ListScreen from './src/screens/ListScreen'
 import Signup from './src/screens/Signup'
 import ReportScreen from './src/screens/ReportScreen'
 import ImageScreen from './src/screens/ImageScreen'
+import ReportList from './src/screens/ReportList'
 import { NavigationComponent } from 'react-native-material-bottom-navigation'
 import { StackNavigator,TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
@@ -32,7 +33,8 @@ const SecondaryNavigator = StackNavigator({
     Pet: {screen: PetScreen},
     Signup: {screen: Signup},
     Report: {screen: ReportScreen},
-    ImageScreen: {screen: ImageScreen}
+    ImageScreen: {screen: ImageScreen},
+    ReportList: {screen: ReportList},
 });
 
 const MainStackNavigator = StackNavigator({
@@ -46,7 +48,9 @@ const SecondaryNavigator2 = StackNavigator({
   List: {screen: ListScreen},
   Pet: {screen: PetScreen},
   ImageScreen: {screen: ImageScreen},
-  Report: {screen: ReportScreen}
+  Report: {screen: ReportScreen},
+  ReportList: {screen: ReportList},
+
 
 })
 

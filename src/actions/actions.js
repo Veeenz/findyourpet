@@ -178,14 +178,28 @@ export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeM
                     });
                 }
               })
-
             })
-
-
-
           })
-
-
         })
   }
+}
+
+
+export const fetchListReport= ({key}) =>{
+  console.log("QUI ENTRA###################À")
+    firebase.database().ref("/ReportList")
+    .on("value", snap => {
+
+      var ArrayReturn= new Array()
+      snap.forEach((child) => {
+
+        if(child.val().idFind === key){
+          ArrayReturn.push(child.val())
+        }
+      })
+      console.log(ArrayReturn)
+      return ArrayReturn
+
+    })
+
 }
