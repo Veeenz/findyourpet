@@ -6,6 +6,8 @@ import { Image } from 'react-native';
 import { findRemove } from '../actions/actions';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation'
+import firebase from 'firebase';
+
 const resetAction = NavigationActions.reset({
   index: 0,
   actions: [
@@ -53,6 +55,38 @@ class PetScreen extends React.Component{
     )
   }
 
+  fetchMarkerReport= (key) => {
+    var ArrayReturn = new Array()
+    firebase.database().ref("/ReportList")
+    .on("value", snap => {
+      snap.forEach((child) => {
+        if(child.val().idFind === key){
+          ArrayReturn.push({latitudeMarker: child.val().latitudeMarker, longitudeMarker: child.val().longitudeMarker})
+        }
+      })
+      return  Object.keys(ArrayReturn).map((id) => {
+          const { latitudeMarker, longitudeMarker} = ArrayReturn[id]
+          console.log('LIST MARKER')
+          console.log(latitudeMarker)
+          console.log(longitudeMarker)
+          return (
+            <MapView.Marker
+
+              onPress={() => alert('test')}
+                coordinate={{
+                    latitude: latitudeMarker,
+                    longitude: longitudeMarker,
+                }}
+              pinColor= {'blue'}
+            />
+          )
+      })
+
+
+    })
+
+  }
+
   printDeleteButtonIfLogged = () => {
       if(this.props.auth.user === null)
         return null
@@ -79,6 +113,8 @@ class PetScreen extends React.Component{
 
     render(){
         const { pet,key } = this.props.navigation.state.params
+        console.log('PET: '+ pet.key)
+        console.log('KEY: '+key)
         const { width, height } = Dimensions.get('window');
         return(
             <Container>
@@ -104,6 +140,7 @@ class PetScreen extends React.Component{
                                             longitude: pet.longitudeMarker,
                                         }}
                                     />
+                                  {this.fetchMarkerReport(pet.key)}
                                 </MapView>
                         </CardItem>
                         <CardItem header>
