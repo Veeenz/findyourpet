@@ -8,12 +8,13 @@ import {
   USER_SET_MARKER,
   FINDLIST_FETCH_START,
   FINDLIST_FETCH_SUCCESS,
-  FIND_CREATE,
   SIGNUP_USER_FAIL,
   SIGNUP_USER_START,
   SIGNUP_USER_SUCCESS,
   REPORT_FETCH_START,
-  REPORT_FETCH_SUCCESS
+  REPORT_FETCH_SUCCESS,
+  FIND_ADD_SUCCESS,
+  FIND_ADD_START
 } from './types';
 import firebase from 'firebase';
 
@@ -106,42 +107,43 @@ export const findListFetch = () => {
 }
 
 export const findCreate = ({ title, location, duedate, descr, images ,latitudeMarker,longitudeMarker, navigateBack}) => {
-  const { currentUser } = firebase.auth();
-  idUser=currentUser.uid
-  navigateBack();
-  return (dispatch) => {
-    let formData = new FormData();
-    for (image in images){
+    return (dispatch) => {
+        dispatch({type: FIND_ADD_START})
+        const { currentUser } = firebase.auth();
+        idUser=currentUser.uid
+        navigateBack('MainScreen');
 
-        var localUri = images[image];
-        var filename = localUri.split('/').pop();
-        // Infer the type of the image
-        var match = /\.(\w+)$/.exec(filename);
-        var type = match ? `image/${match[1]}` : `image`;
-        formData.append('photo', { uri: localUri, name: filename, type });
-      }
+        let formData = new FormData();
+        for (image in images){
 
-    fetch('http://188.213.170.165:8050/insert', {
-        method: 'POST',
-        body: formData,
-        header: {
-          'content-type': 'multipart/form-data',
-        },
-    })
-    .then( response => response.json())
-    .then( image =>{
-      firebase.database().ref(`/DataList`)
-        .push({idUser, title, location, duedate, descr,images,latitudeMarker,longitudeMarker})
-        .then((data) => {
-            alert("Operazione eseguita con fuccesso")
+            var localUri = images[image];
+            var filename = localUri.split('/').pop();
+            // Infer the type of the image
+            var match = /\.(\w+)$/.exec(filename);
+            var type = match ? `image/${match[1]}` : `image`;
+            formData.append('photo', { uri: localUri, name: filename, type });
+        }
+
+        fetch('http://188.213.170.165:8050/insert', {
+            method: 'POST',
+            body: formData,
+            header: {
+                'content-type': 'multipart/form-data',
+            },
         })
+        .then( response => response.json())
+        .then( image =>{
+            firebase.database().ref(`/DataList`)
+            .push({idUser, title, location, duedate, descr,images,latitudeMarker,longitudeMarker})
+            .then((data) => {
+                dispatch({type: FIND_ADD_SUCCESS})
+            })
 
-    })
-    .catch(error => console.log(error));
+        })
+        .catch(error => dispatch({type: FIND_ADD_ERROR}));
+    }
 
-  }
 }
-
 export const findRemove = ({key, navigateBack}) => {
     console.warn(key)
     console.log('ref: '+firebase.database().ref('/DataList').child(key));
@@ -157,8 +159,6 @@ export const findRemove = ({key, navigateBack}) => {
     })
     navigateBack()
 }
-
-
 export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeMarker, idFind, navigateBack}) => {
   navigateBack();
   return (dispatch) => {
@@ -194,12 +194,10 @@ export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeM
         })
   }
 }
-
-
 export const fetchListReport= ({key}) =>{
     firebase.database().ref("/ReportList")
     .on("value", snap => {
-      var ArrayReturn= new Array()
+      let ArrayReturn= new Array()
       snap.forEach((child) => {
 
         if(child.val().idFind === key){
@@ -208,11 +206,9 @@ export const fetchListReport= ({key}) =>{
       })
       console.log(ArrayReturn)
       return ArrayReturn
-
     })
 
 }
-
 export const fetchReport = (key) => {
     return (dispatch) => {
         let ArrayReturn = new Array()

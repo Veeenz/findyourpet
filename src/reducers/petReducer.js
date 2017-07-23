@@ -13,6 +13,15 @@ export default petReducer = (state = initialState, action) => {
     break;
     case FINDLIST_FETCH_ERROR:
       return {...state, isLoading: false}
+    break;
+    case FIND_ADD_START:
+        return {...state, isLoading: true}
+    break;
+    case FIND_ADD_SUCCESS:
+        return {...state, isLoading: false}
+    break;
+    case FIND_ADD_ERROR:
+    break;
     default:
       return state;
   }

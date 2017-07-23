@@ -55,7 +55,7 @@ class CreateFind extends Component {
 
         this.setState({latitude: location.coords.latitude, longitude: location.coords.longitude})
         this.setState({latitudeMarker: location.coords.latitude, longitudeMarker: location.coords.longitude})
-        fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
+        fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+location.coords.latitude+','+location.coords.longitude+'&sensor=true')
             .then((response) => response.json())
             .then((data) => {
                 if(data.results[1])
@@ -134,7 +134,6 @@ class CreateFind extends Component {
                                 placeholder='Where did you lose your buddy?'
                                 value={this.state.location}
                                 onChangeText={text => this.setState({ location: text,error_input_posit: false })}
-
                             />
                         </Item>
                     </CardItem>
@@ -181,7 +180,7 @@ class CreateFind extends Component {
                             </Item>
                         </CardItem>
                         <CardItem >
-                            <Item stackedLabel  error={this.state.error_input_descr} style={{flex: 1, flexDirection:'column'}}>
+                            <Item stackedLabel error={this.state.error_input_descr} style={{flex: 1, flexDirection:'column'}}>
                                 <Label>
                                     Descrizione
                                 </Label>
@@ -219,7 +218,7 @@ class CreateFind extends Component {
                                             images: this.state.images,
                                             latitudeMarker: this.state.latitudeMarker,
                                             longitudeMarker: this.state.longitudeMarker,
-                                            navigateBack: () => this.props.navigation.goBack()
+                                            navigateBack: (screen) => this.props.navigation.navigate(screen)
                                         })
                                       }
                                 }}
