@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Dimensions } from 'react-native';
-import {Button, Text, Container, Content,Label,Item, List, ListItem, Card, CardItem, Header, Icon, Left, Right, Body, Title, Footer} from 'native-base'
+import {Button, Spinner, Text, Container, Content,Label,Item, List, ListItem, Card, CardItem, Header, Icon, Left, Right, Body, Title, Footer} from 'native-base'
 import { MapView, Permissions, Location} from 'expo';
 import { Image } from 'react-native';
 import { findRemove } from '../actions/actions';
+import { fetchReport } from '../actions/actions';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation'
 import firebase from 'firebase';
@@ -34,44 +35,36 @@ class PetScreen extends React.Component{
   }
 
   renderImageList2 = (pet) => {
-  return(
-    <List
-        horizontal={true}
-        dataArray={pet.images}
-        renderRow={(image, i) =>{
-            return (<ListItem
-              onPress={() => this.props.navigation.navigate( "ImageScreen",{ image: image })}
-              >
-                <Image
-                    source={{ uri: image }}
-                    resizeMode="cover"
-                    style={{ height :180, width: 300}}
+      return(
+        <List
+            horizontal={true}
+            dataArray={pet.images}
+            renderRow={(image, i) =>{
+                return (<ListItem
+                  onPress={() => this.props.navigation.navigate( "ImageScreen",{ image: image })}
+                  >
+                    <Image
+                        source={{ uri: image }}
+                        resizeMode="cover"
+                        style={{ height :180, width: 300}}
 
-                    >
-                    </Image>
-                </ListItem>
-            )}}>
-        </List>
-    )
-  }
+                        >
+                        </Image>
+                    </ListItem>
+                )}}>
+            </List>
+        )
+      }
+      componentWillMount(){
 
-  fetchMarkerReport= (key) => {
-    var ArrayReturn = new Array()
-    firebase.database().ref("/ReportList")
-    .on("value", snap => {
-      snap.forEach((child) => {
-        if(child.val().idFind === key){
-          ArrayReturn.push({latitudeMarker: child.val().latitudeMarker, longitudeMarker: child.val().longitudeMarker})
-        }
-      })
-      return  Object.keys(ArrayReturn).map((id) => {
-          const { latitudeMarker, longitudeMarker} = ArrayReturn[id]
-          console.log('LIST MARKER')
-          console.log(latitudeMarker)
-          console.log(longitudeMarker)
+          this.props.fetchReport(this.props.navigation.state.params.pet.key)
+      }
+  fetchMarkerReport = () => {
+      return this.props.report.list.map((report, i) => {
+          const { latitudeMarker, longitudeMarker} = report
           return (
             <MapView.Marker
-
+              key={i}
               onPress={() => alert('test')}
                 coordinate={{
                     latitude: latitudeMarker,
@@ -81,10 +74,6 @@ class PetScreen extends React.Component{
             />
           )
       })
-
-
-    })
-
   }
 
   printDeleteButtonIfLogged = () => {
@@ -115,6 +104,13 @@ class PetScreen extends React.Component{
     }
 
     render(){
+        if(this.props.report.isLoading)
+            return(
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                    <Text></Text>
+                    <Spinner color='blue' />
+                </View>
+            );
         const { pet,key } = this.props.navigation.state.params
         console.log('PET: '+ pet.key)
         console.log('KEY: '+key)
@@ -126,9 +122,6 @@ class PetScreen extends React.Component{
                         <CardItem cardBody>
                             <MapView
                                 style={{ width, height: height-400 }}
-                                rotateEnabled={false}
-                                zoomEnabled={false}
-                                scrollEnabled={false}
                                 showsUserLocation={false}
                                 loadingEnabled={true}
                                 initialRegion={{
@@ -185,6 +178,7 @@ class PetScreen extends React.Component{
     }
 }
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    report: state.report
 })
-export default connect(mapStateToProps, {findRemove})(PetScreen);
+export default connect(mapStateToProps, {findRemove, fetchReport})(PetScreen);
