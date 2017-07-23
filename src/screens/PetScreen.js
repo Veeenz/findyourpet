@@ -88,6 +88,9 @@ class PetScreen extends React.Component{
   }
 
   printDeleteButtonIfLogged = () => {
+      console.log(this.props.auth.user.uid)
+      console.log(this.props.navigation.state.params.idUser)
+      console.log('ENTRA QUI###########################')
       if(this.props.auth.user === null)
         return null
       if (this.props.auth.user.uid === this.props.navigation.state.params.idUser){
@@ -157,31 +160,23 @@ class PetScreen extends React.Component{
                         </CardItem>
 
                         <CardItem>
-                            <Text>Smarrito in data {pet.duedate}</Text>
+                            <Text>Smarrito in data {pet.duedate.split('T')[0]}</Text>
                         </CardItem>
                         <CardItem style={{flex: 1, justifyContent: 'center'}}>
                             <Button onPress={() => {
-                                    findRemove({
-                                        key: pet.key,
-                                        navigateBack: () => this.props.navigation.goBack()
-                                    })
-                                }} block bordered style={{width:'50%'}}>
-                                <Text >Press me</Text>
-                            </Button>
-                            <Button onPress={() => {
                                     this.props.navigation.navigate( "Report",{ key: pet.key })
-                                }} block bordered style={{width:'50%'}}>
+                                }} block bordered style={{width:'100%'}}>
                                 <Text >SEGNALA AVVISTAMENTO</Text>
                             </Button>
                           </CardItem>
                           <CardItem>
                             <Button onPress={() => {
                                     this.props.navigation.navigate( "ReportList",{ key: pet.key })
-                                }} block bordered style={{width:'50%'}}>
+                                }} block bordered style={{width:'100%'}}>
                                 <Text >LISTA AVVISTAMENTI</Text>
                             </Button>
                         </CardItem>
-                        {this.printDeleteButtonIfLogged}
+                        {this.printDeleteButtonIfLogged()}
 
                     </Card>
                 </Content>

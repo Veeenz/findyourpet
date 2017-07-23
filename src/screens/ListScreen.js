@@ -21,7 +21,7 @@ class ListScreen extends Component {
                     key={id}
                     onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[id] })}
                 >
-                    <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[id] })}>
+                    <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[id], idUser: this.props.pet[id]['idUser'] })}>
                         <Image
                             source={{ uri: images[images.length-1] }}
                             resizeMode="cover"
