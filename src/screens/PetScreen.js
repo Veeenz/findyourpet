@@ -70,9 +70,6 @@ class PetScreen extends React.Component{
   }
 
   printDeleteButtonIfOwner = (pet) => {
-      console.log(this.props.auth.user.uid)
-      console.log(this.props.navigation.state.params.idUser)
-      console.log('ENTRA QUI###########################')
       if(this.props.auth.user === null)
         return null
       if (this.props.auth.user.uid === this.props.navigation.state.params.idUser){
@@ -116,6 +113,10 @@ class PetScreen extends React.Component{
                             <MapView
                                 style={{ width, height: height-400 }}
                                 showsUserLocation={false}
+                                rotateEnabled={false}
+                                zoomEnabled={true}
+                                scrollEnabled={true}
+                                showsUserLocation={true}
                                 loadingEnabled={true}
                                 initialRegion={{
                                     latitude: pet.latitudeMarker,
