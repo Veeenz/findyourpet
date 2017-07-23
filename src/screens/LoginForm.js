@@ -169,6 +169,8 @@ class LoginForm extends Component {
                                   </Button>
                               </Item>
                           </CardItem>
+
+                          <Text>LOGIN EFFETTUATO</Text>
                       </Card>
                   </Content>
               </Container>
@@ -231,7 +233,21 @@ class LoginForm extends Component {
                             </Button>
                         </Item>
                     </CardItem>
-
+                    <CardItem>
+                        <Item stackedLabel style={{ flex:1 }}>
+                            <Button style={{marginTop:20}} block primary onPress={() => {
+                                this.props.loginUser(
+                                    {
+                                        email: 'a@a.it',
+                                        password: 'aaaaaa',
+                                        navigateTo: (screen) => this.props.navigation.navigate(screen)
+                                    }
+                                )
+                            }}>
+                                <Text>DEBUG Login ever true</Text>
+                            </Button>
+                        </Item>
+                    </CardItem>
                     <CardItem>
                         <Item stackedLabel style={{ flex:1 }}>
                             <Button style={{marginTop:20}} block primary onPress={() => this.props.navigation.navigate("Signup") }>
