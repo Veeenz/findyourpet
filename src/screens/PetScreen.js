@@ -9,13 +9,6 @@ import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation'
 import firebase from 'firebase';
 
-const resetAction = NavigationActions.reset({
-  index: 0,
-  actions: [
-    NavigationActions.navigate({ routeName: 'MainScreen'})
-  ]
-})
-
 class PetScreen extends React.Component{
   renderImageList = (pet) => {
       return Object.keys(pet.images).map((key) => {
