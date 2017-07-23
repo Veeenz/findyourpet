@@ -4,24 +4,22 @@ import { Image } from 'react-native';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
-    const petList = Object.keys(state.pet.petList).map(id => {
-        return { ...state.pet.petList[id], key: id }
-    });
+
     return {
-        pet: petList
+        pet: state.pet
     }
 }
 class ListScreen extends Component {
     renderPetList = () => {
 
-        return Object.keys(this.props.pet).map((id) => {
-            const { title, descr, images } = this.props.pet[id]
+        return this.props.pet.list.map((pet, i) => {
+            const { title, descr, images } = pet
             return (
                 <Card
-                    key={id}
-                    onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[id] })}
+                    key={i}
+                    onPress={() => this.props.navigation.navigate( "Pet",{ pet: pet })}
                 >
-                    <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[id], idUser: this.props.pet[id]['idUser'] })}>
+                    <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: pet, idUser: pet['idUser'] })}>
                         <Image
                             source={{ uri: images[images.length-1] }}
                             resizeMode="cover"

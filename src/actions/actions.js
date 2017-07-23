@@ -6,6 +6,7 @@ import {
   USER_PROFILE_INFORMATION,
   USER_SET_LOCATION,
   USER_SET_MARKER,
+  FINDLIST_FETCH_START,
   FINDLIST_FETCH_SUCCESS,
   FIND_CREATE,
   SIGNUP_USER_FAIL,
@@ -89,9 +90,17 @@ export const setUserMarker = (coordinates) => {
 
 export const findListFetch = () => {
   return (dispatch) => {
+      dispatch({type: FINDLIST_FETCH_START})
+      ArrayReturn = new Array()
     firebase.database().ref("/DataList")
     .on("value", snap => {
-      dispatch({type:FINDLIST_FETCH_SUCCESS, payload: snap.val()})
+        snap.forEach((child) => {
+            let valPush = child.val()
+            valPush.key = child.key
+            //valPush.append({'key':child.key})
+            ArrayReturn.push(valPush)
+        })
+        dispatch({type: FINDLIST_FETCH_SUCCESS, payload: ArrayReturn})
     })
   }
 }

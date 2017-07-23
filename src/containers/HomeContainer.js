@@ -2,12 +2,10 @@ import {connect} from 'react-redux';
 import { userProfileInformation, setUserLocation, logoutUser,setUserMarker,findListFetch } from '../actions/actions';
 import HomeScreen from '../screens/HomeScreen';
 const mapStateToProps = state => {
-    const petList = Object.keys(state.pet.petList).map(id => {
-        return { ...state.pet.petList[id], key: id }
-    });
+    
     return{
         user: state.user,
-        pet: petList
+        pet: state.pet
     }
 }
 

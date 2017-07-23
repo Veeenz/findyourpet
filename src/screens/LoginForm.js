@@ -46,12 +46,10 @@ firebase.database().ref("/TokenUser")
 
 
 const mapStateToProps = state => {
-    const petList = Object.keys(state.pet.petList).map(id => {
-        return { ...state.pet.petList[id], key: id }
-    });
+
     return {
         auth:state.auth,
-        pet: petList
+        pet: state.pet
     }
 }
 
@@ -61,20 +59,28 @@ class LoginForm extends Component {
 
   renderPetList = () => {
 
-      return Object.keys(this.props.pet).map((key) => {
+      return this.props.pet.list.map((pet, i) => {
           const { currentUser } = firebase.auth();
           idUser=currentUser.uid
-          if (idUser !== this.props.pet[key]['idUser'])
+          if (idUser !== pet['idUser'])
             return
 
-          const { title, descr,images } = this.props.pet[key]
+          const { title, descr,images } = pet
+          console.log(this.props.pet)
+          if(this.props.pet.isLoading){
 
+              return (
+                  <CardItem>
+                      <Text>Caricamento in corso</Text>
+                      <Spinner color='blue' />
+                  </CardItem>
+              )
+          }
           return (
               <Card
-                  key={key}
-                  onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key] })}
+                  key={i}
               >
-                  <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: this.props.pet[key], key:key,idUser: this.props.pet[key]['idUser'] })}>
+                  <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: pet, idUser: pet['idUser'] })}>
                     <Image
                         source={{ uri: images[images.length-1] }}
                         resizeMode="cover"
@@ -90,8 +96,6 @@ class LoginForm extends Component {
           )
       })
   }
-  ren
-
 
     state = {
         email: '',
@@ -135,6 +139,7 @@ class LoginForm extends Component {
 
 
     render(){
+
         if(this.props.auth.isLoading)
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

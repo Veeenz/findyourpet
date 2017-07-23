@@ -111,9 +111,9 @@ class PetScreen extends React.Component{
                     <Spinner color='blue' />
                 </View>
             );
-        const { pet,key } = this.props.navigation.state.params
+        const { pet } = this.props.navigation.state.params
         console.log('PET: '+ pet.key)
-        console.log('KEY: '+key)
+
         const { width, height } = Dimensions.get('window');
         return(
             <Container>
