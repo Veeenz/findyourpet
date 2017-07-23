@@ -7,25 +7,12 @@ import {fetchListReport} from '../actions/actions';
 import firebase from 'firebase';
 
 class ReportList extends Component {
-    renderPetReportList = (key) => {
-      var ArrayReturn= new Array()
-      firebase.database().ref("/ReportList")
-      .on("value", snap => {
-        snap.forEach((child) => {
-          if(child.val().idFind === key){
-            ArrayReturn.push({email: child.val().email, descr: child.val().descr, telefono: child.val().telefono})
-          }
-        })
-        return  Object.keys(ArrayReturn).map((id) => {
-            const { email, descr, telefono } = ArrayReturn[id]
-            console.log(email)
-            console.log(telefono)
+    renderPetReportList = () => {
+        return this.props.report.list.map((report) => {
+            const { email, descr, telefono } = report
             return (
                 <Card>
-                    <CardItem>
-                      <Label>
-                        Segnala dove hai visto l'animale
-                      </Label>
+                    <CardItem>                      
                       <Image/>
                       <Text style={{marginLeft:10}}>
                         {descr}
@@ -40,22 +27,20 @@ class ReportList extends Component {
                 </Card>
             )
         })
-
-
-      })
-
-    }
+      }
     render() {
       const { key } = this.props.navigation.state.params
       const { width, height } = Dimensions.get('window');
         return (
             <Container>
                 <Content>
-                  {this.renderPetReportList(key)}
+                  {this.renderPetReportList()}
                 </Content>
             </Container>
         );
     }
 }
-
-export default connect(null, null)(ReportList)
+const mapStateToProps = (state) => ({
+    report: state.report
+})
+export default connect(mapStateToProps, null)(ReportList)
