@@ -218,7 +218,7 @@ class CreateFind extends Component {
                                             images: this.state.images,
                                             latitudeMarker: this.state.latitudeMarker,
                                             longitudeMarker: this.state.longitudeMarker,
-                                            navigateBack: (screen) => this.props.navigation.navigate(screen)
+                                            navigateBack: () => this.props.navigation.goBack()
                                         })
                                       }
                                 }}
