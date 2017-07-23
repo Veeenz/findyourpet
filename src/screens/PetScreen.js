@@ -76,7 +76,7 @@ class PetScreen extends React.Component{
       })
   }
 
-  printDeleteButtonIfLogged = () => {
+  printDeleteButtonIfOwner = (pet) => {
       console.log(this.props.auth.user.uid)
       console.log(this.props.navigation.state.params.idUser)
       console.log('ENTRA QUI###########################')
@@ -169,7 +169,7 @@ class PetScreen extends React.Component{
                                 <Text >LISTA AVVISTAMENTI</Text>
                             </Button>
                         </CardItem>
-                        {this.printDeleteButtonIfLogged()}
+                        {this.printDeleteButtonIfOwner(pet)}
 
                     </Card>
                 </Content>
