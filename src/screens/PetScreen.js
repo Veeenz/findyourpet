@@ -77,7 +77,7 @@ class PetScreen extends React.Component{
                     latitude: latitudeMarker,
                     longitude: longitudeMarker,
                 }}
-              pinColor= {'blue'}
+              pinColor= {'1D00F7'}
             />
           )
       })

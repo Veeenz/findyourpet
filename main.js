@@ -16,6 +16,7 @@ import { NavigationComponent } from 'react-native-material-bottom-navigation'
 import { StackNavigator,TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import store from './src/store';
+import {Icon} from 'native-base';
 
 const config = {
     apiKey: "AIzaSyBqZ0L1pU_CJaGUeCqvqT5DMEtsdnnsVU0",
@@ -69,13 +70,15 @@ const MainNavigator = TabNavigator({
             tabs: {
                 Login: {
                     barBackgroundColor: '#37474F',
+                    'icon': <Icon name="home" />
                 },
                 Main: {
                     barBackgroundColor: '#37474F',
+                    'icon': <Icon name="map" />
                 },
-                Create: {
-                    barBackgroundColor: '#EEEEEE',
-                    activeLabelColor: '#212121',
+                List: {
+                    barBackgroundColor: '#37474F',
+                    'icon': <Icon name="search" />
                 }
             }
         }
