@@ -51,13 +51,8 @@ class CreateFind extends Component {
             this.setState({ errorMessage: 'Permesso negato'});
         }
 
-        //let location = await Location.getCurrentPositionAsync({});
-        let location = {
-            coords: {
-                latitude: 40.0192,
-                longitude: 3.0918
-            }
-        }
+        let location = await Location.getCurrentPositionAsync({});
+
         this.setState({latitude: location.coords.latitude, longitude: location.coords.longitude})
         this.setState({latitudeMarker: location.coords.latitude, longitudeMarker: location.coords.longitude})
         fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
