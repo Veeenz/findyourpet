@@ -122,7 +122,14 @@ class PetScreen extends React.Component{
                         <CardItem cardBody>
                             <MapView
                                 style={{ width, height: height-400 }}
+<<<<<<< Updated upstream
                                 showsUserLocation={false}
+=======
+                                rotateEnabled={false}
+                                zoomEnabled={true}
+                                scrollEnabled={true}
+                                showsUserLocation={true}
+>>>>>>> Stashed changes
                                 loadingEnabled={true}
                                 initialRegion={{
                                     latitude: pet.latitudeMarker,
