@@ -92,15 +92,17 @@ export const setUserMarker = (coordinates) => {
 export const findListFetch = () => {
   return (dispatch) => {
       dispatch({type: FINDLIST_FETCH_START})
-      ArrayReturn = new Array()
+
     firebase.database().ref("/DataList")
     .on("value", snap => {
+        ArrayReturn = new Array()
         snap.forEach((child) => {
             let valPush = child.val()
             valPush.key = child.key
-            //valPush.append({'key':child.key})
             ArrayReturn.push(valPush)
         })
+        console.log('Array return of findlistfetch');
+        console.log(ArrayReturn)
         dispatch({type: FINDLIST_FETCH_SUCCESS, payload: ArrayReturn})
     })
   }
