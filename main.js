@@ -17,7 +17,7 @@ import { StackNavigator,TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import store from './src/store';
 import {Icon} from 'native-base';
-
+console.disableYellowBox = true;
 const config = {
     apiKey: "AIzaSyBqZ0L1pU_CJaGUeCqvqT5DMEtsdnnsVU0",
     authDomain: "findyourbuddy-76527.firebaseapp.com",
