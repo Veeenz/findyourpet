@@ -188,6 +188,7 @@ class LoginForm extends Component {
                                     else
                                       this.setState({email,error_input_email:false})
                                     }}
+                                    keyboardType= 'email-address'
                                 />
                             </Item>
                         </CardItem>
