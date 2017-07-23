@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-class Signup extends Component {
+class SignupScreen extends Component {
     static navigationOptions = {
         title: 'Registrazione'
     }
@@ -160,5 +160,5 @@ class Signup extends Component {
     }
 }
 
-export default connect(mapStateToProps, { SignUpUser }) (Signup);
+export default connect(mapStateToProps, { SignUpUser }) (SignupScreen);
 //export default Signup;

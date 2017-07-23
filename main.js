@@ -8,7 +8,7 @@ import HomeContainer from './src/containers/HomeContainer';
 import CreateFind from './src/screens/CreateFind'
 import PetScreen from './src/screens/PetScreen'
 import ListScreen from './src/screens/ListScreen'
-import Signup from './src/screens/Signup'
+import SignupScreen from './src/screens/SignupScreen'
 import ReportScreen from './src/screens/ReportScreen'
 import ImageScreen from './src/screens/ImageScreen'
 import ReportList from './src/screens/ReportList'
@@ -32,7 +32,7 @@ const SecondaryNavigator = StackNavigator({
     Login: { screen: LoginForm },
     Create: { screen: CreateFind},
     Pet: {screen: PetScreen},
-    Signup: {screen: Signup},
+    Signup: {screen: SignupScreen},
     Report: {screen: ReportScreen},
     ImageScreen: {screen: ImageScreen},
     ReportList: {screen: ReportList},
