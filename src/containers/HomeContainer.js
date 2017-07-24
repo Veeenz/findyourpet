@@ -2,10 +2,11 @@ import {connect} from 'react-redux';
 import { userProfileInformation, setUserLocation, logoutUser,setUserMarker,findListFetch } from '../actions/actions';
 import HomeScreen from '../screens/HomeScreen';
 const mapStateToProps = state => {
-    
+
     return{
         user: state.user,
-        pet: state.pet
+        pet: state.pet,
+        auth: state.auth
     }
 }
 

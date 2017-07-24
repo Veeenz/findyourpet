@@ -87,7 +87,7 @@ class HomeScreen extends React.Component{
                             active={this.state.active}
                             direction="down"
                             containerStyle={{ }}
-                            style={{ flex: 1, backgroundColor: '#5067FF' }}
+                            style={{ backgroundColor: '#5067FF', display: (this.props.auth.user === null ? 'none':'flex') }}
                             position="topRight"
                             onPress={() => {
                                 this.setState({ active: !this.state.active })
