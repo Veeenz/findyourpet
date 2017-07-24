@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Dimensions } from 'react-native';
-import {Button,Container, Content,Label,Item, Card, CardItem, Header, Icon, Left, Right, Body,Title, Spinner} from 'native-base'
+import {Button,Container, Content,Label,Item, Fab, Card, CardItem, Header, Icon, Left, Right, Body,Title, Spinner} from 'native-base'
 import { MapView, Permissions, Location } from 'expo';
 import firebase from 'firebase';
 
@@ -8,6 +8,9 @@ import firebase from 'firebase';
 class HomeScreen extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            active: true
+        };
     }
     componentWillMount(){
         //this.props.userProfileInformation()
@@ -61,8 +64,10 @@ class HomeScreen extends React.Component{
         return(
             <Container>
                 <Content>
+
                     <Card>
                         <CardItem cardBody>
+
                             <MapView
                                 style={{ width, height: height }}
                                 showsUserLocation={true}
@@ -76,7 +81,21 @@ class HomeScreen extends React.Component{
                                 >
                                     {this.markersRender()}
                             </MapView>
+
                         </CardItem>
+                        <Fab
+                            active={this.state.active}
+                            direction="down"
+                            containerStyle={{ }}
+                            style={{ flex: 1, backgroundColor: '#5067FF' }}
+                            position="topRight"
+                            onPress={() => {
+                                this.setState({ active: !this.state.active })
+                                this.props.navigation.navigate('Create')
+                            }}>
+                            <Icon name="add" />
+
+                        </Fab>
                     </Card>
                 </Content>
             </Container>
