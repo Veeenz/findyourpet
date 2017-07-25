@@ -13,8 +13,8 @@ class ReportList extends Component {
     renderPetReportList = () => {
         if(this.props.report.list.length == 0){
             return (
-                <Card style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
-                    <CardItem>
+                <Card>
+                    <CardItem style={{flex: 1, justifyContent:'center', alignItems:'center', alignSelf:'center'}}>
                         <Text>
                             Nessun avvistamento per questo animale
                         </Text>
