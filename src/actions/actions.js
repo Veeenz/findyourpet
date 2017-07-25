@@ -219,38 +219,23 @@ export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeM
         })
   }
 }
-export const fetchListReport= ({key}) =>{
-    firebase.database().ref("/ReportList")
-    .on("value", snap => {
-      let ArrayReturn= new Array()
-      snap.forEach((child) => {
 
-        if(child.val().idFind === key){
-          ArrayReturn.push(child.val())
-        }
-      })
-      console.log(ArrayReturn)
-      return ArrayReturn
-    })
-
-}
-export const fetchReport = (key) => {
+export const fetchListReport = (key) => {
     return (dispatch) => {
-        let ArrayReturn = new Array()
         dispatch({type: REPORT_FETCH_START})
         firebase.database().ref("/ReportList")
         .on("value", snap => {
-
+            let ArrayReturn = new Array()
             snap.forEach((child) => {
                 if(child.val().idFind === key){
                     ArrayReturn.push(child.val())
                 }
             })
-            fetchReportSuccess(dispatch, ArrayReturn)
+            fetchListReportSuccess(dispatch, ArrayReturn)
         })
     }
 }
 
-export const fetchReportSuccess = (dispatch, reportData) => {
+export const fetchListReportSuccess = (dispatch, reportData) => {
     dispatch({type: REPORT_FETCH_SUCCESS, payload: reportData})
 }
