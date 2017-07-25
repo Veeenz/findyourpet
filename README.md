@@ -49,9 +49,9 @@ Come banca dati abbiamo utilizzato firebase, vista la sua facilità di utilizzo,
   * **userProfileInformation** Richiamando l'evento: **USER_PROFILE_INFORMATION**
 
 * **reportReducer** Si occupare di tenere tutti i report per ogni singola ricerca ancora attiva e lo stato del loading durante il caricamento. Viene chiamato con le seguenti azioni:
-  * **fetchReport** Richiamando l'evento: **REPORT_FETCH_START**
-  * **fetchReportSuccess** Richiamando l'evento: **REPORT_FETCH_SUCCESS**
-  * **ReportCreate** Richiamando gli eventi: **REPORT_ADD_START**, **REPORT_ADD_SUCCESS**
+  * **fetchListReport** Richiamando l'evento: **REPORT_FETCH_START**
+  * **fetchListReportSuccess** Richiamando l'evento: **REPORT_FETCH_SUCCESS**
+  * **reportCreate** Richiamando gli eventi: **REPORT_ADD_START**, **REPORT_ADD_SUCCESS**
 
 
 ***NAVIGATOR:***
