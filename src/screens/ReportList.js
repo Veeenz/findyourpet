@@ -23,32 +23,40 @@ class ReportList extends Component {
             )
         }
         return this.props.report.list.map((report) => {
-            const { email, descr, telefono } = report
+            const { email, descr, telefono, date } = report
+
             return (
                 <Card>
-                    <CardItem>                      
-                      <Image/>
-                      <Text style={{marginLeft:10}}>
-                        {descr}
-                      </Text>
-                      <Text style={{marginLeft:10}}>
-                        {telefono}
-                      </Text>
-                      <Text style={{marginLeft:10}}>
-                        {email}
-                      </Text>
+                    <CardItem>
+                        <Text style={{marginLeft:10}}>
+                            Email: {email}
+                        </Text>
+                    </CardItem>
+                    <CardItem>
+                        <Text style={{marginLeft:10}}>
+                            Messaggio: {descr}
+                        </Text>
+                    </CardItem>
+                    <CardItem>
+                        <Text style={{marginLeft:10}}>
+                            Recapito telefonico: {telefono}
+                        </Text>
+                    </CardItem>
+                    <CardItem>
+                        <Text style={{marginLeft:10}}>
+                            Data: {date}
+                        </Text>
                     </CardItem>
                 </Card>
             )
         })
-      }
+    }
     render() {
-      const { key } = this.props.navigation.state.params
-      const { width, height } = Dimensions.get('window');
+        const { width, height } = Dimensions.get('window');
         return (
             <Container>
                 <Content>
-                  {this.renderPetReportList()}
+                    {this.renderPetReportList()}
                 </Content>
             </Container>
         );
