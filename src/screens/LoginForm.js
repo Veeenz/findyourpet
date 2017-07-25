@@ -149,7 +149,7 @@ class LoginForm extends Component {
                               <Item stackedLabel style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
                                   <Button style={{marginTop:20}} block primary onPress={() =>  this.props.navigation.navigate("Create") }>
-                                      <Text>DEBUG CreateFind</Text>
+                                      <Text>Crea Ricerca</Text>
                                   </Button>
                               </Item>
                           </CardItem>
@@ -161,8 +161,6 @@ class LoginForm extends Component {
                                   </Button>
                               </Item>
                           </CardItem>
-
-                          <Text>LOGIN EFFETTUATO</Text>
                       </Card>
                   </Content>
               </Container>
@@ -173,9 +171,6 @@ class LoginForm extends Component {
             <Container>
                 <Content>
                     <Card>
-
-
-                        {this.handleAuthenticationError()}
                         <CardItem>
                             <Item stackedLabel error={this.state.error_input_email} style={{ flex:1 }}>
                                 <Label>Email</Label>
@@ -225,21 +220,7 @@ class LoginForm extends Component {
                             </Button>
                         </Item>
                     </CardItem>
-                    <CardItem>
-                        <Item stackedLabel style={{ flex:1 }}>
-                            <Button style={{marginTop:20}} block primary onPress={() => {
-                                this.props.loginUser(
-                                    {
-                                        email: 'a@a.it',
-                                        password: 'aaaaaa',
-                                        navigateTo: (screen) => this.props.navigation.navigate(screen)
-                                    }
-                                )
-                            }}>
-                                <Text>DEBUG Login ever true</Text>
-                            </Button>
-                        </Item>
-                    </CardItem>
+
                     <CardItem>
                         <Item stackedLabel style={{ flex:1 }}>
                             <Button style={{marginTop:20}} block primary onPress={() => this.props.navigation.navigate("Signup") }>

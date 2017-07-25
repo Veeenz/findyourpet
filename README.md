@@ -90,7 +90,7 @@ Per risolvere il problema abbiamo programmato un servizio in Flask (python), car
 
 **HomeScreen**
 
-![HOME SCREEN](http://i66.tinypic.com/10rv8ua.jpg)
+![HOME SCREEN](http://i66.tinypic.com/33wxlhi.jpg)
 
 **LOGIN**, **SIGNUP**
 
@@ -101,7 +101,27 @@ Per risolvere il problema abbiamo programmato un servizio in Flask (python), car
 
 ![PET SCREEN](http://i67.tinypic.com/e82u5j.jpg)
 
+**CREATEFIND**
 
+![CREATE FIND](http://i68.tinypic.com/2s94z9g.jpg)
+![CREATE FIND2](http://i68.tinypic.com/2qvs2nm.jpg)
+
+**REPORTSCREEN**
+
+![REPORT SCREEN](http://i67.tinypic.com/289a004.jpg)
+![REPORT SCREEN2](http://i67.tinypic.com/2l88bq8.jpg)
+
+**REPORTLIST**
+
+![REPORT LIST](http://i67.tinypic.com/2iqjnkn.jpg)
+
+**LOGINFORM** (Dopo il login)
+
+![LOGIFOM2](http://i67.tinypic.com/vgmsfn.jpg)
+
+**LISTSCEEN**
+
+![LISTSCREEN](http://i66.tinypic.com/5cd3sx.jpg)
 
 ***PIATTAFORME UTILIZZATE:***
 

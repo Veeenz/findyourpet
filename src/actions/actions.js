@@ -39,7 +39,9 @@ const loginUserSuccess = (dispatch, user, navigateTo) => {
 }
 
 const loginUserFailed = (dispatch, error)  => {
+  alert('Autenticazione fallita')
   dispatch({ type: LOGIN_USER_FAIL, payload: error })
+
 
 }
 

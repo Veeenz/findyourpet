@@ -126,11 +126,14 @@ class CreateFind extends Component {
 
                     <CardItem>
                         <Item stackedLabel  error={this.state.error_input_posit} style={{ flex:1 }}>
-                            <Label> Posizione </Label>
+                            <Label> Dove hai perso il tuo animale? </Label>
                             <Input
+                              style={{ flex: 1, height:80 }}
                                 label="Location"
-                                placeholder='Dove hai perso il tuo animale?'
+                                placeholder='Sposta il cursore presente sulla mappa sul luogo dove hai perso il tuo animale'
+                                multiline={true}
                                 value={this.state.location}
+                                editable= {false}
                                 onChangeText={text => this.setState({ location: text,error_input_posit: false })}
                             />
                         </Item>
@@ -223,7 +226,7 @@ class CreateFind extends Component {
                                 style={{flex:1,justifyContent: 'center'}}
                                 >
                                     <Text>
-                                        Add Find
+                                       Aggiungi
                                     </Text>
                                 </Button>
                             </Item>
