@@ -1,18 +1,20 @@
 # FINDYOURBUDDY
 
-
 SIMONE DI MAURO.
 
 X81/000067
 
 VINCENZO FILETTI
 
-METTI LA TUA MATRICOLA FINOCCHIO.
+METTI LA TUA MATRICOLA VINZ.
+
+***INTRUDUZIONE***
 
 L’applicazione ha lo scopo di permettere al proprietario di un animale disperso, di avere segnalazioni da persone esterne ai suoi conoscenti , di dove si trova l’animale.
 Il proprietario segnala dove ha perso l’animale, inserire delle foto, descrizione e la data della scomparsa. Gli altri utenti possono segnalare l’avvistamento dell animale e l'invio delle proprie informazioni personali al proprietario.
 
 ***LIBRERIE UTILIZZATE:***
+
 Come grafica dei componenti abbiamo usato la libreria ‘NATIVE BASE’, per le mappe, i marker delle mappe, il caricamento dei font, la geolocalizzazione e le  notifiche abbiamo utilizzato  la libreria messa a disposizione da expo.
 Come banca dati abbiamo utilizzato firebase, vista la sua facilità di utilizzo, Strutturando il tutti in 3 tabelle:
 
@@ -59,3 +61,11 @@ Durante lo sviluppo abbiamo riscontrato il problema di non poter caricare le fot
 Per risolvere il problema abbiamo programmato un servizio in Flask (python), caricato in un nostro server, che riceve le foto caricate dall'utente nel momento della creazione della ricerca, e automaticamente il servizio carica i dati su firebase storage.
 
 ***SCREEN:***
+
+***PIATTAFORME UTILIZZATE:***
+
+* **Github**
+* **Trello**
+* **Expo**
+* **Firebase**
+* **Gliffy**
