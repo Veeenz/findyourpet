@@ -8,6 +8,9 @@ VINCENZO FILETTI
 
 METTI LA TUA MATRICOLA VINZ.
 
+***LINK EXPO***
+[Link expo](https://www.google.com)
+
 ***INTRUDUZIONE***
 
 L’applicazione ha lo scopo di permettere al proprietario di un animale disperso, di avere segnalazioni da persone esterne ai suoi conoscenti , di dove si trova l’animale.

@@ -206,9 +206,9 @@ class CreateFind extends Component {
                                         alert("Inserisci almeno 1 foto")
 
                                     if (this.state.location !== '' && this.state.title !== '' && this.state.descr !== '' && this.state.images.length >= 2){
-                                        if (this.state.images.indexOf('https://facebook.github.io/react/img/logo_og.png') >= 0){
+                                        if (this.state.images.indexOf('http://saad.unicam.it/sites/saad.unicam.it/files/logo_homepage_20150714083101.png') >= 0){
                                           imagesCopy= this.state.images
-                                          imagesCopy.splice(imagesCopy.indexOf('https://facebook.github.io/react/img/logo_og.png'),1)
+                                          imagesCopy.splice(imagesCopy.indexOf('http://saad.unicam.it/sites/saad.unicam.it/files/logo_homepage_20150714083101.png'),1)
                                           this.setState({images:imagesCopy})
                                         }
                                         this.props.findCreate({
