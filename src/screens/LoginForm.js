@@ -106,11 +106,7 @@ class LoginForm extends Component {
 
     handleAuthenticationError = () => {
         if(this.props.auth.error)
-        return (
-            <ErrorCard>
-                {this.props.auth.error.message}
-            </ErrorCard>
-        )
+            alert('Autenticazione fallita')
 
     }
 
