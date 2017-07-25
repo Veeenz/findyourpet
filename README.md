@@ -53,6 +53,9 @@ Come banca dati abbiamo utilizzato firebase, vista la sua facilità di utilizzo,
   * **fetchListReportSuccess** Richiamando l'evento: **REPORT_FETCH_SUCCESS**
   * **reportCreate** Richiamando gli eventi: **REPORT_ADD_START**, **REPORT_ADD_SUCCESS**
 
+***REDUX MIDDLEWARES:***
+  * **Logger** Middleware davvero utile nella fase di sviluppo. Permette di visualizzare in maniera dettagliata le modifiche agli stati.
+  * **Redux Thunk** Questo middleware permette di ritornare una funzione invece che un'azione. Utilizzato ampiamente nella nostra applicazione
 
 ***NAVIGATOR:***
 
