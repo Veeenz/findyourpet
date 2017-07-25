@@ -138,7 +138,7 @@ export const findCreate = ({ title, location, duedate, descr, images ,latitudeMa
             },
         })
         .then( response => response.json())
-        .then( image =>{
+        .then( images => {
             firebase.database().ref(`/DataList`)
             .push({idUser, title, location, duedate, descr,images,latitudeMarker,longitudeMarker})
             .then((data) => {
