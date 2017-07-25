@@ -13,22 +13,31 @@ class PetScreen extends React.Component{
   static navigationOptions = {
       title: 'Pet'
   }
-  renderImageList = (pet) => {
-      return Object.keys(pet.images).map((key) => {
-          return (
-              <Card>
-                  <CardItem>
-                      <Image
-                          source={{ uri: pet.images[key] }}
-                          resizeMode="cover"
-                          style={{ height :80, width: 80}}
-                      >
-                      </Image>
-                  </CardItem>
-              </Card>
-          )
-      })
+  componentWillMount(){
+      this.props.fetchListReport(this.props.navigation.state.params.pet.key)
   }
+
+  renderImageList = (pet) => { 
+      return(
+        <List
+            horizontal={true}
+            dataArray={pet.images}
+            renderRow={(image, i) =>{
+                return (<ListItem
+                  onPress={() => this.props.navigation.navigate( "ImageScreen",{ image: image })}
+                  >
+                    <Image
+                        source={{ uri: image }}
+                        resizeMode="cover"
+                        style={{ height :180, width: 300}}
+
+                        >
+                        </Image>
+                    </ListItem>
+                )}}>
+            </List>
+        )
+      }
 
   fetchMarkerReport = () => {
       return this.props.report.list.map((report, i) => {
@@ -122,7 +131,7 @@ class PetScreen extends React.Component{
                         </CardItem>
 
                         <CardItem cardBody>
-                          {this.renderImageList2(pet)}
+                          {this.renderImageList(pet)}
                         </CardItem>
 
                         <CardItem>
