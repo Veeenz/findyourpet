@@ -14,7 +14,8 @@ import {
   REPORT_FETCH_START,
   REPORT_FETCH_SUCCESS,
   FIND_ADD_SUCCESS,
-  FIND_ADD_START
+  FIND_ADD_START,
+  FIND_REMOVE
 } from './types';
 import firebase from 'firebase';
 
@@ -154,12 +155,29 @@ export const findRemove = ({key, navigateBack}) => {
     firebase.database().ref('/DataList').child(key).remove()
     .then(data => {
         console.log('REMOVED SUCCESFULLY')
+        return (dispatch) => {
+            dispatch({type: FINDLIST_FETCH_START})
+          firebase.database().ref("/DataList")
+          .on("value", snap => {
+              ArrayReturn = new Array()
+              snap.forEach((child) => {
+                  let valPush = child.val()
+                  valPush.key = child.key
+                  ArrayReturn.push(valPush)
+              })
+
+              dispatch({type: FIND_REMOVE, payload: ArrayReturn})
+          })
+        }
+
 
     })
     .catch(data => {
         console.log('error')
     })
     navigateBack()
+
+
 }
 export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeMarker, idFind, navigateBack}) => {
   navigateBack();
