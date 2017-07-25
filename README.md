@@ -71,7 +71,7 @@ Qui elenco tutte le funzionalità di ogni screen:
 
 * **Pet:** Pagina che elenca tutti i dettagli inseriti dall’utente che ha creato la ricerca.
 
-* **SignUp:** Permette la registrazione all app.
+* **SignUp:** Permette la registrazione all'app.
 
 * **Report:** Crea la segnalazione che sarà poi notificata al proprietario.
 
