@@ -57,11 +57,12 @@ class PetScreen extends React.Component{
       }
   fetchMarkerReport = () => {
       return this.props.report.list.map((report, i) => {
-          const { latitudeMarker, longitudeMarker} = report
+          const { latitudeMarker, longitudeMarker,telefono,descr} = report
           return (
             <MapView.Marker
               key={i}
-              onPress={() => alert('test')}
+              title={telefono }             //NOTE: After validation, those if can be
+              description={descr} //      removed
                 coordinate={{
                     latitude: latitudeMarker,
                     longitude: longitudeMarker,
