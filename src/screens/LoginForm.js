@@ -45,13 +45,10 @@ firebase.database().ref("/TokenUser")
 }
 
 
-const mapStateToProps = state => {
-
-    return {
+const mapStateToProps = state => ({
         auth:state.auth,
         pet: state.pet
-    }
-}
+})
 
 class LoginForm extends Component {
 
