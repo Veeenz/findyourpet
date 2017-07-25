@@ -4,7 +4,7 @@ import DatePicker from 'react-native-datepicker'
 import {Button, Input,Container, Content,Label,Item, Card, CardItem, List, ListItem, Header, Icon, Left, Right, Body,Title} from 'native-base'
 import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-import { ReportCreate } from '../actions/actions';
+import { reportCreate } from '../actions/actions';
 import { ImagePicker, Location, MapView, Permissions } from 'expo';
 
 class ReportScreen extends Component {
@@ -15,6 +15,7 @@ class ReportScreen extends Component {
         email: '',
         telefono: '',
         descr: '',
+        data: new Date().toISOString(),
         latitudeMarker: 0.0,
         longitudeMarker: 0.0,
         latitude: 37.525729,
@@ -47,9 +48,7 @@ class ReportScreen extends Component {
         if (status !== 'granted') {
             this.setState({ errorMessage: 'Permesso negato'});
         }
-
         let location = await Location.getCurrentPositionAsync({});
-
         this.setState({latitude: location.coords.latitude, longitude: location.coords.longitude})
         this.setState({latitudeMarker: location.coords.latitude, longitudeMarker: location.coords.longitude})
     }
@@ -100,7 +99,6 @@ class ReportScreen extends Component {
                                 </Label>
                                 <Input
                                     style={{ flex: 1 }}
-                                    placeholder='Inserisci il tuo indirizzo e-mail per essere contattato'
                                     multiline={true}
                                     keyboardType= 'email-address'
                                     onChangeText={text => text === '' || this.state.email.indexOf('@') !== -1 ? this.setState({error_input_email: true}) : this.setState({ email: text, error_input_email: false })}
@@ -115,7 +113,6 @@ class ReportScreen extends Component {
                                 </Label>
                                 <Input
                                     style={{ flex: 1 }}
-                                    placeholder='Inserisci il tuo numero di telefono per essere contattato'
                                     multiline={true}
                                     keyboardType= 'numeric'
                                     onChangeText={text => text === '' ? this.setState({error_input_telefono: true}) : this.setState({ telefono: text, error_input_telefono: false })}
@@ -150,10 +147,11 @@ class ReportScreen extends Component {
                                     if (this.state.latitudeMarker === 0.0 && this.state.longitudeMarker === 0.0)
                                         alert('Perfavore posiziona il marker dove hai avvistato l\'animale')
                                     if (this.state.email !== '' && this.state.email.indexOf('@') !== -1 &&this.state.telefono !== '' && this.state.descr !== '' && (this.state.latitudeMarker !== 0.0 || this.state.longitudeMarker !== 0.0)){
-                                        this.props.ReportCreate({
+                                        this.props.reportCreate({
                                             email: this.state.email,
                                             telefono: this.state.telefono,
                                             descr: this.state.descr,
+                                            date: this.state.data,
                                             latitudeMarker: this.state.latitudeMarker,
                                             longitudeMarker: this.state.longitudeMarker,
                                             idFind: key,
@@ -176,5 +174,4 @@ class ReportScreen extends Component {
         )
     }
 }
-
-export default connect(null, { ReportCreate }) (ReportScreen);
+export default connect(null, { reportCreate }) (ReportScreen);

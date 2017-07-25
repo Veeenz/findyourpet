@@ -4,7 +4,7 @@ import {Button, Spinner, Text, Container, Content,Label,Item, List, ListItem, Ca
 import { MapView, Permissions, Location} from 'expo';
 import { Image } from 'react-native';
 import { findRemove } from '../actions/actions';
-import { fetchReport } from '../actions/actions';
+import { fetchListReport } from '../actions/actions';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation'
 import firebase from 'firebase';
@@ -53,7 +53,7 @@ class PetScreen extends React.Component{
       }
       componentWillMount(){
 
-          this.props.fetchReport(this.props.navigation.state.params.pet.key)
+          this.props.fetchListReport(this.props.navigation.state.params.pet.key)
       }
   fetchMarkerReport = () => {
       return this.props.report.list.map((report, i) => {
@@ -162,7 +162,7 @@ class PetScreen extends React.Component{
                           </CardItem>
                           <CardItem>
                             <Button onPress={() => {
-                                    this.props.navigation.navigate( "ReportList",{ key: pet.key })
+                                    this.props.navigation.navigate("ReportList")
                                 }} block bordered style={{width:'100%'}}>
                                 <Text >LISTA AVVISTAMENTI</Text>
                             </Button>
@@ -179,4 +179,4 @@ const mapStateToProps = state => ({
     auth: state.auth,
     report: state.report
 })
-export default connect(mapStateToProps, {findRemove, fetchReport})(PetScreen);
+export default connect(mapStateToProps, {findRemove, fetchListReport})(PetScreen);
