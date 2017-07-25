@@ -7,6 +7,9 @@ import {fetchListReport} from '../actions/actions';
 import firebase from 'firebase';
 
 class ReportList extends Component {
+    static navigationOptions = {
+        title: 'Segnalazioni'
+    }
     renderPetReportList = () => {
         return this.props.report.list.map((report) => {
             const { email, descr, telefono } = report
