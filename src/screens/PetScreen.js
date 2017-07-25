@@ -30,31 +30,6 @@ class PetScreen extends React.Component{
       })
   }
 
-  renderImageList2 = (pet) => {
-      return(
-        <List
-            horizontal={true}
-            dataArray={pet.images}
-            renderRow={(image, i) =>{
-                return (<ListItem
-                  onPress={() => this.props.navigation.navigate( "ImageScreen",{ image: image })}
-                  >
-                    <Image
-                        source={{ uri: image }}
-                        resizeMode="cover"
-                        style={{ height :180, width: 300}}
-
-                        >
-                        </Image>
-                    </ListItem>
-                )}}>
-            </List>
-        )
-      }
-      componentWillMount(){
-
-          this.props.fetchListReport(this.props.navigation.state.params.pet.key)
-      }
   fetchMarkerReport = () => {
       return this.props.report.list.map((report, i) => {
           const { latitudeMarker, longitudeMarker,telefono,descr} = report
