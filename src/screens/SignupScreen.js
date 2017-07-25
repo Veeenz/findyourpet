@@ -4,7 +4,6 @@ import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'rea
 import { connect } from 'react-redux';
 import { SignUpUser } from '../actions/actions';
 import { ImagePicker, Location, MapView, Permissions } from 'expo';
-import ErrorCard from '../components/ErrorCard';
 
 const mapStateToProps = state => ({
     auth: state.auth

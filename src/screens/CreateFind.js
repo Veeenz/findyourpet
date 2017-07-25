@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {  CardSection,} from '../components/common';
 import DatePicker from 'react-native-datepicker'
 import {Button, Input,Container, Content,Label,Item, Card, CardItem, List, ListItem, Header, Icon, Left, Right, Body,Title} from 'native-base'
 import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';

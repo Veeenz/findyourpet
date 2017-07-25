@@ -5,7 +5,6 @@ import { Container, Content, Button, Text, Form, Item, Input, InputGroup, Label,
 import { connect } from 'react-redux';
 import { Image } from 'react-native'
 import { loginUser,logoutUser } from '../actions/actions';
-import ErrorCard from '../components/ErrorCard';
 import firebase from 'firebase';
 import { Permissions, Notifications } from 'expo';
 
