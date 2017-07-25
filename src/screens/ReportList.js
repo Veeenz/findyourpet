@@ -11,6 +11,17 @@ class ReportList extends Component {
         title: 'Segnalazioni'
     }
     renderPetReportList = () => {
+        if(this.props.report.list.length == 0){
+            return (
+                <Card style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+                    <CardItem>
+                        <Text>
+                            Nessun avvistamento per questo animale
+                        </Text>
+                    </CardItem>
+                </Card>
+            )
+        }
         return this.props.report.list.map((report) => {
             const { email, descr, telefono } = report
             return (
