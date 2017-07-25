@@ -1,4 +1,4 @@
-# FINDYOURBUDDY
+# FINDYOURPET
 
 SIMONE DI MAURO.
 
@@ -9,7 +9,7 @@ VINCENZO FILETTI
 METTI LA TUA MATRICOLA VINZ.
 
 ***LINK EXPO***
-[Link expo](https://expo.io/@simone989/findyourbuddy)
+[Link expo](https://expo.io/@simone989/findyourpet)
 
 ***INTRUDUZIONE***
 

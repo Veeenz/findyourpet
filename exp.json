@@ -1,7 +1,7 @@
 {
-  "name": "findyourbuddy",
+  "name": "findyourpet",
   "description": "An empty new project",
-  "slug": "findyourbuddy",
+  "slug": "findyourpet",
   "privacy": "public",
   "sdkVersion": "17.0.0",
   "version": "1.0.0",
