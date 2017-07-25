@@ -9,7 +9,7 @@ VINCENZO FILETTI
 METTI LA TUA MATRICOLA VINZ.
 
 ***LINK EXPO***
-[Link expo](https://www.google.com)
+[Link expo](https://expo.io/@simone989/findyourbuddy)
 
 ***INTRUDUZIONE***
 
