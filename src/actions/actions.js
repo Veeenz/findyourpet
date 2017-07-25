@@ -215,8 +215,8 @@ export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeM
               })
             })
           })
+          dispatch({type: REPORT_ADD_SUCCESS})
         })
-        dispatch({type: REPORT_ADD_SUCCESS})
   }
 }
 export const fetchListReport= ({key}) =>{
