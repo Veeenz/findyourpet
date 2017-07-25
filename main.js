@@ -41,6 +41,7 @@ const SecondaryNavigator = StackNavigator({
 const MainStackNavigator = StackNavigator({
     MainScreen: { screen: HomeContainer },
     Pet: {screen: PetScreen},
+    Create: { screen: CreateFind},
 
 });
 
