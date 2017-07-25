@@ -182,12 +182,12 @@ export const findRemove = ({key, navigateBack}) => {
 
 
 }
-export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeMarker, idFind, navigateBack}) => {
+export const reportCreate = ({ email, telefono, descr, date, latitudeMarker,longitudeMarker, idFind, navigateBack}) => {
   navigateBack();
   return (dispatch) => {
       dispatch({type: REPORT_ADD_START})
       firebase.database().ref(`/ReportList`)
-        .push({idFind,email, telefono, descr, descr,latitudeMarker,longitudeMarker})
+        .push({idFind,email, telefono, descr, date, descr,latitudeMarker,longitudeMarker})
         .then((data) => {
           firebase.database().ref('/DataList').on("value", snap => {
             var IdUserGet=snap.val()[idFind]['idUser']
