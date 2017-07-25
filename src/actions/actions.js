@@ -15,7 +15,10 @@ import {
   REPORT_FETCH_SUCCESS,
   FIND_ADD_SUCCESS,
   FIND_ADD_START,
-  FIND_REMOVE
+  FIND_REMOVE,
+  REPORT_ADD_ERROR,
+  REPORT_ADD_SUCCESS,
+  REPORT_ADD_START
 } from './types';
 import firebase from 'firebase';
 
@@ -182,6 +185,7 @@ export const findRemove = ({key, navigateBack}) => {
 export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeMarker, idFind, navigateBack}) => {
   navigateBack();
   return (dispatch) => {
+      dispatch({type: REPORT_ADD_START})
       firebase.database().ref(`/ReportList`)
         .push({idFind,email, telefono, descr, descr,latitudeMarker,longitudeMarker})
         .then((data) => {
@@ -212,6 +216,7 @@ export const ReportCreate = ({ email, telefono, descr, latitudeMarker,longitudeM
             })
           })
         })
+        dispatch({type: REPORT_ADD_SUCCESS})
   }
 }
 export const fetchListReport= ({key}) =>{
