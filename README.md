@@ -66,7 +66,7 @@ Per risolvere il problema abbiamo programmato un servizio in Flask (python), car
 
 ![HOME SCREEN](http://i66.tinypic.com/10rv8ua.jpg)
 
-**LOGIN**                  **SIGNUP**
+**LOGIN**, **SIGNUP**
 
 ![LOGIN](http://i63.tinypic.com/21n1q3c.jpg)
 ![SIGNUP](http://i66.tinypic.com/6qk805.jpg)

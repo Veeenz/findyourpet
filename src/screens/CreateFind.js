@@ -131,7 +131,7 @@ class CreateFind extends Component {
                             <Label> Posizione </Label>
                             <Input
                                 label="Location"
-                                placeholder='Where did you lose your buddy?'
+                                placeholder='Dove hai perso il tuo animale?'
                                 value={this.state.location}
                                 onChangeText={text => this.setState({ location: text,error_input_posit: false })}
                             />

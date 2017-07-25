@@ -10,6 +10,9 @@ import { NavigationActions } from 'react-navigation'
 import firebase from 'firebase';
 
 class PetScreen extends React.Component{
+  static navigationOptions = {
+      title: 'Pet'
+  }
   renderImageList = (pet) => {
       return Object.keys(pet.images).map((key) => {
           return (

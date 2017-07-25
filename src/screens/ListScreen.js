@@ -10,6 +10,9 @@ const mapStateToProps = state => {
     }
 }
 class ListScreen extends Component {
+  static navigationOptions = {
+      title: 'List'
+  }
     renderPetList = () => {
 
         return this.props.pet.list.map((pet, i) => {
@@ -21,7 +24,7 @@ class ListScreen extends Component {
                 >
                     <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: pet, idUser: pet['idUser'] })}>
                         <Image
-                            source={{ uri: images[images.length-1] }}
+                            source={{ uri: images[images.length-1] }}V
                             resizeMode="cover"
                             style={{ height :80, width: 80}}
                         >

@@ -9,6 +9,9 @@ import ErrorCard from '../components/ErrorCard';
 
 
 class ImageScreen extends Component{
+  static navigationOptions = {
+      title: 'Photo'
+  }
 
   render(){
     const { image } = this.props.navigation.state.params
