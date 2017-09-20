@@ -44,7 +44,7 @@ class ReportList extends Component {
                     </CardItem>
                     <CardItem>
                         <Text style={{marginLeft:10}}>
-                            Data: {date}
+                            Data: {date.replace('T',' ').split('.')[0]}
                         </Text>
                     </CardItem>
                 </Card>
