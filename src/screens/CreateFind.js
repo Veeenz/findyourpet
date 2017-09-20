@@ -111,8 +111,8 @@ class CreateFind extends Component {
                                         fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng='+this.state.latitudeMarker+','+this.state.longitudeMarker+'&sensor=true')
                                         .then((response) => response.json())
                                         .then((data) => {
-                                            if(data.results[1])
-                                                this.setState({location: data.results[1].formatted_address})
+                                            if(data.results[0])
+                                                this.setState({location: data.results[0].formatted_address})
                                         })
                                         .catch((error) => {
                                             console.log("ERROR: " + error);
@@ -225,7 +225,7 @@ class CreateFind extends Component {
                                 }}
                                 style={{flex:1,justifyContent: 'center'}}
                                 >
-                                    <Text>
+                                    <Text style={{color:'rgb(255,255,255)'}}>
                                        Aggiungi
                                     </Text>
                                 </Button>

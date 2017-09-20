@@ -160,7 +160,7 @@ class ReportScreen extends Component {
                                 }}
                                 style={{flex:1,justifyContent: 'center'}}
                                 >
-                                    <Text>
+                                    <Text style={{color:'rgb(255,255,255)'}}>
                                         Aggiungi Segnalazione
                                     </Text>
                                 </Button>
