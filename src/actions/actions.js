@@ -47,8 +47,9 @@ const loginUserFailed = (dispatch, error)  => {
 
 const signupUserSuccess = (dispatch, email,password, navigateBack) => {
   dispatch({type: SIGNUP_USER_SUCCESS})
+  loginUser([email, password, navigateBack])
   navigateBack()
-  alert("Registrazione effettuata con successo, procedi ora con il login")
+  //alert("Registrazione effettuata con successo, procedi ora con il login")
 }
 
 const signupUserFailed= (dispatch,error) => {
