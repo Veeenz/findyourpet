@@ -35,7 +35,7 @@ export default authReducer = (state = initialState, action) => {
         user: null,
         error: null,
         isLoading: false,
-        isLogged: false
+        isLogged: true
       }
     case SIGNUP_USER_FAIL:
       return{

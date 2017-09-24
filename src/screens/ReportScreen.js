@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-native-datepicker'
-import {Button, Input,Container, Content,Label,Item, Card, CardItem, List, ListItem, Header, Icon, Left, Right, Body,Title} from 'native-base'
-import { View, Image, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
+import {Button, Text, Input,Container, Content,Label,Item, Card, CardItem, List, ListItem, Header, Icon, Left, Right, Body,Title} from 'native-base'
+import { Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { reportCreate } from '../actions/actions';
 import { ImagePicker, Location, MapView, Permissions } from 'expo';
@@ -44,7 +44,8 @@ class ReportScreen extends Component {
 
     retrieveUserLocation = async () => {
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
-        if (status !== 'granted') {
+        if (status !== 'granted'){
+            alert('Permesso negato per la posizione')
             this.setState({ errorMessage: 'Permesso negato'});
         }
         let location = await Location.getCurrentPositionAsync({});
@@ -55,6 +56,7 @@ class ReportScreen extends Component {
     render() {
         const { width, height } = Dimensions.get('window');
         const { key } = this.props.navigation.state.params
+
         return (
             <Container>
                 <Content>

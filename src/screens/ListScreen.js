@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Content, Card, CardItem, Text, Icon, Right, Button } from 'native-base';
+import { Container, Content, Card, CardItem, List, Text, Icon, Right, Button } from 'native-base';
 import { Image } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 }
 class ListScreen extends Component {
   static navigationOptions = {
-      title: 'List'
+      title: 'Lista'
   }
     renderPetList = () => {
 
@@ -20,11 +20,11 @@ class ListScreen extends Component {
             return (
                 <Card
                     key={i}
-                    onPress={() => this.props.navigation.navigate( "Pet",{ pet: pet })}
+
                 >
                     <CardItem button={true} onPress={() => this.props.navigation.navigate( "Pet",{ pet: pet, idUser: pet['idUser'] })}>
                         <Image
-                            source={{ uri: images[images.length-1] }}V
+                            source={{ uri: images[images.length-1] }}
                             resizeMode="cover"
                             style={{ height :80, width: 80}}
                         >
@@ -42,7 +42,9 @@ class ListScreen extends Component {
         return (
             <Container>
                 <Content>
+
                     {this.renderPetList()}
+
                 </Content>
             </Container>
         );
