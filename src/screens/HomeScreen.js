@@ -15,8 +15,7 @@ class HomeScreen extends React.Component{
     componentWillMount(){
         //this.props.userProfileInformation()
         this.retrieveUserLocation()
-        if (this.props.pet.list.length == 0)
-            this.props.findListFetch()
+        this.props.findListFetch()
     }
 
 
@@ -24,7 +23,8 @@ class HomeScreen extends React.Component{
     retrieveUserLocation = async () => {
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
         if (status !== 'granted') {
-            this.setState({ errorMessage: 'Permesso negato'});
+            alert('Per utilizzare correttamente questa applicazione devi fornire il permesso di accedere ai dati di geolocalizzazione')
+            //this.setState({ errorMessage: 'Permesso negato'});
         }
 
         let location = await Location.getCurrentPositionAsync({});
